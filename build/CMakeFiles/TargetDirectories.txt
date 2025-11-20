@@ -1,3 +1,0 @@
-/home/dawid/DEV/projects/OpenGLRenderer/build/CMakeFiles/OpenGLRenderer.dir
-/home/dawid/DEV/projects/OpenGLRenderer/build/CMakeFiles/edit_cache.dir
-/home/dawid/DEV/projects/OpenGLRenderer/build/CMakeFiles/rebuild_cache.dir
