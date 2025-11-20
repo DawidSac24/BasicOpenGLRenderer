@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/dawid/DEV/projects/OpenGLRenderer/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
