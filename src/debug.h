@@ -2,8 +2,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <signal.h>
 #include <string>
+
+// TODO:
+// ADD a line error printing
 
 // THIS PART IS FROM :
 // https://blog.nobel-joergensen.com/2013/02/17/debugging-opengl-part-2-using-gldebugmessagecallback/
@@ -52,19 +54,6 @@ inline void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint i
     case GL_DEBUG_SEVERITY_HIGH:
         returnSeverity = "HIGH";
         break;
-    }
-
-    if (type == GL_DEBUG_TYPE_ERROR)
-    {
-        std::cout << "🛑 OpenGL Error detected. Breaking..." << std::endl;
-
-#if defined(_MSC_VER)
-        __debugbreak(); // Windows (MSVC)
-#elif defined(__SIG_ATOMIC_MAX__)
-        raise(SIGTRAP); // Linux / Mac / MinGW
-#else
-        std::abort(); // Fallback
-#endif
     }
 }
 
