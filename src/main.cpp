@@ -31,25 +31,26 @@ int main()
     }
     getOpenGLErrors();
 
-    unsigned int vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-
     float positions[] = {
         -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f,
     };
 
     unsigned int indices[]{0, 1, 2, 2, 3, 0};
 
+    unsigned int vao;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
     unsigned int buffer;
     glGenBuffers(1, &buffer);
     // binds (select) the buffer to draw on
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
 
     // always need to enable the vertext attribute array
     glEnableVertexAttribArray(0);
-    // allows to "add context" for the vertex array
+    // allows to "add context" for the vertex array: specify the layout of the vertex buffer
+    // it assings the bound buffer to the vertext array on the decided index (first param 0)
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 
     unsigned int ibo;
@@ -77,16 +78,20 @@ int main()
 
     // Unbind everything for safety
     glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glUseProgram(0);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
     while (!window.shouldClose())
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glBindVertexArray(vao);
-
+        glUseProgram(shader);
         glUniform4f(location, r, 0.3f, 0.8f, 1.0f);
+
+        glBindVertexArray(vao);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+
         // We specify the count as the number of INDICES not vertexes!!!
         // don't have to reference the indices bc we did it in (so we put nullptr) :
         // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
