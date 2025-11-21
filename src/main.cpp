@@ -1,6 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <cassert>
 #include <iostream>
 #include <ostream>
 #include <string>
@@ -19,6 +20,7 @@ int main()
     Core::Window window(windowSpecification);
 
     window.create();
+    glfwSwapInterval(1);
 
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
@@ -62,6 +64,17 @@ int main()
     unsigned int shader = Renderer::createShader(vertexSource, fragmentSource);
     glUseProgram(shader);
 
+    // *** assigning variables from cpu to gpu (on the shader) ***
+    // we first retrieve the location of the variable (uniform of 4 floats here)
+    // we can ask opengl to get the location by name:
+    int location = glGetUniformLocation(shader, "u_color");
+    // the assert is optional in most cases, bc the variable may get 'stashed' by opengl when it is not used etc
+    assert(location != -1);
+    glUniform4f(location, 0.2f, 0.3f, 0.8f, 1.0f);
+
+    float r = 0.0f;
+    float increment = 0.05f;
+
     // Unbind everything for safety
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -73,10 +86,21 @@ int main()
 
         glBindVertexArray(vao);
 
+        glUniform4f(location, r, 0.3f, 0.8f, 1.0f);
         // We specify the count as the number of INDICES not vertexes!!!
-        // don't have to reference the indices bc we did it in :
+        // don't have to reference the indices bc we did it in (so we put nullptr) :
         // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+        if (r > 1.0f)
+        {
+            increment = -0.05f;
+        }
+        else if (r < 0.0f)
+        {
+            increment = 0.05f;
+        }
+        r += increment;
 
         window.update();
 
