@@ -1,69 +1,33 @@
 #pragma once
 
-#include <GL/glew.h>
-
-#include <fstream>
-#include <iostream>
-#include <sstream>
 #include <string>
 
 namespace Renderer
 {
-
-static std::string parseShader(const std::string &filepath)
+class Shader
 {
-    std::fstream stream(filepath);
+  public:
+    Shader(const std::string &vert_filepath, std::string &frag_filepath);
+    ~Shader();
 
-    std::stringstream result;
-    std::string line;
+    void bind() const;
+    void unbind() const;
 
-    while (std::getline(stream, line))
-    {
-        result << line << "\n";
-    }
-    return result.str();
-}
+    // set uniforms
+    void setUniform4f(const std::string &name, float v0, float v1, float v2, float v3);
 
-static unsigned int compileShader(unsigned int type, const std::string &source)
-{
-    unsigned int id = glCreateShader(type);
-    const char *src = source.c_str();
-    glShaderSource(id, 1, &src, nullptr);
-    glCompileShader(id);
+  private:
+    std::string parseShader(const std::string &filepath);
 
-    int result;
-    glGetShaderiv(id, GL_COMPILE_STATUS, &result);
-    if (result == GL_FALSE)
-    {
-        int length;
-        glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-        char message[length];
-        glGetShaderInfoLog(id, length, &length, message);
-        std::cout << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader"
-                  << std::endl;
-        std::cout << message << std::endl;
+    unsigned int compileShader(unsigned int type, const std::string &source);
 
-        glDeleteShader(id);
-        return 0;
-    }
+    unsigned int createShader(const std::string &vert_shader, const std::string &frag_shader);
 
-    return id;
-}
+    unsigned int getUniformLocation(const std::string &name);
 
-static unsigned int createShader(const std::string &vertexShader, const std::string &fragmentShader)
-{
-    unsigned int program = glCreateProgram();
-    unsigned int vs = compileShader(GL_VERTEX_SHADER, vertexShader);
-    unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
+    std::string m_vert_filepath, m_frag_filepath;
+    unsigned int m_rendererID;
+};
 
-    glAttachShader(program, vs);
-    glAttachShader(program, fs);
-    glLinkProgram(program);
-    glValidateProgram(program);
-
-    glDeleteShader(vs);
-    glDeleteShader(fs);
-
-    return program;
-}
+//
 } // namespace Renderer

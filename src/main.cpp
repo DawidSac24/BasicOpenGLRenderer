@@ -44,7 +44,6 @@ int main()
 
         Renderer::VertexArray va;
         Renderer::VertexBuffer vb(positions, 4 * 2 * sizeof(float));
-
         Renderer::VertexBufferLayout layout;
         layout.push<float>(2);
         va.addBuffer(vb, layout);
@@ -69,10 +68,10 @@ int main()
         float increment = 0.05f;
 
         // Unbind everything for safety
-        glBindVertexArray(0);
         glUseProgram(0);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        va.unbind();
+        vb.unbind();
+        ib.unbind();
 
         while (!window.shouldClose())
         {
