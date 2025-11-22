@@ -6,9 +6,11 @@
 #include <ostream>
 #include <string>
 
-#include "debug.h"
-#include "renderer/shader.h"
-#include "window.h"
+#include "Debug.h"
+#include "Window.h"
+#include "renderer/Shader.h"
+#include "renderer/buffers/IndexBuffer.h"
+#include "renderer/buffers/VertexBuffer.h"
 
 int main()
 {
@@ -31,93 +33,91 @@ int main()
     }
     getOpenGLErrors();
 
-    float positions[] = {
-        -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f,
-    };
-
-    unsigned int indices[]{0, 1, 2, 2, 3, 0};
-
-    unsigned int vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-
-    unsigned int buffer;
-    glGenBuffers(1, &buffer);
-    // binds (select) the buffer to draw on
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
-
-    // always need to enable the vertext attribute array
-    glEnableVertexAttribArray(0);
-    // allows to "add context" for the vertex array: specify the layout of the vertex buffer
-    // it assings the bound buffer to the vertext array on the decided index (first param 0)
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
-
-    unsigned int ibo;
-    glGenBuffers(1, &ibo);
-    // binds (select) the buffer to draw on
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
-
-    std::string vertexSource = Renderer::parseShader("../res/shaders/basic.vert");
-    std::string fragmentSource = Renderer::parseShader("../res/shaders/basic.frag");
-
-    unsigned int shader = Renderer::createShader(vertexSource, fragmentSource);
-    glUseProgram(shader);
-
-    // *** assigning variables from cpu to gpu (on the shader) ***
-    // we first retrieve the location of the variable (uniform of 4 floats here)
-    // we can ask opengl to get the location by name:
-    int location = glGetUniformLocation(shader, "u_color");
-    // the assert is optional in most cases, bc the variable may get 'stashed' by opengl when it is not used etc
-    assert(location != -1);
-    glUniform4f(location, 0.2f, 0.3f, 0.8f, 1.0f);
-
-    float r = 0.0f;
-    float increment = 0.05f;
-
-    // Unbind everything for safety
-    glBindVertexArray(0);
-    glUseProgram(0);
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-
-    while (!window.shouldClose())
     {
-        glClear(GL_COLOR_BUFFER_BIT);
+        float positions[] = {
+            -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f,
+        };
 
-        glUseProgram(shader);
-        glUniform4f(location, r, 0.3f, 0.8f, 1.0f);
+        unsigned int indices[]{0, 1, 2, 2, 3, 0};
 
+        unsigned int vao;
+        glGenVertexArrays(1, &vao);
         glBindVertexArray(vao);
+
+        Renderer::VertexBuffer vb(positions, 4 * 2 * sizeof(float));
+        unsigned int buffer;
+
+        // always need to enable the vertext attribute array
+        glEnableVertexAttribArray(0);
+        // allows to "add context" for the vertex array: specify the layout of the vertex buffer
+        // it assings the bound buffer to the vertext array on the decided index (first param 0)
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+
+        Renderer::IndexBuffer ib(indices, 6);
+
+        unsigned int ibo;
+        glGenBuffers(1, &ibo);
+
+        std::string vertexSource = Renderer::parseShader("../res/shaders/basic.vert");
+        std::string fragmentSource = Renderer::parseShader("../res/shaders/basic.frag");
+
+        unsigned int shader = Renderer::createShader(vertexSource, fragmentSource);
+        glUseProgram(shader);
+
+        // *** assigning variables from cpu to gpu (on the shader) ***
+        // we first retrieve the location of the variable (uniform of 4 floats here)
+        // we can ask opengl to get the location by name:
+        int location = glGetUniformLocation(shader, "u_color");
+        // the assert is optional in most cases, bc the variable may get 'stashed' by opengl when it is not used etc
+        assert(location != -1);
+        glUniform4f(location, 0.2f, 0.3f, 0.8f, 1.0f);
+
+        float r = 0.0f;
+        float increment = 0.05f;
+
+        // Unbind everything for safety
+        glBindVertexArray(0);
+        glUseProgram(0);
+        glBindBuffer(GL_ARRAY_BUFFER, buffer);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
-        // We specify the count as the number of INDICES not vertexes!!!
-        // don't have to reference the indices bc we did it in (so we put nullptr) :
-        // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-
-        if (r > 1.0f)
+        while (!window.shouldClose())
         {
-            increment = -0.05f;
-        }
-        else if (r < 0.0f)
-        {
-            increment = 0.05f;
-        }
-        r += increment;
+            glClear(GL_COLOR_BUFFER_BIT);
 
-        window.update();
+            glUseProgram(shader);
+            glUniform4f(location, r, 0.3f, 0.8f, 1.0f);
 
-        glfwPollEvents();
+            glBindVertexArray(vao);
+            ib.bind();
+
+            // We specify the count as the number of INDICES not vertexes!!!
+            // don't have to reference the indices bc we did it in (so we put nullptr) :
+            // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+            if (r > 1.0f)
+            {
+                increment = -0.05f;
+            }
+            else if (r < 0.0f)
+            {
+                increment = 0.05f;
+            }
+            r += increment;
+
+            window.update();
+
+            glfwPollEvents();
+        }
+
+        glDeleteProgram(shader);
+        glDeleteVertexArrays(1, &vao);
+        glDeleteBuffers(1, &buffer);
+        glDeleteBuffers(1, &ibo);
+
+        window.destroy();
     }
-
-    glDeleteProgram(shader);
-    glDeleteVertexArrays(1, &vao);
-    glDeleteBuffers(1, &buffer);
-    glDeleteBuffers(1, &ibo);
-
-    window.destroy();
     glfwTerminate();
     return 0;
 }

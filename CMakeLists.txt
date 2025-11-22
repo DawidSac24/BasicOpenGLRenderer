@@ -7,7 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(${PROJECT_NAME} 
   src/main.cpp 
-  src/window.cpp
+  src/Window.cpp
+  src/renderer/buffers/IndexBuffer.cpp
+  src/renderer/buffers/VertexBuffer.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
