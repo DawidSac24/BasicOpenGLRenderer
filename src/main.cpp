@@ -10,7 +10,9 @@
 #include "Window.h"
 #include "renderer/Shader.h"
 #include "renderer/buffers/IndexBuffer.h"
+#include "renderer/buffers/VertexArray.h"
 #include "renderer/buffers/VertexBuffer.h"
+#include "renderer/buffers/VertexBufferLayout.h"
 
 int main()
 {
@@ -40,23 +42,14 @@ int main()
 
         unsigned int indices[]{0, 1, 2, 2, 3, 0};
 
-        unsigned int vao;
-        glGenVertexArrays(1, &vao);
-        glBindVertexArray(vao);
-
+        Renderer::VertexArray va;
         Renderer::VertexBuffer vb(positions, 4 * 2 * sizeof(float));
-        unsigned int buffer;
 
-        // always need to enable the vertext attribute array
-        glEnableVertexAttribArray(0);
-        // allows to "add context" for the vertex array: specify the layout of the vertex buffer
-        // it assings the bound buffer to the vertext array on the decided index (first param 0)
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+        Renderer::VertexBufferLayout layout;
+        layout.push<float>(2);
+        va.addBuffer(vb, layout);
 
         Renderer::IndexBuffer ib(indices, 6);
-
-        unsigned int ibo;
-        glGenBuffers(1, &ibo);
 
         std::string vertexSource = Renderer::parseShader("../res/shaders/basic.vert");
         std::string fragmentSource = Renderer::parseShader("../res/shaders/basic.frag");
@@ -78,8 +71,8 @@ int main()
         // Unbind everything for safety
         glBindVertexArray(0);
         glUseProgram(0);
-        glBindBuffer(GL_ARRAY_BUFFER, buffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
         while (!window.shouldClose())
         {
@@ -88,7 +81,7 @@ int main()
             glUseProgram(shader);
             glUniform4f(location, r, 0.3f, 0.8f, 1.0f);
 
-            glBindVertexArray(vao);
+            va.bind();
             ib.bind();
 
             // We specify the count as the number of INDICES not vertexes!!!
@@ -110,12 +103,7 @@ int main()
 
             glfwPollEvents();
         }
-
         glDeleteProgram(shader);
-        glDeleteVertexArrays(1, &vao);
-        glDeleteBuffers(1, &buffer);
-        glDeleteBuffers(1, &ibo);
-
         window.destroy();
     }
     glfwTerminate();

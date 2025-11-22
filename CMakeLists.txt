@@ -5,11 +5,10 @@ project(OpenGLRenderer VERSION 1.0)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "src/*.cpp")
+
 add_executable(${PROJECT_NAME} 
-  src/main.cpp 
-  src/Window.cpp
-  src/renderer/buffers/IndexBuffer.cpp
-  src/renderer/buffers/VertexBuffer.cpp
+    ${SOURCES}
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
