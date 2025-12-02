@@ -7,7 +7,7 @@ namespace Renderer
 class Shader
 {
   public:
-    Shader(const std::string &vert_filepath, std::string &frag_filepath);
+    Shader(const std::string vert_filepath, std::string frag_filepath);
     ~Shader();
 
     void bind() const;
@@ -18,10 +18,9 @@ class Shader
 
   private:
     std::string parseShader(const std::string &filepath);
+    unsigned int createShader(const std::string &vert_shader, const std::string &frag_shader);
 
     unsigned int compileShader(unsigned int type, const std::string &source);
-
-    unsigned int createShader(const std::string &vert_shader, const std::string &frag_shader);
 
     unsigned int getUniformLocation(const std::string &name);
 

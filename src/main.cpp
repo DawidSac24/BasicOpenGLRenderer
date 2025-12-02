@@ -50,19 +50,10 @@ int main()
 
         Renderer::IndexBuffer ib(indices, 6);
 
-        std::string vertexSource = Renderer::parseShader("../res/shaders/basic.vert");
-        std::string fragmentSource = Renderer::parseShader("../res/shaders/basic.frag");
+        Renderer::Shader shader("../res/shaders/basic.vert", "../res/shaders/basic.frag");
 
-        unsigned int shader = Renderer::createShader(vertexSource, fragmentSource);
-        glUseProgram(shader);
-
-        // *** assigning variables from cpu to gpu (on the shader) ***
-        // we first retrieve the location of the variable (uniform of 4 floats here)
-        // we can ask opengl to get the location by name:
-        int location = glGetUniformLocation(shader, "u_color");
-        // the assert is optional in most cases, bc the variable may get 'stashed' by opengl when it is not used etc
-        assert(location != -1);
-        glUniform4f(location, 0.2f, 0.3f, 0.8f, 1.0f);
+        shader.bind();
+        shader.setUniform4f("u_color", 0.2f, 0.3f, 0.8f, 1.0f);
 
         float r = 0.0f;
         float increment = 0.05f;
@@ -72,13 +63,14 @@ int main()
         va.unbind();
         vb.unbind();
         ib.unbind();
+        shader.unbind();
 
         while (!window.shouldClose())
         {
             glClear(GL_COLOR_BUFFER_BIT);
 
-            glUseProgram(shader);
-            glUniform4f(location, r, 0.3f, 0.8f, 1.0f);
+            shader.bind();
+            shader.setUniform4f("u_color", r, 0.3f, 0.8f, 1.0f);
 
             va.bind();
             ib.bind();
@@ -102,7 +94,6 @@ int main()
 
             glfwPollEvents();
         }
-        glDeleteProgram(shader);
         window.destroy();
     }
     glfwTerminate();
