@@ -33,6 +33,11 @@ struct VertexBufferElement
 
 class VertexBufferLayout
 {
+  private:
+    std::vector<VertexBufferElement> m_elements;
+
+    unsigned int m_stride;
+
   public:
     VertexBufferLayout() : m_stride(0) {};
     // ~VertexBufferLayout();
@@ -51,11 +56,6 @@ class VertexBufferLayout
     {
         return m_stride;
     }
-
-  private:
-    std::vector<VertexBufferElement> m_elements;
-
-    unsigned int m_stride;
 };
 
 template <> void VertexBufferLayout::push<float>(unsigned int count);

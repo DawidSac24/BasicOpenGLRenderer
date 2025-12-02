@@ -7,6 +7,9 @@ namespace Renderer
 {
 class VertexArray
 {
+  private:
+    unsigned int m_rendererID;
+
   public:
     VertexArray();
     ~VertexArray();
@@ -15,8 +18,5 @@ class VertexArray
 
     void bind() const;
     void unbind() const;
-
-  private:
-    unsigned int m_rendererID;
 };
 } // namespace Renderer

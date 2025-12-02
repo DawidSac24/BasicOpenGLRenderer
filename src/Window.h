@@ -19,6 +19,11 @@ struct WindowSpecification
 
 class Window
 {
+  private:
+    WindowSpecification m_specification;
+
+    GLFWwindow *m_handle = nullptr;
+
   public:
     Window(const WindowSpecification &specification);
 
@@ -35,10 +40,5 @@ class Window
     {
         return m_handle;
     }
-
-  private:
-    WindowSpecification m_specification;
-
-    GLFWwindow *m_handle = nullptr;
 };
 } // namespace Core
