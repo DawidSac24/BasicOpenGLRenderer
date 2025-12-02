@@ -10,6 +10,7 @@ class Shader
   private:
     std::string m_vert_filepath, m_frag_filepath;
     unsigned int m_rendererID;
+    std::unordered_map<std::string, int> m_uniformLocationCache;
 
     std::string parseShader(const std::string &filepath);
     unsigned int createShader(const std::string &vert_shader, const std::string &frag_shader);
