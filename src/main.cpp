@@ -8,6 +8,7 @@
 
 #include "Debug.h"
 #include "Window.h"
+#include "renderer/Renderer.h"
 #include "renderer/Shader.h"
 #include "renderer/buffers/IndexBuffer.h"
 #include "renderer/buffers/VertexArray.h"
@@ -52,9 +53,6 @@ int main()
 
         Renderer::Shader shader("../res/shaders/basic.vert", "../res/shaders/basic.frag");
 
-        shader.bind();
-        shader.setUniform4f("u_color", 0.2f, 0.3f, 0.8f, 1.0f);
-
         float r = 0.0f;
         float increment = 0.05f;
 
@@ -65,20 +63,16 @@ int main()
         ib.unbind();
         shader.unbind();
 
+        Renderer::Renderer renderer;
+
         while (!window.shouldClose())
         {
-            glClear(GL_COLOR_BUFFER_BIT);
+            renderer.clear();
 
             shader.bind();
             shader.setUniform4f("u_color", r, 0.3f, 0.8f, 1.0f);
 
-            va.bind();
-            ib.bind();
-
-            // We specify the count as the number of INDICES not vertexes!!!
-            // don't have to reference the indices bc we did it in (so we put nullptr) :
-            // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+            renderer.draw(va, ib, shader);
 
             if (r > 1.0f)
             {
