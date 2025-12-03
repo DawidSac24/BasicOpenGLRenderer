@@ -6,6 +6,7 @@
 #include <ostream>
 #include <string>
 
+#include "../vendor/stb_image/stb_image.h"
 #include "Debug.h"
 #include "Window.h"
 #include "renderer/Renderer.h"
