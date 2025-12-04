@@ -4,8 +4,7 @@ include(FetchContent)
 FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw.git GIT_TAG 3.3.8)
 FetchContent_MakeAvailable(glfw)
 
-include(FetchContent)
-
+# GLM
 FetchContent_Declare(
 	glm
 	GIT_REPOSITORY	https://github.com/g-truc/glm.git

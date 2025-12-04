@@ -2,11 +2,11 @@
 
 #include <GL/glew.h>
 #include <fstream>
+#include <glm/glm.hpp>
 #include <iostream>
 #include <ostream>
 #include <sstream>
 #include <string>
-
 namespace Renderer
 {
 Shader::Shader(const std::string vert_filepath, std::string frag_filepath)
