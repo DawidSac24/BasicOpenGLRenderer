@@ -5,6 +5,7 @@
 #include <iostream>
 #include <ostream>
 #include <sstream>
+#include <string>
 
 namespace Renderer
 {
@@ -30,11 +31,6 @@ void Shader::bind() const
 void Shader::unbind() const
 {
     glUseProgram(m_rendererID);
-}
-
-void Shader::setUniform4f(const std::string &name, float v0, float v1, float v2, float v3)
-{
-    glUniform4f(getUniformLocation(name), v0, v1, v2, v3);
 }
 
 std::string Shader::parseShader(const std::string &filepath)
@@ -107,6 +103,21 @@ int Shader::getUniformLocation(const std::string &name)
 
     m_uniformLocationCache[name] = location;
     return location;
+}
+
+void Shader::setUniform1i(const std::string &name, int value)
+{
+    glUniform1i(getUniformLocation(name), value);
+}
+
+void Shader::setUniform1f(const std::string &name, float value)
+{
+    glUniform1f(getUniformLocation(name), value);
+}
+
+void Shader::setUniform4f(const std::string &name, float v0, float v1, float v2, float v3)
+{
+    glUniform4f(getUniformLocation(name), v0, v1, v2, v3);
 }
 
 } // namespace Renderer
