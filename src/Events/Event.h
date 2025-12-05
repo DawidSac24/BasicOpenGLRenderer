@@ -2,19 +2,24 @@
 
 #include <functional>
 #include <string>
-namespace Core
+namespace Event
 {
 enum class EventType
 {
     None = 0,
+    // WindowEvents
     WindowClose,
     WindowResize,
+    // KeyEvents
     KeyPressed,
     KeyReleased,
+    // MouseEvents
     MouseButtonPressed,
     MouseButtonReleased,
     MouseMoved,
     MouseScrolled,
+    // ApplicationEvents
+    LayerTransitionEvent,
 };
 
 #define EVENT_CLASS_TYPE(type)                                                                                         \
@@ -67,4 +72,4 @@ class EventDispatcher
     Event &m_Event;
 };
 
-} // namespace Core
+} // namespace Event
