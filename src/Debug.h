@@ -7,9 +7,10 @@
 // TODO:
 // ADD a line error printing
 
+namespace Core
+{
 // THIS PART IS FROM :
-// https://blog.nobel-joergensen.com/2013/02/17/debugging-opengl-part-2-using-gldebugmessagecallback/
-
+// https://blog.nobel-joergensen.com/2013/02/17/debugging-opengl-part-2-using-gldebugmessagecallback
 inline void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length,
                                             const GLchar *message, const void *userParam)
 {
@@ -69,3 +70,4 @@ inline void getOpenGLErrors()
         glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, &unusedIds, true);
     }
 }
+} // namespace Core
