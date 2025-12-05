@@ -3,7 +3,6 @@
 #include "Events/Event.h"
 #include "Layer.h"
 #include "Window.h"
-#include "glm/glm.hpp"
 
 #include <memory>
 #include <string>
@@ -11,6 +10,12 @@
 
 namespace Core
 {
+
+// TODO:
+// Add TransitionLayerEvent handling (idk if in this closs or another one yet)
+// Add Renderer handling or initialisation ?
+//  -- renderer should be allowed to have multiple instances so i initialise glfw ect here
+
 struct ApplicationSpecification
 {
     std::string applicationName = "application";
