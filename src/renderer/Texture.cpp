@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include <GL/gl.h>
 
-#include "../../vendor/stb_image/stb_image.h"
+#include "stb_image.h"
 #include "buffers/VertexBufferLayout.h"
 namespace Renderer
 {

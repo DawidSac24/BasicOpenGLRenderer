@@ -4,6 +4,7 @@ project(OpenGLRenderer VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(dependencies.cmake)
 
@@ -17,7 +18,10 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_include_directories(${PROJECT_NAME} PRIVATE src)
+target_include_directories(${PROJECT_NAME} PRIVATE 
+  src
+  "${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb_image"
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     glfw      

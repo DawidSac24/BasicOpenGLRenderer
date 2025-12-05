@@ -9,6 +9,7 @@
 
 #include "Debug.h"
 #include "Window.h"
+#include "glm/ext/matrix_clip_space.hpp"
 #include "renderer/Renderer.h"
 #include "renderer/Shader.h"
 #include "renderer/Texture.h"
@@ -17,6 +18,8 @@
 #include "renderer/buffers/VertexBuffer.h"
 #include "renderer/buffers/VertexBufferLayout.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 int main()
 {
     /* Initialize the library */
@@ -56,9 +59,12 @@ int main()
 
         Renderer::IndexBuffer ib(indices, 6);
 
+        glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+
         Renderer::Shader shader("../res/shaders/basic.vert", "../res/shaders/basic.frag");
         shader.bind();
         shader.setUniform4f("u_color", 0.8f, 0.3f, 0.8f, 1.0f);
+        shader.setUniformMat4f("u_mvp", proj);
 
         Renderer::Texture texture("../res/textures/texture.png");
         texture.bind();
