@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Renderer.h"
 #include <string>
+
 namespace Renderer
 {
 class Texture

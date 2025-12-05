@@ -8,15 +8,15 @@
 #include <string>
 
 #include "Debug.h"
+#include "Renderer/Renderer.h"
+#include "Renderer/Shader.h"
+#include "Renderer/Texture.h"
+#include "Renderer/buffers/IndexBuffer.h"
+#include "Renderer/buffers/VertexArray.h"
+#include "Renderer/buffers/VertexBuffer.h"
+#include "Renderer/buffers/VertexBufferLayout.h"
 #include "Window.h"
 #include "glm/ext/matrix_clip_space.hpp"
-#include "renderer/Renderer.h"
-#include "renderer/Shader.h"
-#include "renderer/Texture.h"
-#include "renderer/buffers/IndexBuffer.h"
-#include "renderer/buffers/VertexArray.h"
-#include "renderer/buffers/VertexBuffer.h"
-#include "renderer/buffers/VertexBufferLayout.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

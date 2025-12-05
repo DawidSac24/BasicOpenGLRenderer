@@ -1,8 +1,8 @@
 #include "Texture.h"
-#include <GL/gl.h>
 
-#include "stb_image.h"
 #include "buffers/VertexBufferLayout.h"
+#include "stb_image.h"
+
 namespace Renderer
 {
 Texture::Texture(const std::string &path)
