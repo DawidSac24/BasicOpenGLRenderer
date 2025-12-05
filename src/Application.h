@@ -1,0 +1,64 @@
+#pragma once
+
+#include "Events/Event.h"
+#include "Layer.h"
+#include "Window.h"
+#include "glm/glm.hpp"
+
+#include <memory>
+#include <string>
+#include <vector>
+
+namespace Core
+{
+struct ApplicationSpecification
+{
+    std::string applicationName = "application";
+    Core::WindowSpecification windowSpec;
+};
+
+class Application
+{
+  private:
+    ApplicationSpecification m_specification;
+    std::shared_ptr<Window> m_window;
+    bool m_isRunning = true;
+
+    std::vector<std::unique_ptr<Layer>> m_layerStack;
+
+  public:
+    Application(const ApplicationSpecification &appSpec = ApplicationSpecification());
+    ~Application();
+
+    void run();
+    void stop();
+
+    void raiseEvent(Event::Event &event);
+
+    template <typename TLayer>
+        requires(std::is_base_of_v<Layer, TLayer>)
+    void pushLayer()
+    {
+        m_layerStack.push_back(std::make_unique<TLayer>());
+    }
+
+    template <typename TLayer>
+        requires(std::is_base_of_v<Layer, TLayer>)
+    TLayer *getLayer()
+    {
+        for (const auto &layer : m_layerStack)
+        {
+            if (auto casted = dynamic_cast<TLayer *>(layer.get()))
+                return casted;
+        }
+        return nullptr;
+    }
+
+    std::shared_ptr<Window> getWindow() const
+    {
+        return m_window;
+    }
+
+    static Application &get();
+};
+} // namespace Core

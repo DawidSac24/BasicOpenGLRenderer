@@ -74,7 +74,7 @@ int main()
         float r = 0.0f;
         float increment = 0.05f;
 
-        // Unbind everything for safety
+        // Unbind everything for safety   
         va.unbind();
         vb.unbind();
         ib.unbind();
