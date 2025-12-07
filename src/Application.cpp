@@ -1,6 +1,9 @@
 #include "Debug.h"
+#include "Events/ApplicationEvents.h"
+#include "Events/Event.h"
 
 #include "Application.h"
+#include <cassert>
 #include <memory>
 #include <ranges>
 
@@ -60,6 +63,7 @@ void Application::run()
             layer->onRender();
 
         m_window->update();
+        flushEvents();
     }
 }
 
@@ -76,6 +80,33 @@ void Application::raiseEvent(Event::Event &event)
         if (event.handled)
             break;
     }
+}
+
+void Application::flushEvents()
+{
+    // Iterate through the generic event pointers
+    for (auto &eventPtr : m_pendingEvents)
+    {
+        Event::EventDispatcher dispatcher(eventPtr);
+        dispatcher.dispatch<Event::LayerTransitionEvent>(
+            [this](Event::LayerTransitionEvent &e) { return onLayerTransition(e); });
+        // might need to dispatch otter Events
+    }
+
+    m_pendingEvents.clear();
+}
+
+bool Application::onLayerTransition(Event::LayerTransitionEvent &event)
+{
+    for (auto &layer : m_layerStack)
+    {
+        if (layer.get() == event.getOutgoingLayer())
+        {
+            layer = event.getIncomingLayer();
+            return true;
+        }
+    }
+    return false;
 }
 
 Application &Application::get()

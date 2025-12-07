@@ -41,6 +41,8 @@ class Event
   public:
     bool handled = false;
 
+    virtual ~Event() = default;
+
     virtual EventType getEventType() const = 0;
     virtual const char *getName() const = 0;
     virtual std::string toString() const
@@ -54,22 +56,22 @@ class EventDispatcher
     template <typename T> using EventFn = std::function<bool(T &)>;
 
   public:
-    EventDispatcher(Event &event) : m_Event(event)
+    EventDispatcher(Event &event) : m_event(event)
     {
     }
 
-    template <typename T> bool Dispatch(EventFn<T> func)
+    template <typename T> bool dispatch(EventFn<T> func)
     {
-        if (m_Event.getEventType() == T::getStaticType() && !m_Event.handled)
+        if (m_event.getEventType() == T::getStaticType() && !m_event.handled)
         {
-            m_Event.handled = func(*(T *)&m_Event);
+            m_event.handled = func(*(T *)&m_event);
             return true;
         }
         return false;
     }
 
   private:
-    Event &m_Event;
+    Event &m_event;
 };
 
 } // namespace Event

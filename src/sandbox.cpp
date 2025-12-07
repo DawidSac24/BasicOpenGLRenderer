@@ -59,7 +59,7 @@ int main()
 
         Renderer::IndexBuffer ib(indices, 6);
 
-        glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+        glm::mat4 proj = glm::ortho(-1.0f, 1.0f, -1.5f, 1.5f, -1.0f, 1.0f);
 
         Renderer::Shader shader("../res/shaders/basic.vert", "../res/shaders/basic.frag");
         shader.bind();
@@ -74,7 +74,7 @@ int main()
         float r = 0.0f;
         float increment = 0.05f;
 
-        // Unbind everything for safety   
+        // Unbind everything for safety
         va.unbind();
         vb.unbind();
         ib.unbind();

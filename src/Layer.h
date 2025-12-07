@@ -8,9 +8,10 @@ class Layer
   public:
     ~Layer() = default;
 
-    virtual void onEvent(Event::Event &event);
-
+    virtual void onAttach();
     virtual void onUpdate();
     virtual bool onRender();
+
+    virtual void onEvent(Event::Event &event);
 };
 } // namespace Core

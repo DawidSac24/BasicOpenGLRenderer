@@ -1,6 +1,8 @@
 #pragma once
 
+#include "Events/ApplicationEvents.h"
 #include "Events/Event.h"
+
 #include "Layer.h"
 #include "Window.h"
 
@@ -30,6 +32,12 @@ class Application
     bool m_isRunning = true;
 
     std::vector<std::unique_ptr<Layer>> m_layerStack;
+    std::vector<Event::Event> m_pendingEvents;
+
+  private:
+    void flushEvents();
+
+    bool onLayerTransition(Event::LayerTransitionEvent &event);
 
   public:
     Application(const ApplicationSpecification &appSpec = ApplicationSpecification());
@@ -57,6 +65,11 @@ class Application
                 return casted;
         }
         return nullptr;
+    }
+
+    template <typename Event> void PushLayerTransition(Event event)
+    {
+        m_pendingEvents.push_back(std::move(event));
     }
 
     std::shared_ptr<Window> getWindow() const
