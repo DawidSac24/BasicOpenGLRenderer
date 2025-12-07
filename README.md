@@ -10,7 +10,6 @@ While the primary focus is 3D rendering, the project also implements a core engi
 - [Roadmap & Future Features](#Roadmap-&-Future-Features)
 - [Prerequisites](#Prerequisites)
 - [Buid](#Buid)
-- [Project Structure](#Project-Structure)
 
 ## Project Goals
 Learning: Deepen understanding of the graphics pipeline and memory management.
@@ -91,16 +90,5 @@ cmake ..
 Linux: ./BasicOpenGLRenderer
 Windows: .\Debug\BasicOpenGLRenderer.exe
 
-## Project Structure
-Plaintext
-
-BasicOpenGLRenderer/
-├── CMakeLists.txt       # Main build configuration
-├── dependencies.cmake   # Dependency linkage
-├── src/                 # Source code
-│   ├── Core/            # Application, Window, Layer, Events
-│   ├── Renderer/        # OpenGL abstractions (Buffers, Shaders)
-│   └── main.cpp         # Entry point
-└── vendor/              # Third-party libraries (stb_image, etc.)
 ## License & Credits
 This project is for educational purposes. Some code patterns may be derived from various online tutorials and resources (e.g., The Cherno, LearnOpenGL) and adapted/refactored for this specific architecture.
