@@ -72,18 +72,24 @@ GLM
 ### Linux (Debian/Ubuntu)
 You can install the necessary dependencies via the terminal:
 
+```shell
 sudo apt-get update
 sudo apt-get install build-essential cmake libgl1-mesa-dev libglew-dev libglfw3-dev libglm-dev
 Build Instructions
 Clone the repository:
+```
 
 ## Buid and Install
+```
 git clone https://github.com/your-username/BasicOpenGLRenderer.git
 cd BasicOpenGLRenderer
+```
 
+```shell
 mkdir build
 cd build
 cmake ..
+```
 
 ### Run
 
