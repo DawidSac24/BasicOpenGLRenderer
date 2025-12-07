@@ -1,4 +1,5 @@
-#BasicOpenGLRenderer
+# BasicOpenGLRenderer
+
 BasicOpenGLRenderer is a C++ rendering engine and application framework built from scratch. This project serves as a sandbox for learning modern OpenGL rendering techniques, exploring C++ application architecture, and mastering C++23 standards.
 
 While the primary focus is 3D rendering, the project also implements a core engine architecture featuring an Application layer, a Layer Stack, and a robust Event system.
