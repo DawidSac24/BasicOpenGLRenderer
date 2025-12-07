@@ -90,8 +90,8 @@ Compile:
 cmake --build .
 ### Run
 
-### Linux: ./BasicOpenGLRenderer
-### Windows: .\Debug\BasicOpenGLRenderer.exe
+Linux: ./BasicOpenGLRenderer
+Windows: .\Debug\BasicOpenGLRenderer.exe
 
 ## Project Structure
 Plaintext
