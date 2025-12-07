@@ -9,7 +9,7 @@ While the primary focus is 3D rendering, the project also implements a core engi
 - [Architecture](#Architecture)
 - [Roadmap & Future Features](#Roadmap-&-Future-Features)
 - [Prerequisites](#Prerequisites)
-- [Buid](#Buid)
+- [Buid and Install](#Buid-and-Install)
 
 ## Project Goals
 Learning: Deepen understanding of the graphics pipeline and memory management.
@@ -77,10 +77,10 @@ sudo apt-get install build-essential cmake libgl1-mesa-dev libglew-dev libglfw3-
 Build Instructions
 Clone the repository:
 
+## Buid and Install
 git clone https://github.com/your-username/BasicOpenGLRenderer.git
 cd BasicOpenGLRenderer
 
-## Buid
 mkdir build
 cd build
 cmake ..
