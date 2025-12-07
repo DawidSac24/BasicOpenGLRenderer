@@ -85,9 +85,7 @@ cd BasicOpenGLRenderer
 mkdir build
 cd build
 cmake ..
-Compile:
 
-cmake --build .
 ### Run
 
 Linux: ./BasicOpenGLRenderer
