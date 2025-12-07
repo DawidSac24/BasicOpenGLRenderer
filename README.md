@@ -3,6 +3,15 @@ BasicOpenGLRenderer is a C++ rendering engine and application framework built fr
 
 While the primary focus is 3D rendering, the project also implements a core engine architecture featuring an Application layer, a Layer Stack, and a robust Event system.
 
+## Summary
+- [Project Goals](#Project-Goals)
+- [Tech Stack](#Tech-Stack)
+- [Architecture](#Architecture)
+- [Roadmap & Future Features](#Roadmap-&-Future-Features)
+- [Prerequisites](#Prerequisites)
+- [Buid](#Buid)
+- [Project Structure](#Project-Structure)
+
 ## Project Goals
 Learning: Deepen understanding of the graphics pipeline and memory management.
 
@@ -39,13 +48,13 @@ Renderer: Abstractions for Vertex Arrays, Buffers, Shaders, and Textures.
 ## Roadmap & Future Features
 This is a living project, and the following features are planned for implementation:
 
-[ ] Renderer Abstraction: Create a hardware-agnostic Rendering API to switch between raw OpenGL and a custom software renderer.
+- [ ] Renderer Abstraction: Create a hardware-agnostic Rendering API to switch between raw OpenGL and a custom software renderer.
 
-[ ] Demo Project: A space simulation (Solar System or Black Hole visualization) to stress-test the engine.
+- [ ] Demo Project: A space simulation (Solar System or Black Hole visualization) to stress-test the engine.
 
-[ ] Physics Engine: Implementation of basic 2D and 3D physics solvers.
+- [ ] Physics Engine: Implementation of basic 2D and 3D physics solvers.
 
-[ ] Scene Graph: Basic entity management system.
+- [ ] Scene Graph: Basic entity management system.
 
 ## Building the Project
 The project is designed to be cross-platform (Linux/Windows).
@@ -64,33 +73,24 @@ GLM
 ### Linux (Debian/Ubuntu)
 You can install the necessary dependencies via the terminal:
 
-Bash
-
 sudo apt-get update
 sudo apt-get install build-essential cmake libgl1-mesa-dev libglew-dev libglfw3-dev libglm-dev
 Build Instructions
 Clone the repository:
 
-Bash
-
 git clone https://github.com/your-username/BasicOpenGLRenderer.git
 cd BasicOpenGLRenderer
-Generate project files:
 
-Bash
-
+## Buid
 mkdir build
 cd build
 cmake ..
 Compile:
 
-Bash
-
 cmake --build .
-Run:
+### Run
 
 ### Linux: ./BasicOpenGLRenderer
-
 ### Windows: .\Debug\BasicOpenGLRenderer.exe
 
 ## Project Structure
