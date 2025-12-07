@@ -93,8 +93,14 @@ cmake ..
 
 ### Run
 
-Linux: ./BasicOpenGLRenderer
-Windows: .\Debug\BasicOpenGLRenderer.exe
+Linux: 
+```shell
+./BasicOpenGLRenderer
+```
+Windows: 
+```shell
+.\Debug\BasicOpenGLRenderer.exe
+```
 
 ## License & Credits
 This project is for educational purposes. Some code patterns may be derived from various online tutorials and resources (e.g., The Cherno, LearnOpenGL) and adapted/refactored for this specific architecture.
