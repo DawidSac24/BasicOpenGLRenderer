@@ -4,6 +4,7 @@
 #include "Events/Event.h"
 
 #include "Layer.h"
+#include "LayerStack.h"
 #include "Window.h"
 
 #include <memory>
@@ -31,13 +32,11 @@ class Application
     std::shared_ptr<Window> m_window;
     bool m_isRunning = true;
 
-    std::vector<std::unique_ptr<Layer>> m_layerStack;
+    LayerStack m_layerStack;
     std::vector<Event::Event> m_pendingEvents;
 
   private:
     void flushEvents();
-
-    bool onLayerTransition(Event::LayerTransitionEvent &event);
 
   public:
     Application(const ApplicationSpecification &appSpec = ApplicationSpecification());
@@ -50,21 +49,21 @@ class Application
 
     template <typename TLayer>
         requires(std::is_base_of_v<Layer, TLayer>)
-    void pushLayer()
-    {
-        m_layerStack.push_back(std::make_unique<TLayer>());
-    }
-
-    template <typename TLayer>
-        requires(std::is_base_of_v<Layer, TLayer>)
     TLayer *getLayer()
     {
-        for (const auto &layer : m_layerStack)
-        {
-            if (auto casted = dynamic_cast<TLayer *>(layer.get()))
-                return casted;
-        }
-        return nullptr;
+        return m_layerStack.getLayer<TLayer>();
+    }
+    template <typename TLayer>
+        requires(std::is_base_of_v<Layer, TLayer>)
+    void pushLayer()
+    {
+        m_layerStack.pushLayer<TLayer>();
+    }
+    template <typename TLayer>
+        requires(std::is_base_of_v<Layer, TLayer>)
+    void popLayer()
+    {
+        m_layerStack.popLayer<TLayer>();
     }
 
     template <typename Event> void PushLayerTransition(Event event)

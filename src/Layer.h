@@ -13,5 +13,7 @@ class Layer
     virtual bool onRender();
 
     virtual void onEvent(Event::Event &event);
+
+    virtual void onDetach();
 };
 } // namespace Core

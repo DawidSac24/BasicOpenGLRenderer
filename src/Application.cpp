@@ -89,24 +89,11 @@ void Application::flushEvents()
     {
         Event::EventDispatcher dispatcher(eventPtr);
         dispatcher.dispatch<Event::LayerTransitionEvent>(
-            [this](Event::LayerTransitionEvent &e) { return onLayerTransition(e); });
+            [this](Event::LayerTransitionEvent &e) { return m_layerStack.onLayerTransition(e); });
         // might need to dispatch otter Events
     }
 
     m_pendingEvents.clear();
-}
-
-bool Application::onLayerTransition(Event::LayerTransitionEvent &event)
-{
-    for (auto &layer : m_layerStack)
-    {
-        if (layer.get() == event.getOutgoingLayer())
-        {
-            layer = event.getIncomingLayer();
-            return true;
-        }
-    }
-    return false;
 }
 
 Application &Application::get()
