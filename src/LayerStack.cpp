@@ -1,4 +1,5 @@
 #include "LayerStack.h"
+#include <ranges>
 
 namespace Core
 {
@@ -8,9 +9,9 @@ LayerStack::LayerStack()
 
 LayerStack::~LayerStack()
 {
-    for (auto it = m_layers.rbegin(); it != m_layers.rend(); ++it)
+    for (auto &layer : std::ranges::views::reverse(m_layers))
     {
-        (*it)->onDetach();
+        layer->onDetach();
     }
 }
 
@@ -37,15 +38,15 @@ template <typename TLayer>
     requires(std::is_base_of_v<Layer, TLayer>)
 void LayerStack::popLayer()
 {
-    auto it = std::ranges::find_if(m_layers.begin(), m_layers.end(), [](const std::unique_ptr<Layer> &layer) {
+    auto layer = std::ranges::find_if(m_layers.begin(), m_layers.end(), [](const std::unique_ptr<Layer> &layer) {
         return dynamic_cast<TLayer *>(layer.get()) != nullptr;
     });
 
-    if (it != m_layers.end())
+    if (layer != m_layers.end())
     {
-        (*it)->onDetach();
+        (*layer)->onDetach();
 
-        m_layers.erase(it);
+        m_layers.erase(layer);
     }
 }
 
