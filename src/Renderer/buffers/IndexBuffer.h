@@ -1,5 +1,6 @@
 #pragma once
 
+#include <GL/glew.h>
 namespace Renderer
 {
 
@@ -10,7 +11,7 @@ class IndexBuffer
     unsigned int m_count;
 
   public:
-    IndexBuffer(const unsigned int *data, unsigned int count);
+    IndexBuffer(const GLuint *data, unsigned int count);
     ~IndexBuffer();
 
     void bind() const;
