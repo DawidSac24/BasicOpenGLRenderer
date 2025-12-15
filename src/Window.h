@@ -1,8 +1,14 @@
 #pragma once
 
+#include "glm/glm.hpp"
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
 #include <cstdint>
+#include <functional>
 #include <string>
+
+#include <Events/Event.h>
 
 namespace Core
 {
@@ -13,7 +19,11 @@ struct WindowSpecification
     uint32_t width = 1280;
     uint32_t height = 720;
     bool isResizeable = true;
+    bool VSync = true;
     bool isInDEbugMode = false;
+
+    using EventCallbackFn = std::function<void(Event::Event &)>;
+    EventCallbackFn eventCallback;
 };
 
 class Window
@@ -32,6 +42,11 @@ class Window
     void destroy();
 
     void update();
+
+    void raiseEvent(Event::Event &event);
+
+    glm::vec2 getFrameBufferSize() const;
+    glm::vec2 getMousePos() const;
 
     bool shouldClose() const;
 

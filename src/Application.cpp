@@ -22,6 +22,8 @@ Application::Application(const ApplicationSpecification &appSpec)
         m_specification.windowSpec.title = m_specification.applicationName;
     }
 
+    m_specification.windowSpec.eventCallback = [this](Event::Event &event) { raiseEvent(event); };
+
     m_window = std::make_shared<Window>(m_specification.windowSpec);
     m_window->create();
 
