@@ -27,7 +27,7 @@ class LayerStack
         requires(std::is_base_of_v<Layer, TLayer>)
     void popLayer();
 
-    bool onLayerTransition(Event::LayerTransitionEvent &event);
+    bool onLayerTransition(LayerTransitionEvent &event);
 
     using iterator = std::vector<std::unique_ptr<Layer>>::iterator;
     using const_iterator = std::vector<std::unique_ptr<Layer>>::const_iterator;

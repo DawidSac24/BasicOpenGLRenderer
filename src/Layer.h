@@ -12,7 +12,7 @@ class Layer
     virtual void onUpdate();
     virtual bool onRender();
 
-    virtual void onEvent(Event::Event &event);
+    virtual void onEvent(Event &event);
 
     virtual void onDetach();
 };

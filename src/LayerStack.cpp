@@ -50,7 +50,7 @@ void LayerStack::popLayer()
     }
 }
 
-bool LayerStack::onLayerTransition(Event::LayerTransitionEvent &event)
+bool LayerStack::onLayerTransition(LayerTransitionEvent &event)
 {
     for (auto &layer : m_layers)
     {

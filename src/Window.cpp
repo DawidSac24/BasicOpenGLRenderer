@@ -43,14 +43,14 @@ void Window::create()
     glfwSetWindowCloseCallback(m_handle, [](GLFWwindow *handle) {
         Window &window = *((Window *)glfwGetWindowUserPointer(handle));
 
-        Event::WindowClosedEvent(event);
+        WindowClosedEvent(event);
         window.raiseEvent(event);
     });
 
     glfwSetWindowSizeCallback(m_handle, [](GLFWwindow *handle, int width, int height) {
         Window &window = *((Window *)glfwGetWindowUserPointer(handle));
 
-        Event::WindowResizeEvent event((uint32_t)width, (uint32_t)height);
+        WindowResizeEvent event((uint32_t)width, (uint32_t)height);
         window.raiseEvent(event);
     });
 
@@ -61,12 +61,12 @@ void Window::create()
         {
         case GLFW_PRESS:
         case GLFW_REPEAT: {
-            Event::KeyPressedEvent event(key, action == GLFW_REPEAT);
+            KeyPressedEvent event(key, action == GLFW_REPEAT);
             window.raiseEvent(event);
             break;
         }
         case GLFW_RELEASE: {
-            Event::KeyReleasedEvent event(key);
+            KeyReleasedEvent event(key);
             window.raiseEvent(event);
             break;
         }
@@ -79,12 +79,12 @@ void Window::create()
         switch (action)
         {
         case GLFW_PRESS: {
-            Event::MouseButtonPressedEvent event(button);
+            MouseButtonPressedEvent event(button);
             window.raiseEvent(event);
             break;
         }
         case GLFW_RELEASE: {
-            Event::MouseButtonReleasedEvent event(button);
+            MouseButtonReleasedEvent event(button);
             window.raiseEvent(event);
             break;
         }
@@ -94,14 +94,14 @@ void Window::create()
     glfwSetScrollCallback(m_handle, [](GLFWwindow *handle, double xOffset, double yOffset) {
         Window &window = *((Window *)glfwGetWindowUserPointer(handle));
 
-        Event::MouseScrolledEvent event(xOffset, yOffset);
+        MouseScrolledEvent event(xOffset, yOffset);
         window.raiseEvent(event);
     });
 
     glfwSetCursorPosCallback(m_handle, [](GLFWwindow *handle, double x, double y) {
         Window &window = *((Window *)glfwGetWindowUserPointer(handle));
 
-        Event::MouseMovedEvent event(x, y);
+        MouseMovedEvent event(x, y);
         window.raiseEvent(event);
     });
 }
@@ -120,7 +120,7 @@ void Window::update()
     glfwSwapBuffers(m_handle);
 }
 
-void Window::raiseEvent(Event::Event &event)
+void Window::raiseEvent(Event &event)
 {
     if (m_specification.eventCallback)
         m_specification.eventCallback(event);

@@ -4,7 +4,7 @@
 
 #include <format>
 
-namespace Event
+namespace Core
 {
 
 class WindowClosedEvent : public Event
@@ -43,4 +43,4 @@ class WindowResizeEvent : public Event
 
     EVENT_CLASS_TYPE(WindowResize)
 };
-} // namespace Event
+} // namespace Core

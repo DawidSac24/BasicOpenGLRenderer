@@ -4,7 +4,7 @@
 
 #include <memory>
 
-namespace Event
+namespace Core
 {
 class LayerTransitionEvent : public Event
 {
@@ -31,4 +31,4 @@ class LayerTransitionEvent : public Event
 
     EVENT_CLASS_TYPE(LayerTransitionEvent)
 };
-} // namespace Event
+} // namespace Core

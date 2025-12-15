@@ -4,7 +4,7 @@
 
 #include <format>
 
-namespace Event
+namespace Core
 {
 
 //
@@ -169,4 +169,4 @@ class MouseButtonReleasedEvent : public MouseButtonEvent
     EVENT_CLASS_TYPE(MouseButtonReleased)
 };
 
-} // namespace Event
+} // namespace Core

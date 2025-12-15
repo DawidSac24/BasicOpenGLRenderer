@@ -22,7 +22,7 @@ struct WindowSpecification
     bool VSync = true;
     bool isInDEbugMode = false;
 
-    using EventCallbackFn = std::function<void(Event::Event &)>;
+    using EventCallbackFn = std::function<void(Event &)>;
     EventCallbackFn eventCallback;
 };
 
@@ -43,7 +43,7 @@ class Window
 
     void update();
 
-    void raiseEvent(Event::Event &event);
+    void raiseEvent(Event &event);
 
     glm::vec2 getFrameBufferSize() const;
     glm::vec2 getMousePos() const;

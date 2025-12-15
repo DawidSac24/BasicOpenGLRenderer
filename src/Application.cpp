@@ -22,7 +22,7 @@ Application::Application(const ApplicationSpecification &appSpec)
         m_specification.windowSpec.title = m_specification.applicationName;
     }
 
-    m_specification.windowSpec.eventCallback = [this](Event::Event &event) { raiseEvent(event); };
+    m_specification.windowSpec.eventCallback = [this](Event &event) { raiseEvent(event); };
 
     m_window = std::make_shared<Window>(m_specification.windowSpec);
     m_window->create();
@@ -74,7 +74,7 @@ void Application::stop()
     m_isRunning = false;
 }
 
-void Application::raiseEvent(Event::Event &event)
+void Application::raiseEvent(Event &event)
 {
     for (auto &layer : std::views::reverse(m_layerStack))
     {
@@ -89,9 +89,9 @@ void Application::flushEvents()
     // Iterate through the generic event pointers
     for (auto &eventPtr : m_pendingEvents)
     {
-        Event::EventDispatcher dispatcher(eventPtr);
-        dispatcher.dispatch<Event::LayerTransitionEvent>(
-            [this](Event::LayerTransitionEvent &e) { return m_layerStack.onLayerTransition(e); });
+        EventDispatcher dispatcher(eventPtr);
+        dispatcher.dispatch<LayerTransitionEvent>(
+            [this](LayerTransitionEvent &e) { return m_layerStack.onLayerTransition(e); });
         // might need to dispatch otter Events
     }
 

@@ -33,7 +33,7 @@ class Application
     bool m_isRunning = true;
 
     LayerStack m_layerStack;
-    std::vector<Event::Event> m_pendingEvents;
+    std::vector<Event> m_pendingEvents;
 
   private:
     void flushEvents();
@@ -45,7 +45,7 @@ class Application
     void run();
     void stop();
 
-    void raiseEvent(Event::Event &event);
+    void raiseEvent(Event &event);
 
     template <typename TLayer>
         requires(std::is_base_of_v<Layer, TLayer>)

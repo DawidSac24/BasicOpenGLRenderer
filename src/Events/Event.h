@@ -2,7 +2,7 @@
 
 #include <functional>
 #include <string>
-namespace Event
+namespace Core
 {
 enum class EventType
 {
@@ -74,4 +74,4 @@ class EventDispatcher
     Event &m_event;
 };
 
-} // namespace Event
+} // namespace Core
