@@ -7,7 +7,8 @@
 #include <ostream>
 #include <string>
 
-#include "Debug.h"
+#include "Core/Debug.h"
+#include "Core/Window.h"
 #include "Renderer/Renderer.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Texture.h"
@@ -15,7 +16,6 @@
 #include "Renderer/buffers/VertexArray.h"
 #include "Renderer/buffers/VertexBuffer.h"
 #include "Renderer/buffers/VertexBufferLayout.h"
-#include "Window.h"
 #include "glm/ext/matrix_clip_space.hpp"
 
 #include <glm/glm.hpp>
