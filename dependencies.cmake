@@ -13,6 +13,10 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(glm)
 
-# # GLAD
-# FetchContent_Declare(glad GIT_REPOSITORY https://github.com/Dav1dde/glad.git GIT_TAG v0.1.36)
-# FetchContent_MakeAvailable(glad)
+# imgui
+FetchContent_Declare(
+    imgui
+    GIT_REPOSITORY https://github.com/ocornut/imgui.git
+    GIT_TAG        docking
+)
+FetchContent_MakeAvailable(imgui)

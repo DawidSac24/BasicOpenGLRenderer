@@ -11,6 +11,26 @@ include(dependencies.cmake)
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 
+add_library(imgui STATIC
+    "${imgui_SOURCE_DIR}/imgui.cpp"
+    "${imgui_SOURCE_DIR}/imgui_draw.cpp"
+    "${imgui_SOURCE_DIR}/imgui_tables.cpp"
+    "${imgui_SOURCE_DIR}/imgui_widgets.cpp"
+    "${imgui_SOURCE_DIR}/imgui_demo.cpp"
+    # Backends
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp"
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp"
+)
+
+# Allow ImGui to find its own headers and backend headers
+target_include_directories(imgui PUBLIC 
+    "${imgui_SOURCE_DIR}" 
+    "${imgui_SOURCE_DIR}/backends"
+)
+
+# ImGui backends need access to GLFW and GLEW headers to compile
+target_link_libraries(imgui PUBLIC glfw GLEW::glew OpenGL::GL)
+
 add_library(stb_image STATIC "vendor/stb_image/stb_image.cpp")
 target_include_directories(stb_image PUBLIC "vendor/stb_image")
 
@@ -29,4 +49,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     GLEW::glew
     stb_image
     glm::glm  
+    imgui
 )
