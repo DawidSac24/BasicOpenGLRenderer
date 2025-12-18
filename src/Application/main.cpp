@@ -1,3 +1,4 @@
+#include "Application/MVPTestLayer.h"
 #include "Application/SandboxLayer.h"
 #include "Core/Application.h"
 int main() {
@@ -6,6 +7,6 @@ int main() {
   spec.windowSpec.isInDEbugMode = true;
 
   Core::Application application(spec);
-  application.pushLayer<SandboxLayer>();
+  application.pushLayer<MVPTestLayer>();
   application.run();
 }

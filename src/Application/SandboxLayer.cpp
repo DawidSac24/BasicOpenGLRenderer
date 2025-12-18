@@ -5,14 +5,12 @@
 #include "glm/ext/matrix_clip_space.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/fwd.hpp"
-#include "glm/gtc/matrix_transform.hpp"
 #include "imgui.h"
 #include "imgui_impl_opengl3.h"
 
-// Define data here so it's available for the Initializer List
 static float s_positions[] = {
-    100.0f, 100.0f, 0.0f, 0.0f, 200.0f, 100.0f, 1.0f, 0.0f,
-    200.0f, 200.0f, 1.0f, 1.0f, 100.0f, 200.0f, 0.0f, 1.0f,
+    -50.0f, -50.0f, 0.0f, 0.0f, 50.0f,  -50.0f, 1.0f, 0.0f,
+    50.0f,  50.0f,  1.0f, 1.0f, -50.0f, 50.0f,  0.0f, 1.0f,
 };
 
 static unsigned int s_indices[] = {0, 1, 2, 2, 3, 0};
@@ -41,8 +39,8 @@ SandboxLayer::SandboxLayer()
 
   // Shader Uniforms
   glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-  glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-1, 0, 0));
-  glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0));
+  glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+  glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 
   glm::mat4 mvp = proj * view * model;
 

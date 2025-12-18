@@ -7,8 +7,10 @@
 #include "Renderer/buffers/IndexBuffer.h"
 #include "Renderer/buffers/VertexArray.h"
 #include "Renderer/buffers/VertexBuffer.h"
+#include "glm/fwd.hpp"
+#include "imgui.h"
 
-class SandboxLayer : public Core::Layer {
+class MVPTestLayer : public Core::Layer {
  private:
   Renderer::Renderer renderer;
 
@@ -18,9 +20,14 @@ class SandboxLayer : public Core::Layer {
   Renderer::Shader m_shader;
   Renderer::Texture m_texture;
 
+  glm::vec3 m_translation;
+  glm::mat4 proj, view, model, mvp;
+
+  ImGuiIO& imGuiIO = ImGui::GetIO();
+
  public:
-  SandboxLayer();
-  virtual ~SandboxLayer();
+  MVPTestLayer();
+  virtual ~MVPTestLayer();
 
   virtual void onUpdate() override;
   virtual void onRender() override;
