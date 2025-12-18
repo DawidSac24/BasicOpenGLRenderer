@@ -17,7 +17,7 @@ IndexBuffer::~IndexBuffer()
 
 void IndexBuffer::bind() const
 {
-    glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_rendererID);
 }
 
 void IndexBuffer::unbind() const

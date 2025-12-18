@@ -1,9 +1,10 @@
-#include "Debug.h"
 #include "../Events/ApplicationEvents.h"
+#include "Debug.h"
 #include "Events/Event.h"
 
 #include "Application.h"
 #include <cassert>
+#include <iostream>
 #include <memory>
 #include <ranges>
 
@@ -54,6 +55,7 @@ void Application::run()
 
         if (m_window->shouldClose())
         {
+            std::cout << "window should close !";
             stop();
             break;
         }

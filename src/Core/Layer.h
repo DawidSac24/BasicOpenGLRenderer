@@ -6,14 +6,21 @@ namespace Core
 class Layer
 {
   public:
-    ~Layer() = default;
+    virtual ~Layer() = default;
 
-    virtual void onAttach();
-    virtual void onUpdate();
-    virtual bool onRender();
+    virtual void onUpdate()
+    {
+    }
+    virtual void onRender()
+    {
+    }
 
-    virtual void onEvent(Event &event);
+    virtual void onEvent(Event &event)
+    {
+    }
 
-    virtual void onDetach();
+    virtual void onDetach()
+    {
+    }
 };
 } // namespace Core
