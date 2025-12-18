@@ -5,7 +5,7 @@
 #include <memory>
 #include <ranges>
 
-#include "Core/Events/ApplicationEvents.h"
+#include "Events/ApplicationEvents.h"
 #include "Debug.h"
 #include "Events/Event.h"
 
