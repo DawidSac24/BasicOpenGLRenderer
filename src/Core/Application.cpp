@@ -68,8 +68,11 @@ Application::Application(const ApplicationSpecification& appSpec) {
 }
 
 Application::~Application() {
-  m_window->destroy();
+  ImGui_ImplOpenGL3_Shutdown();
+  ImGui_ImplGlfw_Shutdown();
+  ImGui::DestroyContext();
 
+  m_window->destroy();
   glfwTerminate();
 
   s_application = nullptr;
@@ -87,9 +90,16 @@ void Application::run() {
       break;
     }
 
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
     for (const std::unique_ptr<Layer>& layer : m_layerStack) layer->onUpdate();
 
     for (const std::unique_ptr<Layer>& layer : m_layerStack) layer->onRender();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     m_window->update();
     flushEvents();
