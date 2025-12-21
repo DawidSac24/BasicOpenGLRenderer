@@ -5,8 +5,14 @@
 
 namespace Renderer
 {
-Texture::Texture(const std::string &path)
-    : m_rendererId(0), m_filepath(path), m_localBuffer(nullptr), m_width(0), m_height(0), m_BPP(0)
+Texture::Texture(const std::string& path, const char* type)
+    : m_rendererId(0)
+    , type(type)
+    , m_filepath(path)
+    , m_localBuffer(nullptr)
+    , m_width(0)
+    , m_height(0)
+    , m_BPP(0)
 {
     glGenTextures(1, &m_rendererId);
     glBindTexture(GL_TEXTURE_2D, m_rendererId);

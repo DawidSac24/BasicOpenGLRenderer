@@ -33,29 +33,21 @@ struct VertexBufferElement
 
 class VertexBufferLayout
 {
-  private:
+private:
     std::vector<VertexBufferElement> m_elements;
 
     unsigned int m_stride;
 
-  public:
-    VertexBufferLayout() : m_stride(0) {};
+public:
+    VertexBufferLayout()
+        : m_stride(0) { };
     // ~VertexBufferLayout();
 
-    template <typename T> void push(unsigned int count)
-    {
-        static_assert(false);
-    }
+    template <typename T> void push(unsigned int count) { static_assert(false); }
 
-    inline const std::vector<VertexBufferElement> getElements() const
-    {
-        return m_elements;
-    }
+    inline const std::vector<VertexBufferElement> getElements() const { return m_elements; }
 
-    inline unsigned int getStride() const
-    {
-        return m_stride;
-    }
+    inline unsigned int getStride() const { return m_stride; }
 };
 
 template <> void VertexBufferLayout::push<float>(unsigned int count);

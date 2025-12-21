@@ -6,26 +6,22 @@ namespace Renderer
 {
 class Texture
 {
-  private:
+private:
     unsigned int m_rendererId;
+    const char* type;
     std::string m_filepath;
-    unsigned char *m_localBuffer;
+    unsigned char* m_localBuffer;
     int m_width, m_height, m_BPP;
 
-  public:
-    Texture(const std::string &path);
+public:
+    Texture(const std::string& path, const char* type);
     ~Texture();
 
     void bind(unsigned int slot = 0) const;
     void unbind() const;
 
-    inline int getWidth() const
-    {
-        return m_width;
-    }
-    inline int getHeight() const
-    {
-        return m_height;
-    }
+    inline int getWidth() const { return m_width; }
+    inline int getHeight() const { return m_height; }
+    inline const char* getType() const { return type; }
 };
 } // namespace Renderer

@@ -1,15 +1,25 @@
 #pragma once
 
+#include "glm/glm.hpp"
+#include <vector>
 namespace Renderer
 {
 
+struct Vertex
+{
+    glm::vec3 position;
+    glm::vec3 normal;
+    glm::vec3 color;
+    glm::vec2 textUV;
+};
+
 class VertexBuffer
 {
-  private:
+private:
     unsigned int m_rendererID;
 
-  public:
-    VertexBuffer(const void *data, unsigned int size);
+public:
+    VertexBuffer(std::vector<Vertex>& vertices);
     ~VertexBuffer();
 
     void bind() const;

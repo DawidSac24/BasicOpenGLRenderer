@@ -1,25 +1,20 @@
 #pragma once
 
 #include <GL/glew.h>
+#include <vector>
 namespace Renderer
 {
 
 class IndexBuffer
 {
-  private:
+private:
     unsigned int m_rendererID;
-    unsigned int m_count;
 
-  public:
-    IndexBuffer(const GLuint *data, unsigned int count);
+public:
+    IndexBuffer(std::vector<GLuint>& indices);
     ~IndexBuffer();
 
     void bind() const;
     void unbind() const;
-
-    inline unsigned int getCount() const
-    {
-        return m_count;
-    }
 };
 }; // namespace Renderer

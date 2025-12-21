@@ -4,12 +4,12 @@
 
 namespace Renderer
 {
-VertexBuffer::VertexBuffer(const void *data, unsigned int size)
+VertexBuffer::VertexBuffer(std::vector<Vertex>& vertices)
 {
     glGenBuffers(1, &m_rendererID);
     // binds (select) the buffer to draw on
     glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
-    glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 }
 VertexBuffer::~VertexBuffer()
 {
