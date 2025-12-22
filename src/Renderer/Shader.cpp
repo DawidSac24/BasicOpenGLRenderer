@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <fstream>
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <ostream>
 #include <sstream>
@@ -122,9 +123,16 @@ void Shader::setUniform4f(const std::string& name, const glm::vec4 values)
     glUniform4f(getUniformLocation(name), values.x, values.y, values.z, values.w);
 }
 
-void Shader::setUniformMat4f(const std::string& name, glm::mat4 matrix)
+void Shader::setUniformMat4f(const std::string& name, const glm::mat4& matrix)
 {
     glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, &matrix[0][0]);
+}
+
+void Shader::setUniformMat4fv(const std::string& name, const std::vector<glm::mat4>& matrices)
+{
+    if (matrices.empty())
+        return;
+    glUniformMatrix4fv(getUniformLocation(name), (GLsizei)matrices.size(), GL_FALSE, glm::value_ptr(matrices[0]));
 }
 
 } // namespace Renderer

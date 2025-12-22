@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Maths/Transform.h"
+#include "Renderer/Shader.h"
 
 #include "glm/fwd.hpp"
 
@@ -9,23 +10,22 @@ namespace Engine
 class Camera
 {
 private:
-    Math::Transform m_transform;
-
     glm::mat4 m_view;
     glm::mat4 m_projection;
 
-    float m_fov = 45.0f;
-    float m_near = 0.1f;
-    float m_far = 100.0f;
+    float m_fov;
+    float m_aspect;
+    float m_near;
+    float m_far;
+
+public:
+    Math::Transform transform;
 
 public:
     Camera(float width, float height, glm::vec3 initialPosition);
 
-    void UpdateMatrix(float width, float height);
+    void matrix(Renderer::Shader& shader, const char* uniform);
 
-    const glm::mat4& GetViewMatrix() const { return m_view; }
-    const glm::mat4& GetProjectionMatrix() const { return m_projection; }
-
-    Math::Transform& GetTransform() { return m_transform; }
+    void updateDimensions(float width, float height) { m_aspect = width / height; }
 };
 }
