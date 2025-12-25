@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 
+#include "Engine/Camera.h"
+#include "Renderer/Renderer.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Texture.h"
 #include "Renderer/buffers/IndexBuffer.h"
@@ -25,6 +27,6 @@ public:
     Mesh(std::vector<Renderer::Vertex>& vertices, std::vector<GLuint>& indices,
         std::vector<Renderer::Texture>& textures);
 
-    void draw(Renderer::Shader& shader, Camera& camera);
+    void draw(Renderer::Renderer& renderer, Renderer::Shader& shader);
 };
 } // namespace Engine

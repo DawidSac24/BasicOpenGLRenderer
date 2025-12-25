@@ -1,31 +1,33 @@
-#pragma once
+#include <memory>
+#pragma onceSandb
 
+#include "Core/Application.h"
 #include "Core/Layer.h"
+#include "Engine/Camera.h"
+#include "Engine/Mesh.h"
 #include "Renderer/Renderer.h"
 #include "Renderer/Shader.h"
-#include "Renderer/Texture.h"
-#include "Renderer/buffers/IndexBuffer.h"
-#include "Renderer/buffers/VertexArray.h"
-#include "Renderer/buffers/VertexBuffer.h"
 
-class SandboxLayer : public Core::Layer {
- private:
-  Renderer::Renderer renderer;
+class SandboxLayer : public Core::Layer
+{
+private:
+    std::unique_ptr<Engine::Camera> camera;
+    std::unique_ptr<Engine::Mesh> cubeMesh;
 
-  Renderer::VertexArray m_va;
-  Renderer::VertexBuffer m_vb;
-  Renderer::IndexBuffer m_ib;
-  Renderer::Shader m_shader;
-  Renderer::Texture m_texture;
+    Renderer::Renderer renderer;
+    std::unique_ptr<Renderer::Shader> whiteShader;
+    std::unique_ptr<Renderer::Shader> basicShader;
 
- public:
-  SandboxLayer();
-  virtual ~SandboxLayer();
+    float m_rotation = 0.0f;
 
-  virtual void onUpdate() override;
-  virtual void onRender() override;
+public:
+    SandboxLayer();
+    virtual ~SandboxLayer();
 
-  virtual void onEvent(Core::Event& event) override;
+    virtual void onUpdate() override;
+    virtual void onRender() override;
 
-  virtual void onDetach() override;
+    virtual void onEvent(Core::Event& event) override;
+
+    virtual void onDetach() override;
 };

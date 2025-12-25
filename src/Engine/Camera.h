@@ -24,6 +24,7 @@ public:
 public:
     Camera(float width, float height, glm::vec3 initialPosition);
 
+    glm::mat4 getMatrix();
     void matrix(Renderer::Shader& shader, const char* uniform);
 
     void updateDimensions(float width, float height) { m_aspect = width / height; }

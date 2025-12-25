@@ -33,12 +33,17 @@ void Shader::bind() const
 
 void Shader::unbind() const
 {
-    glUseProgram(m_rendererID);
+    glUseProgram(0);
 }
 
 std::string Shader::parseShader(const std::string& filepath)
 {
     std::fstream stream(filepath);
+    if (!stream.is_open())
+    {
+        std::cout << "Failed to open shader file: " << filepath << std::endl;
+        return "";
+    }
 
     std::stringstream result;
     std::string line;
@@ -59,6 +64,21 @@ unsigned int Shader::createShader(const std::string& vert_shader, const std::str
     glAttachShader(program, vs);
     glAttachShader(program, fs);
     glLinkProgram(program);
+
+    int result;
+    glGetProgramiv(program, GL_LINK_STATUS, &result);
+    if (result == GL_FALSE)
+    {
+        int length;
+        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
+        char message[length];
+        glGetProgramInfoLog(program, length, &length, message);
+        std::cout << "Failed to link program" << std::endl;
+        std::cout << message << std::endl;
+        glDeleteProgram(program);
+        return 0;
+    }
+
     glValidateProgram(program);
 
     glDeleteShader(vs);
@@ -118,7 +138,12 @@ void Shader::setUniform1f(const std::string& name, float value)
     glUniform1f(getUniformLocation(name), value);
 }
 
-void Shader::setUniform4f(const std::string& name, const glm::vec4 values)
+void Shader::setUniform3f(const std::string& name, const glm::vec3& values)
+{
+    glUniform3f(getUniformLocation(name), values.x, values.y, values.z);
+}
+
+void Shader::setUniform4f(const std::string& name, const glm::vec4& values)
 {
     glUniform4f(getUniformLocation(name), values.x, values.y, values.z, values.w);
 }

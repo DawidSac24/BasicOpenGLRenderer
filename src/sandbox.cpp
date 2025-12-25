@@ -1,111 +1,67 @@
-
-#include <GL/glext.h>
-#include <GLFW/glfw3.h>
-
-#include <cassert>
-#include <iostream>
-#include <ostream>
-#include <string>
-
-#include "Core/Debug.h"
-#include "Core/Window.h"
-#include "Renderer/Renderer.h"
-#include "Renderer/Shader.h"
-#include "Renderer/Texture.h"
-#include "Renderer/buffers/IndexBuffer.h"
-#include "Renderer/buffers/VertexArray.h"
-#include "Renderer/buffers/VertexBuffer.h"
-#include "Renderer/buffers/VertexBufferLayout.h"
-#include "glm/ext/matrix_clip_space.hpp"
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-int main()
-{
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
-
-    Core::WindowSpecification windowSpecification = { "OpenGL_renderer", 1280, 720, true, true };
-    Core::Window window(windowSpecification);
-
-    window.create();
-    glfwSwapInterval(1);
-
-    glewExperimental = GL_TRUE;
-    if (glewInit() != GLEW_OK)
-    {
-        std::cerr << "Failed to initialize GLEW" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    Core::getOpenGLErrors();
-
-    {
-        float positions[]
-            = { -0.5f, -0.5f, 0.0f, 0.0f, 0.5f, -0.5f, 1.0f, 0.0f, 0.5f, 0.5f, 1.0f, 1.0f, -0.5f, 0.5f, 0.0f, 1.0f };
-
-        unsigned int indices[] { 0, 1, 2, 2, 3, 0 };
-
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-        Renderer::VertexArray va;
-        Renderer::VertexBuffer vb(positions, 4 * 4 * sizeof(float));
-        Renderer::VertexBufferLayout layout;
-        layout.push<float>(2);
-        layout.push<float>(2);
-        va.addBuffer(vb, layout);
-
-        Renderer::IndexBuffer ib(indices, 6);
-
-        glm::mat4 proj = glm::ortho(-1.0f, 1.0f, -1.5f, 1.5f, -1.0f, 1.0f);
-
-        Renderer::Shader shader("../res/shaders/basic.vert", "../res/shaders/basic.frag");
-        shader.bind();
-        shader.setUniform4f("u_color", 0.8f, 0.3f, 0.8f, 1.0f);
-        shader.setUniformMat4f("u_mvp", proj);
-
-        Renderer::Texture texture("../res/textures/texture.png");
-        texture.bind();
-        // specify the texture slot as the second parameter
-        shader.setUniform1i("u_texture", 0);
-
-        float r = 0.0f;
-        float increment = 0.05f;
-
-        // Unbind everything for safety
-        va.unbind();
-        vb.unbind();
-        ib.unbind();
-        shader.unbind();
-
-        Renderer::Renderer renderer;
-
-        while (!window.shouldClose())
-        {
-            renderer.clear();
-
-            shader.bind();
-            shader.setUniform4f("u_color", r, 0.3f, 0.8f, 1.0f);
-
-            renderer.draw(va, ib, shader);
-            if (r > 1.0f)
-            {
-                increment = -0.05f;
-            }
-            else if (r < 0.0f)
-            {
-                increment = 0.05f;
-            }
-            r += increment;
-
-            window.update();
-
-            glfwPollEvents();
-        }
-        window.destroy();
-    }
-    glfwTerminate();
-    return 0;
-}
+// #include <GLFW/glfw3.h> // Assuming you use GLFW
+// #include <glad/glad.h>
+// #include <vector>
+//
+// #include "Engine/Camera.h"
+// #include "Engine/Mesh.h"
+// #include "Renderer/Shader.h"
+// #include "Renderer/Texture.h"
+//
+// int main()
+// {
+//     // 1. Initialize Window (GLFW/GLAD boilerplate)
+//     // ... (Your window creation code here) ...
+//
+//     // CRITICAL: Enable Depth Testing
+//     glEnable(GL_DEPTH_TEST);
+//
+//     // 2. Define the Cube Data
+//     // We need 24 vertices (4 per face x 6 faces) to have sharp corners.
+//     // If you share vertices, the lighting (normals) will look smooth/spherical.
+//     std::vector<Renderer::Vertex> vertices = {
+//         // Front Face (Normal 0,0,1)
+//         { { -0.5f, -0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } }, // Bottom-Left
+//         { { 0.5f, -0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } }, // Bottom-Right
+//         { { 0.5f, 0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } }, // Top-Right
+//         { { -0.5f, 0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } }, // Top-Left
+//
+//         // Back Face (Normal 0,0,-1) ... (You would add the other 5 faces here)
+//         // For testing, just 1 face (a square) is enough to verify it works!
+//     };
+//
+//     std::vector<GLuint> indices = {
+//         0, 1, 2, 2, 3, 0 // Front face
+//         // Add indices for other faces if you added vertices
+//     };
+//
+//     // 3. EMPTY Texture List
+//     std::vector<Renderer::Texture> noTextures;
+//
+//     // 4. Use the new "SolidColor" shader
+//     Renderer::Shader whiteShader("res/shaders/SolidColor.shader");
+//     Engine::Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+//
+//     // 5. Create Mesh with empty textures
+//     Engine::Mesh cubeMesh(vertices, indices, noTextures);
+//
+//     while (!window.closed())
+//     {
+//         renderer.Clear();
+//
+//         // Standard Camera Updates
+//         camera.Inputs(window);
+//         camera.Matrix(whiteShader, "u_Projection");
+//
+//         // Set Model Matrix (Identity)
+//         whiteShader.bind(); // Make sure shader is bound before setting uniforms!
+//         whiteShader.setUniformMat4f("u_Model", glm::mat4(1.0f));
+//
+//         // Draw
+//         cubeMesh.draw(whiteShader, camera);
+//
+//         window.SwapBuffers();
+//         glfwPollEvents();
+//     }
+//
+//     return 0;
+// }

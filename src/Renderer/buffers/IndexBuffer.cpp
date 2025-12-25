@@ -4,6 +4,7 @@ namespace Renderer
 {
 
 IndexBuffer::IndexBuffer(std::vector<GLuint>& indices)
+    : count(indices.size())
 {
     glGenBuffers(1, &m_rendererID);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_rendererID);

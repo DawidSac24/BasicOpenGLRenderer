@@ -1,145 +1,178 @@
 #include "SandboxLayer.h"
 
 #include "Core/Application.h"
+#include "Engine/Camera.h"
 #include "GLFW/glfw3.h"
+#include "Maths/Transform.h"
 #include "glm/ext/matrix_clip_space.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/fwd.hpp"
 #include "imgui.h"
 #include "imgui_impl_opengl3.h"
-
-static float s_positions[] = {
-    -50.0f, -50.0f, 0.0f, 0.0f, 50.0f,  -50.0f, 1.0f, 0.0f,
-    50.0f,  50.0f,  1.0f, 1.0f, -50.0f, 50.0f,  0.0f, 1.0f,
-};
-
-static unsigned int s_indices[] = {0, 1, 2, 2, 3, 0};
+#include <memory>
 
 SandboxLayer::SandboxLayer()
-    : m_va(),
-      m_vb(s_positions, 4 * 4 * sizeof(float)),
-      m_ib(s_indices, 6),
-      m_shader("../res/shaders/basic.vert", "../res/shaders/basic.frag"),
-      m_texture("../res/textures/texture.png") {
-  // The Constructor Body is now only for configuring state,
-  // because the objects are already created!
+// , camera(application.getWindow()->getFrameBufferSize().x, application.getWindow()->getFrameBufferSize().y,
+//       glm::vec3(0.0f, 0.0f, 2.0f))
+// , cubeMesh(vertices, indices, noTextures)
 
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+{
+    glEnable(GL_DEPTH_TEST);
+    Core::Application& application = Core::Application::get();
+    glm::vec2 frameBufferSize = application.getWindow()->getFrameBufferSize();
 
-  // Setup the Layout
-  Renderer::VertexBufferLayout layout;
-  layout.push<float>(2);
-  layout.push<float>(2);
+    std::vector<Renderer::Vertex> vertices = {
+        // Front Face (Normal 0, 0, 1)
+        { { -0.5f, -0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } }, // Bottom-Left
+        { { 0.5f, -0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } }, // Bottom-Right
+        { { 0.5f, 0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } }, // Top-Right
+        { { -0.5f, 0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } }, // Top-Left
 
-  // Link the VB to the VA
-  // Note: m_vb and m_va are objects now, so we pass them directly (or by
-  // reference)
-  m_va.addBuffer(m_vb, layout);
+        // Back Face (Normal 0, 0, -1)
+        { { 0.5f, -0.5f, -0.5f }, { 0.0f, 0.0f, -1.0f }, { 1.0f, 0.0f, 0.0f },
+            { 0.0f, 0.0f } }, // Bottom-Left (from back)
+        { { -0.5f, -0.5f, -0.5f }, { 0.0f, 0.0f, -1.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } }, // Bottom-Right
+        { { -0.5f, 0.5f, -0.5f }, { 0.0f, 0.0f, -1.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } }, // Top-Right
+        { { 0.5f, 0.5f, -0.5f }, { 0.0f, 0.0f, -1.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } }, // Top-Left
 
-  // Shader Uniforms
-  glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-  glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
-  glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+        // Left Face (Normal -1, 0, 0)
+        { { -0.5f, -0.5f, -0.5f }, { -1.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
+        { { -0.5f, -0.5f, 0.5f }, { -1.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
+        { { -0.5f, 0.5f, 0.5f }, { -1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
+        { { -0.5f, 0.5f, -0.5f }, { -1.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } },
 
-  glm::mat4 mvp = proj * view * model;
+        // Right Face (Normal 1, 0, 0)
+        { { 0.5f, -0.5f, 0.5f }, { 1.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
+        { { 0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
+        { { 0.5f, 0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
+        { { 0.5f, 0.5f, 0.5f }, { 1.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } },
 
-  m_shader.bind();
-  m_shader.setUniform4f("u_color", 0.8f, 0.3f, 0.8f, 1.0f);
-  m_shader.setUniformMat4f("u_mvp", mvp);
+        // Top Face (Normal 0, 1, 0)
+        { { -0.5f, 0.5f, 0.5f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
+        { { 0.5f, 0.5f, 0.5f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
+        { { 0.5f, 0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
+        { { -0.5f, 0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } },
 
-  m_texture.bind();
-  m_shader.setUniform1i("u_texture", 0);
+        // Bottom Face (Normal 0, -1, 0)
+        { { -0.5f, -0.5f, -0.5f }, { 0.0f, -1.0f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
+        { { 0.5f, -0.5f, -0.5f }, { 0.0f, -1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
+        { { 0.5f, -0.5f, 0.5f }, { 0.0f, -1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
+        { { -0.5f, -0.5f, 0.5f }, { 0.0f, -1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } },
+    };
+    // 36 Indices (6 faces * 2 triangles * 3 indices)
+    std::vector<GLuint> indices = {
+        0, 1, 2, 2, 3, 0, // Front
+        4, 5, 6, 6, 7, 4, // Back
+        8, 9, 10, 10, 11, 8, // Left
+        12, 13, 14, 14, 15, 12, // Right
+        16, 17, 18, 18, 19, 16, // Top
+        20, 21, 22, 22, 23, 20 // Bottom
+    };
 
-  // Unbind (using dot operator, not arrow)
-  m_va.unbind();
-  m_vb.unbind();
-  m_ib.unbind();
-  m_shader.unbind();
+    // EMPTY Texture List
+    std::vector<Renderer::Texture> noTextures;
+
+    whiteShader
+        = std::make_unique<Renderer::Shader>("../res/shaders/whiteShader.vert", "../res/shaders/whiteShader.frag");
+    basicShader = std::make_unique<Renderer::Shader>("../res/shaders/basic.vert", "../res/shaders/basic.frag");
+    camera = std::make_unique<Engine::Camera>(frameBufferSize.x, frameBufferSize.y, glm::vec3(0.0f, 0.0f, 2.0f));
+    cubeMesh = std::make_unique<Engine::Mesh>(vertices, indices, noTextures);
 }
-SandboxLayer::~SandboxLayer() {}
+SandboxLayer::~SandboxLayer() { }
 
-void SandboxLayer::onUpdate() {
-  // Our state
-  ImGuiIO& io = ImGui::GetIO();
-  (void)io;
-  bool show_demo_window = true;
-  bool show_another_window = false;
-  ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-  // 1. Show the big demo window (Most of the sample code is in
-  // ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear
-  // ImGui!).
-  if (show_demo_window) ImGui::ShowDemoWindow(&show_demo_window);
+void SandboxLayer::onUpdate()
+{
+    m_rotation += 0.5f;
+    {
+        Math::Transform& cameraTransform = camera->transform;
 
-  // 2. Show a simple window that we create ourselves. We use a Begin/End pair
-  // to create a named window.
-  {
-    static float f = 0.0f;
-    static int counter = 0;
+        ImGui::Begin("Camera"); // Create a window called "Hello, world!" and append into it.
+        //
+        // ImGui::Text("This is some useful text."); // Display some text (you can use a format strings too)
+        // ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
+        // ImGui::Checkbox("Another Window", &show_another_window);
 
-    ImGui::Begin("Hello, world!");  // Create a window called "Hello, world!"
-                                    // and append into it.
+        ImGui::SliderFloat("x", &cameraTransform.position.x, -10.0f, 10.0f);
+        ImGui::SliderFloat("y", &cameraTransform.position.y, -10.0f, 10.0f);
+        ImGui::SliderFloat("z", &cameraTransform.position.z, -10.0f, 10.0f);
 
-    ImGui::Text("This is some useful text.");  // Display some text (you can use
-                                               // a format strings too)
-    ImGui::Checkbox(
-        "Demo Window",
-        &show_demo_window);  // Edit bools storing our window open/close state
-    ImGui::Checkbox("Another Window", &show_another_window);
+        ImGui::Text("Rotation");
+        // Step A: Convert Quaternion -> Euler Angles (Radians)
+        glm::vec3 eulerRadians = glm::eulerAngles(cameraTransform.rotation);
 
-    ImGui::SliderFloat("float", &f, 0.0f,
-                       1.0f);  // Edit 1 float using a slider from 0.0f to 1.0f
-    ImGui::ColorEdit3(
-        "clear color",
-        (float*)&clear_color);  // Edit 3 floats representing a color
+        // Step B: Convert Radians -> Degrees (For humans to read in ImGui)
+        glm::vec3 eulerDegrees = glm::degrees(eulerRadians);
 
-    if (ImGui::Button("Button"))  // Buttons return true when clicked (most
-                                  // widgets return true when edited/activated)
-      counter++;
-    ImGui::SameLine();
-    ImGui::Text("counter = %d", counter);
+        // Step C: Edit the DEGREES with ImGui
+        // We use a helper bool to see if any slider changed
+        bool rotationChanged = false;
+        rotationChanged |= ImGui::DragFloat("Pitch (X)", &eulerDegrees.x, 0.5f);
+        rotationChanged |= ImGui::DragFloat("Yaw   (Y)", &eulerDegrees.y, 0.5f);
+        rotationChanged |= ImGui::DragFloat("Roll  (Z)", &eulerDegrees.z, 0.5f);
 
-    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
-                1000.0f / io.Framerate, io.Framerate);
-    ImGui::End();
-  }
+        // Step D: If changed, convert Degrees -> Radians -> Quaternion and save back
+        if (rotationChanged)
+        {
+            glm::vec3 newRadians = glm::radians(eulerDegrees);
+            cameraTransform.rotation = glm::quat(newRadians);
+        }
 
-  // 3. Show another simple window.
-  if (show_another_window) {
-    ImGui::Begin(
-        "Another Window",
-        &show_another_window);  // Pass a pointer to our bool variable (the
-                                // window will have a closing button that will
-                                // clear the bool when clicked)
-    ImGui::Text("Hello from another window!");
-    if (ImGui::Button("Close Me")) show_another_window = false;
-    ImGui::End();
-  }
+        // ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
 
-  // Rendering
-  ImGui::Render();
-  int display_w, display_h;
-  GLFWwindow* window = Core::Application::get().getWindow()->getHandle();
+        // if (ImGui::Button(
+        //         "Button")) // Buttons return true when clicked (most widgets return true when edited/activated)
+        //     counter++;
+        // ImGui::SameLine();
+        // ImGui::Text("counter = %d", counter);
+        //
+        // ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+        ImGui::End();
+    }
 
-  glfwGetFramebufferSize(window, &display_w, &display_h);
-  glViewport(0, 0, display_w, display_h);
-  glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w,
-               clear_color.z * clear_color.w, clear_color.w);
-  glClear(GL_COLOR_BUFFER_BIT);
-  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    // // 3. Show another simple window.
+    // if (show_another_window)
+    // {
+    //     ImGui::Begin(
+    //         "Another Window", &show_another_window); // Pass a pointer to our bool variable (the window will have a
+    //                                                  // closing button that will clear the bool when clicked)
+    //     ImGui::Text("Hello from another window!");
+    //     if (ImGui::Button("Close Me"))
+    //         show_another_window = false;
+    //     ImGui::End();
+    // }
 }
 
-void SandboxLayer::onRender() {
-  renderer.clear();
+void SandboxLayer::onRender()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // 1. SETUP GLOBAL SCENE STATE (Once per frame)
+    // ------------------------------------------------
+    // Set the Camera (View/Projection) ONCE.
+    camera->matrix(*whiteShader.get(), "u_camMatrix");
 
-  m_texture.bind();
-  m_shader.bind();
+    // 2. SETUP OBJECT STATE (Per Object)
+    // ------------------------------------------------
+    // Create a model matrix for the cube
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::rotate(model, glm::radians(m_rotation), glm::vec3(0.0f, 1.0f, 0.0f));
 
-  // Pass objects by reference to draw command
-  // (Assuming your Renderer::draw takes (VertexArray&, IndexBuffer&, Shader&))
-  renderer.draw(m_va, m_ib, m_shader);
+    // 3. DRAW BORDER
+    // ------------------------------------------------
+    glLineWidth(3.0f);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    whiteShader->bind();
+    glm::mat4 borderModel = glm::scale(model, glm::vec3(1.01f, 1.01f, 1.01f));
+    whiteShader->setUniformMat4f("u_model", borderModel);
+    cubeMesh->draw(renderer, *whiteShader.get());
+
+    // 4. DRAW FILLED CUBE
+    // ------------------------------------------------
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    basicShader->bind();
+    basicShader->setUniformMat4f("u_mvp", camera->getMatrix() * model);
+    cubeMesh->draw(renderer, *basicShader.get());
 }
 
-void SandboxLayer::onEvent(Core::Event& event) {}
+void SandboxLayer::onEvent(Core::Event& event) { }
 
-void SandboxLayer::onDetach() {}
+void SandboxLayer::onDetach() { }
