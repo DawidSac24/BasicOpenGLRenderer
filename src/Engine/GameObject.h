@@ -3,7 +3,6 @@
 #include "Component.h"
 #include "Engine/Scene.h"
 #include "Maths/Transform.h"
-#include "glm/fwd.hpp"
 #include <algorithm>
 #include <memory>
 #include <type_traits>

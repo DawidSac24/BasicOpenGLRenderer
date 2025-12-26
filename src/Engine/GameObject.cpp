@@ -1,6 +1,5 @@
 #include "GameObject.h"
 #include "Engine/Scene.h"
-#include <type_traits>
 
 namespace Engine
 {

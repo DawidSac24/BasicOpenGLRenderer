@@ -3,7 +3,6 @@
 #include <memory>
 #include <vector>
 
-#include "Engine/Camera.h"
 #include "Renderer/Renderer.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Texture.h"

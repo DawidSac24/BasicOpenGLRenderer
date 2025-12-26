@@ -1,6 +1,5 @@
 #include "Camera.h"
 #include "GL/glew.h"
-#include "glm/gtc/type_ptr.hpp"
 
 namespace Engine
 {
