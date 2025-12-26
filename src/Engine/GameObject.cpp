@@ -1,10 +1,19 @@
 #include "GameObject.h"
+#include "Engine/Scene.h"
 #include <type_traits>
 
 namespace Engine
 {
 GameObject::GameObject(const std::string& name, GameObject* parent)
-    : name(name)
+    : id()
+    , name(name)
+    , m_parent(parent)
+{
+}
+
+GameObject::GameObject(Core::UUID id, const std::string& name, GameObject* parent)
+    : id(id)
+    , name(name)
     , m_parent(parent)
 {
 }

@@ -1,6 +1,7 @@
 // GameObject.h
 #pragma once
 #include "Component.h"
+#include "Engine/Scene.h"
 #include "Maths/Transform.h"
 #include "glm/fwd.hpp"
 #include <algorithm>
@@ -17,7 +18,14 @@ public:
     std::unique_ptr<Math::Transform> transform;
 
 public:
-    GameObject(const std::string& name, GameObject* parent = nullptr);
+    GameObject(const std::string& name = "GameObject", GameObject* parent = nullptr);
+    GameObject(Core::UUID id, const std::string& name = "GameObject", GameObject* parent = nullptr);
+
+    // disable copying
+    GameObject(const GameObject&) = delete;
+    GameObject& operator=(const GameObject&) = delete;
+
+    Core::UUID getID() const { return id; }
 
     template <typename TComponent>
         requires(std::is_base_of_v<Component, TComponent>)
@@ -52,6 +60,8 @@ public:
     void markChildrenDirty();
 
 private:
+    Core::UUID id;
+
     std::vector<std::unique_ptr<Component>> m_components;
 
     GameObject* m_parent;
