@@ -12,7 +12,6 @@ public:
     {
     }
 
-    // Allow copying/conversion to uint64_t
     operator uint64_t() const { return m_UUID; }
 
 private:
@@ -23,10 +22,8 @@ private:
     static std::uniform_int_distribution<uint64_t> s_UniformDistribution;
 };
 
-// (Implementation of statics goes in .cpp file)
 }
 
-// Enable hashing so it works in unordered_map
 namespace std
 {
 template <> struct hash<Core::UUID>
