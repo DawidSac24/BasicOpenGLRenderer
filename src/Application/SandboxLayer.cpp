@@ -12,12 +12,7 @@
 #include <memory>
 
 SandboxLayer::SandboxLayer()
-// , camera(application.getWindow()->getFrameBufferSize().x, application.getWindow()->getFrameBufferSize().y,
-//       glm::vec3(0.0f, 0.0f, 2.0f))
-// , cubeMesh(vertices, indices, noTextures)
-
 {
-    glEnable(GL_DEPTH_TEST);
     Core::Application& application = Core::Application::get();
     glm::vec2 frameBufferSize = application.getWindow()->getFrameBufferSize();
 
@@ -68,6 +63,19 @@ SandboxLayer::SandboxLayer()
         16, 17, 18, 18, 19, 16, // Top
         20, 21, 22, 22, 23, 20 // Bottom
     };
+    std::vector<GLuint> lineIndices = { // Front Face
+        0, 1, 1, 2, 2, 3, 3, 0,
+        // Back Face
+        4, 5, 5, 6, 6, 7, 7, 4,
+        // Left Face
+        8, 9, 9, 10, 10, 11, 11, 8,
+        // Right Face
+        12, 13, 13, 14, 14, 15, 15, 12,
+        // Top Face
+        16, 17, 17, 18, 18, 19, 19, 16,
+        // Bottom Face
+        20, 21, 21, 22, 22, 23, 23, 20
+    };
 
     // EMPTY Texture List
     std::vector<Renderer::Texture> noTextures;
@@ -77,6 +85,7 @@ SandboxLayer::SandboxLayer()
     basicShader = std::make_unique<Renderer::Shader>("../res/shaders/basic.vert", "../res/shaders/basic.frag");
     camera = std::make_unique<Engine::Camera>(frameBufferSize.x, frameBufferSize.y, glm::vec3(0.0f, 0.0f, 2.0f));
     cubeMesh = std::make_unique<Engine::Mesh>(vertices, indices, noTextures);
+    cubeLineMesh = std::make_unique<Engine::Mesh>(vertices, lineIndices, noTextures);
 }
 SandboxLayer::~SandboxLayer() { }
 
@@ -145,32 +154,41 @@ void SandboxLayer::onUpdate()
 void SandboxLayer::onRender()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    // 1. SETUP GLOBAL SCENE STATE (Once per frame)
-    // ------------------------------------------------
-    // Set the Camera (View/Projection) ONCE.
-    camera->matrix(*whiteShader.get(), "u_camMatrix");
 
-    // 2. SETUP OBJECT STATE (Per Object)
-    // ------------------------------------------------
-    // Create a model matrix for the cube
+    // Update rotation
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::rotate(model, glm::radians(m_rotation), glm::vec3(0.0f, 1.0f, 0.0f));
 
-    // 3. DRAW BORDER
-    // ------------------------------------------------
-    glLineWidth(3.0f);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    whiteShader->bind();
-    glm::mat4 borderModel = glm::scale(model, glm::vec3(1.01f, 1.01f, 1.01f));
-    whiteShader->setUniformMat4f("u_model", borderModel);
-    cubeMesh->draw(renderer, *whiteShader.get());
+    // --- PASS 1: DRAW WHITE LINES ---
+    {
+        whiteShader->bind();
+        camera->matrix(*whiteShader.get(), "u_camMatrix");
 
-    // 4. DRAW FILLED CUBE
-    // ------------------------------------------------
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    basicShader->bind();
-    basicShader->setUniformMat4f("u_mvp", camera->getMatrix() * model);
-    cubeMesh->draw(renderer, *basicShader.get());
+        // Scale slightly (1.001) to sit on top of the solid cube
+        glm::mat4 borderModel = glm::scale(model, glm::vec3(1.001f, 1.001f, 1.001f));
+        whiteShader->setUniformMat4f("u_model", borderModel);
+
+        // Don't use glPolygonMode here.
+        // We draw the "cubeLineMesh" using GL_LINES.
+        cubeLineMesh->draw(renderer, *whiteShader.get(), GL_LINES);
+    }
+
+    // --- PASS 2: DRAW TRANSPARENT INTERIOR ---
+    {
+        basicShader->bind();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDepthMask(GL_FALSE);
+
+        camera->matrix(*basicShader.get(), "u_camMatrix");
+        basicShader->setUniformMat4f("u_model", model);
+
+        // Draw the normal mesh using GL_TRIANGLES
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        cubeMesh->draw(renderer, *basicShader.get(), GL_TRIANGLES);
+
+        glDepthMask(GL_TRUE);
+    }
 }
 
 void SandboxLayer::onEvent(Core::Event& event) { }

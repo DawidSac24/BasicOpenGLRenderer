@@ -12,7 +12,9 @@ class SandboxLayer : public Core::Layer
 {
 private:
     std::unique_ptr<Engine::Camera> camera;
+
     std::unique_ptr<Engine::Mesh> cubeMesh;
+    std::unique_ptr<Engine::Mesh> cubeLineMesh;
 
     Renderer::Renderer renderer;
     std::unique_ptr<Renderer::Shader> whiteShader;

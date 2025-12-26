@@ -27,6 +27,6 @@ public:
     Mesh(std::vector<Renderer::Vertex>& vertices, std::vector<GLuint>& indices,
         std::vector<Renderer::Texture>& textures);
 
-    void draw(Renderer::Renderer& renderer, Renderer::Shader& shader);
+    void draw(Renderer::Renderer& renderer, Renderer::Shader& shader, GLenum drawMode = GL_TRIANGLES);
 };
 } // namespace Engine

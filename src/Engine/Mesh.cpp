@@ -31,7 +31,7 @@ Mesh::Mesh(
     m_VAO->addBuffer(*m_VBO, layout);
 }
 
-void Mesh::draw(Renderer::Renderer& renderer, Renderer::Shader& shader)
+void Mesh::draw(Renderer::Renderer& renderer, Renderer::Shader& shader, GLenum drawMode)
 {
     shader.bind();
 
@@ -55,6 +55,6 @@ void Mesh::draw(Renderer::Renderer& renderer, Renderer::Shader& shader)
         m_textures[i].bind(i);
     }
 
-    renderer.draw(*m_VAO, *m_IBO, shader);
+    renderer.draw(*m_VAO, *m_IBO, shader, drawMode);
 }
 } // namespace Engine
