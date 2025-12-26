@@ -22,7 +22,7 @@ public:
     Math::Transform transform;
 
 public:
-    Camera(float width, float height, glm::vec3 initialPosition);
+    Camera(float width, float height, const glm::vec3& initialPosition);
 
     glm::mat4 getMatrix();
     void matrix(Renderer::Shader& shader, const char* uniform);

@@ -49,7 +49,7 @@ public:
 
     void setParent(GameObject* parent);
 
-    glm::mat4 getWorldMatrix();
+    void markChildrenDirty();
 
 private:
     std::vector<std::unique_ptr<Component>> m_components;
@@ -57,6 +57,7 @@ private:
     GameObject* m_parent;
     std::vector<GameObject*> m_children;
 
+private:
     void addChild(GameObject* child);
     void removeChild(GameObject* child);
 };

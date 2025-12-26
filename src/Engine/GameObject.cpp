@@ -24,18 +24,28 @@ void GameObject::setParent(GameObject* parent)
     }
 }
 
-glm::mat4 GameObject::getWorldMatrix()
+void GameObject::markChildrenDirty()
 {
-    glm::mat4 localMatrix = transform.toMatrix(); // Position/Rot/Scale
+    transform->forceSetDirty(); // marks dirty without owner->markChildrenDirty
 
-    // Recursion: If I have a parent, multiply my matrix by theirs
-    if (m_parent != nullptr)
+    for (GameObject* child : m_children)
     {
-        return m_parent->getWorldMatrix() * localMatrix;
+        child->markChildrenDirty();
     }
+}
 
-    // If no parent, my Local is my World
-    return localMatrix;
+void GameObject::addChild(GameObject* child)
+{
+    m_children.push_back(child);
+}
+
+void GameObject::removeChild(GameObject* child)
+{
+    auto it = std::remove(m_children.begin(), m_children.end(), child);
+    if (it != m_children.end())
+    {
+        m_children.erase(it, m_children.end());
+    }
 }
 
 }

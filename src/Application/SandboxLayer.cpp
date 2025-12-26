@@ -101,13 +101,17 @@ void SandboxLayer::onUpdate()
         // ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
         // ImGui::Checkbox("Another Window", &show_another_window);
 
-        ImGui::SliderFloat("x", &cameraTransform.position.x, -10.0f, 10.0f);
-        ImGui::SliderFloat("y", &cameraTransform.position.y, -10.0f, 10.0f);
-        ImGui::SliderFloat("z", &cameraTransform.position.z, -10.0f, 10.0f);
+        glm::vec3 cameraPos = cameraTransform.getPosition();
+
+        ImGui::SliderFloat("x", &cameraPos.x, -10.0f, 10.0f);
+        ImGui::SliderFloat("y", &cameraPos.y, -10.0f, 10.0f);
+        ImGui::SliderFloat("z", &cameraPos.z, -10.0f, 10.0f);
+
+        cameraTransform.setPosition(cameraPos);
 
         ImGui::Text("Rotation");
         // Step A: Convert Quaternion -> Euler Angles (Radians)
-        glm::vec3 eulerRadians = glm::eulerAngles(cameraTransform.rotation);
+        glm::vec3 eulerRadians = glm::eulerAngles(cameraTransform.getRotation());
 
         // Step B: Convert Radians -> Degrees (For humans to read in ImGui)
         glm::vec3 eulerDegrees = glm::degrees(eulerRadians);
@@ -122,10 +126,9 @@ void SandboxLayer::onUpdate()
         // Step D: If changed, convert Degrees -> Radians -> Quaternion and save back
         if (rotationChanged)
         {
-            glm::vec3 newRadians = glm::radians(eulerDegrees);
-            cameraTransform.rotation = glm::quat(newRadians);
+            glm::vec3 finalRadians = glm::radians(eulerDegrees);
+            cameraTransform.setRotation(glm::quat(finalRadians));
         }
-
         // ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
 
         // if (ImGui::Button(
