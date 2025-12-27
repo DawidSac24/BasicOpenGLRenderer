@@ -1,8 +1,9 @@
 #include "SandboxLayer.h"
 
-#include "Engine/Core/Application.h"
-#include "Engine/Maths/Transform.h"
-#include "Engine/Objects/Camera.h"
+#include "Engine/Math/Transform.h"
+#include "Engine/Platform/OpenGL/Application.h"
+#include "Engine/Renderer/Camera.h"
+
 #include "glm/ext/matrix_clip_space.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/fwd.hpp"

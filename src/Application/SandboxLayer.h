@@ -1,11 +1,12 @@
-#include <memory>
-#pragma onceSandb
+#pragma once
 
 #include "Engine/Core/Layer.h"
-#include "Engine/Objects/Camera.h"
+#include "Engine/Renderer/Camera.h"
 #include "Engine/Renderer/Mesh.h"
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Renderer/Shader.h"
+
+#include <memory>
 
 class SandboxLayer : public Core::Layer
 {

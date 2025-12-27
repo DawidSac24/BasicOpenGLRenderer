@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Engine/Core/Layer.h"
-#include "Engine/Objects/GameObject.h"
-#include "Engine/Scene.h"
+#include "Engine/Scene/GameObject.h"
+#include "Engine/Scene/Scene.h"
 
 class EditorLayer : public Core::Layer
 {

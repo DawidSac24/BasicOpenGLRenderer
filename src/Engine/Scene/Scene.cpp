@@ -1,5 +1,5 @@
 #include "Scene.h"
-#include "Objects/GameObject.h"
+#include "GameObject.h"
 #include "imgui.h"
 #include <memory>
 

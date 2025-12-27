@@ -1,6 +1,6 @@
 #include "EditorLayer.h"
 
-#include "Engine/Core/Application.h"
+#include "Engine/Platform/OpenGL/Application.h"
 #include "imgui.h"
 
 EditorLayer::EditorLayer() { }

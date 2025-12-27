@@ -1,5 +1,5 @@
-#include "Application/EditorLayer.h"
-#include "Engine/Core/Application.h"
+#include "EditorLayer.h"
+#include "Engine/Platform/OpenGL/Application.h"
 
 #include "SandboxLayer.h"
 

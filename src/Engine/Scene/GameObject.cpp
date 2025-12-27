@@ -1,5 +1,5 @@
 #include "GameObject.h"
-#include "Engine/Scene.h"
+#include "Scene.h"
 
 namespace Engine
 {
