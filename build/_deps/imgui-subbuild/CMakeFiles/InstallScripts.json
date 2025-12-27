@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-subbuild/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
