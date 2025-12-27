@@ -1,9 +1,9 @@
 #include <memory>
 #pragma onceSandb
 
-#include "Engine/Camera.h"
 #include "Engine/Core/Layer.h"
-#include "Engine/Mesh.h"
+#include "Engine/Objects/Camera.h"
+#include "Engine/Renderer/Mesh.h"
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Renderer/Shader.h"
 
@@ -12,8 +12,8 @@ class SandboxLayer : public Core::Layer
 private:
     std::unique_ptr<Engine::Camera> camera;
 
-    std::unique_ptr<Engine::Mesh> cubeMesh;
-    std::unique_ptr<Engine::Mesh> cubeLineMesh;
+    std::unique_ptr<Renderer::Mesh> cubeMesh;
+    std::unique_ptr<Renderer::Mesh> cubeLineMesh;
 
     Renderer::Renderer renderer;
     std::unique_ptr<Renderer::Shader> whiteShader;

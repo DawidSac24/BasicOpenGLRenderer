@@ -5,22 +5,16 @@ namespace Core
 {
 class Layer
 {
-  public:
+public:
     virtual ~Layer() = default;
 
-    virtual void onUpdate()
-    {
-    }
-    virtual void onRender()
-    {
-    }
+    virtual void onUpdate() { }
 
-    virtual void onEvent(Event &event)
-    {
-    }
+    virtual void onRender() { }
+    virtual void onGuiRender() { }
 
-    virtual void onDetach()
-    {
-    }
+    virtual void onEvent(Event& event) { }
+
+    virtual void onDetach() { }
 };
 } // namespace Core

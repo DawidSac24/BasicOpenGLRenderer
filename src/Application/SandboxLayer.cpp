@@ -1,8 +1,8 @@
 #include "SandboxLayer.h"
 
-#include "Engine/Camera.h"
 #include "Engine/Core/Application.h"
 #include "Engine/Maths/Transform.h"
+#include "Engine/Objects/Camera.h"
 #include "glm/ext/matrix_clip_space.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/fwd.hpp"
@@ -83,62 +83,62 @@ SandboxLayer::SandboxLayer()
         = std::make_unique<Renderer::Shader>("../res/shaders/whiteShader.vert", "../res/shaders/whiteShader.frag");
     basicShader = std::make_unique<Renderer::Shader>("../res/shaders/basic.vert", "../res/shaders/basic.frag");
     camera = std::make_unique<Engine::Camera>(frameBufferSize.x, frameBufferSize.y, glm::vec3(0.0f, 0.0f, 2.0f));
-    cubeMesh = std::make_unique<Engine::Mesh>(vertices, indices, noTextures);
-    cubeLineMesh = std::make_unique<Engine::Mesh>(vertices, lineIndices, noTextures);
+    cubeMesh = std::make_unique<Renderer::Mesh>(vertices, indices, noTextures);
+    cubeLineMesh = std::make_unique<Renderer::Mesh>(vertices, lineIndices, noTextures);
 }
 SandboxLayer::~SandboxLayer() { }
 
 void SandboxLayer::onUpdate()
 {
     m_rotation += 0.5f;
-    {
-        Math::Transform& cameraTransform = camera->transform;
-
-        ImGui::Begin("Camera"); // Create a window called "Hello, world!" and append into it.
-        //
-        // ImGui::Text("This is some useful text."); // Display some text (you can use a format strings too)
-        // ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
-        // ImGui::Checkbox("Another Window", &show_another_window);
-
-        glm::vec3 cameraPos = cameraTransform.getPosition();
-
-        ImGui::SliderFloat("x", &cameraPos.x, -10.0f, 10.0f);
-        ImGui::SliderFloat("y", &cameraPos.y, -10.0f, 10.0f);
-        ImGui::SliderFloat("z", &cameraPos.z, -10.0f, 10.0f);
-
-        cameraTransform.setPosition(cameraPos);
-
-        ImGui::Text("Rotation");
-        // Step A: Convert Quaternion -> Euler Angles (Radians)
-        glm::vec3 eulerRadians = glm::eulerAngles(cameraTransform.getRotation());
-
-        // Step B: Convert Radians -> Degrees (For humans to read in ImGui)
-        glm::vec3 eulerDegrees = glm::degrees(eulerRadians);
-
-        // Step C: Edit the DEGREES with ImGui
-        // We use a helper bool to see if any slider changed
-        bool rotationChanged = false;
-        rotationChanged |= ImGui::DragFloat("Pitch (X)", &eulerDegrees.x, 0.5f);
-        rotationChanged |= ImGui::DragFloat("Yaw   (Y)", &eulerDegrees.y, 0.5f);
-        rotationChanged |= ImGui::DragFloat("Roll  (Z)", &eulerDegrees.z, 0.5f);
-
-        // Step D: If changed, convert Degrees -> Radians -> Quaternion and save back
-        if (rotationChanged)
-        {
-            glm::vec3 finalRadians = glm::radians(eulerDegrees);
-            cameraTransform.setRotation(glm::quat(finalRadians));
-        }
-        // ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-        // if (ImGui::Button(
-        //         "Button")) // Buttons return true when clicked (most widgets return true when edited/activated)
-        //     counter++;
-        // ImGui::SameLine();
-        // ImGui::Text("counter = %d", counter);
-        //
-        // ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-        ImGui::End();
-    }
+    // {
+    //     Math::Transform& cameraTransform = camera->transform;
+    //
+    //     ImGui::Begin("Camera"); // Create a window called "Hello, world!" and append into it.
+    //     //
+    //     // ImGui::Text("This is some useful text."); // Display some text (you can use a format strings too)
+    //     // ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
+    //     // ImGui::Checkbox("Another Window", &show_another_window);
+    //
+    //     glm::vec3 cameraPos = cameraTransform.getPosition();
+    //
+    //     ImGui::SliderFloat("x", &cameraPos.x, -10.0f, 10.0f);
+    //     ImGui::SliderFloat("y", &cameraPos.y, -10.0f, 10.0f);
+    //     ImGui::SliderFloat("z", &cameraPos.z, -10.0f, 10.0f);
+    //
+    //     cameraTransform.setPosition(cameraPos);
+    //
+    //     ImGui::Text("Rotation");
+    //     // Step A: Convert Quaternion -> Euler Angles (Radians)
+    //     glm::vec3 eulerRadians = glm::eulerAngles(cameraTransform.getRotation());
+    //
+    //     // Step B: Convert Radians -> Degrees (For humans to read in ImGui)
+    //     glm::vec3 eulerDegrees = glm::degrees(eulerRadians);
+    //
+    //     // Step C: Edit the DEGREES with ImGui
+    //     // We use a helper bool to see if any slider changed
+    //     bool rotationChanged = false;
+    //     rotationChanged |= ImGui::DragFloat("Pitch (X)", &eulerDegrees.x, 0.5f);
+    //     rotationChanged |= ImGui::DragFloat("Yaw   (Y)", &eulerDegrees.y, 0.5f);
+    //     rotationChanged |= ImGui::DragFloat("Roll  (Z)", &eulerDegrees.z, 0.5f);
+    //
+    //     // Step D: If changed, convert Degrees -> Radians -> Quaternion and save back
+    //     if (rotationChanged)
+    //     {
+    //         glm::vec3 finalRadians = glm::radians(eulerDegrees);
+    //         cameraTransform.setRotation(glm::quat(finalRadians));
+    //     }
+    //     // ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+    //
+    //     // if (ImGui::Button(
+    //     //         "Button")) // Buttons return true when clicked (most widgets return true when edited/activated)
+    //     //     counter++;
+    //     // ImGui::SameLine();
+    //     // ImGui::Text("counter = %d", counter);
+    //     //
+    //     // ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+    //     ImGui::End();
+    // }
 
     // // 3. Show another simple window.
     // if (show_another_window)

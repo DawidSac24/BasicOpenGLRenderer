@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Maths/Transform.h"
-#include "Renderer/Shader.h"
+#include "Engine/Maths/Transform.h"
+#include "Engine/Renderer/Shader.h"
 
 #include "glm/fwd.hpp"
 

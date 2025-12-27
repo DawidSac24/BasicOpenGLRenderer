@@ -1,8 +1,8 @@
 // GameObject.h
 #pragma once
-#include "Component.h"
+#include "Engine/Components/Component.h"
+#include "Engine/Maths/Transform.h"
 #include "Engine/Scene.h"
-#include "Maths/Transform.h"
 #include <algorithm>
 #include <memory>
 #include <type_traits>
@@ -25,6 +25,8 @@ public:
     GameObject& operator=(const GameObject&) = delete;
 
     Core::UUID getID() const { return id; }
+
+    void onGuiRender() { }
 
     template <typename TComponent>
         requires(std::is_base_of_v<Component, TComponent>)
