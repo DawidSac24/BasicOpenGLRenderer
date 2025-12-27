@@ -23,16 +23,9 @@ Entity* Scene::getEntityByUUID(Core::UUID uuid)
     return nullptr;
 }
 
-Entity* Scene::createEntity(const std::string& p_name)
+Entity* Scene::createEntity(const std::string* p_name)
 {
     std::shared_ptr<Entity> newObj = std::make_shared<Entity>(p_name);
-    m_entityMap[newObj->getID()] = newObj;
-
-    return newObj.get();
-}
-Entity* Scene::createEntity()
-{
-    std::shared_ptr<Entity> newObj = std::make_shared<Entity>();
     m_entityMap[newObj->getID()] = newObj;
 
     return newObj.get();

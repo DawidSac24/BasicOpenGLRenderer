@@ -5,20 +5,24 @@
 
 namespace Engine
 {
-Entity::Entity(const std::string& name, Entity* parent)
+Entity::Entity(const std::string* name, Entity* parent)
     : id()
-    , name(name)
     , m_parent(parent)
 {
+    if (name)
+        this->name = *name;
+
     transform = std::make_unique<Math::Transform>();
     transform->owner = this;
 }
 
-Entity::Entity(Core::UUID id, const std::string& name, Entity* parent)
+Entity::Entity(Core::UUID id, const std::string* name, Entity* parent)
     : id(id)
-    , name(name)
     , m_parent(parent)
 {
+    if (name)
+        this->name = *name;
+
     transform = std::make_unique<Math::Transform>();
     transform->owner = this;
 }

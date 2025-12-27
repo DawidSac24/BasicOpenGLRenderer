@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Component.h"
+#include "Components/Component.h"
 #include "Scene.h"
 
 #include <algorithm>
@@ -15,15 +15,23 @@ class Transform;
 
 namespace Engine
 {
+
+enum class EntityType
+{
+    Empty,
+    Square,
+    Sphere,
+};
+
 class Entity
 {
 public:
-    std::string name;
+    std::string name = "newEntity";
     std::unique_ptr<Math::Transform> transform;
 
 public:
-    Entity(const std::string& name = "Entity", Entity* parent = nullptr);
-    Entity(Core::UUID id, const std::string& name = "Entity", Entity* parent = nullptr);
+    Entity(const std::string* name, Entity* parent = nullptr);
+    Entity(Core::UUID id, const std::string* name, Entity* parent = nullptr);
 
     ~Entity() = default;
 

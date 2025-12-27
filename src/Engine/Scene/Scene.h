@@ -20,8 +20,7 @@ public:
     Entity* getEntityByUUID(Core::UUID uuid);
     std::unordered_map<Core::UUID, std::shared_ptr<Entity>>* getEntityMap() { return &m_entityMap; }
 
-    Entity* createEntity(const std::string& p_name);
-    Entity* createEntity();
+    Entity* createEntity(const std::string* p_name);
     void destroyEntity(Entity* obj);
     void destroyEntity(Core::UUID id);
 
