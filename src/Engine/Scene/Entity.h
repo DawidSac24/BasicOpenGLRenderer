@@ -1,7 +1,6 @@
-// GameObject.h
 #pragma once
+
 #include "Component.h"
-#include "Engine/Math/Transform.h"
 #include "Scene.h"
 
 #include <algorithm>
@@ -9,25 +8,30 @@
 #include <type_traits>
 #include <vector>
 
+namespace Math
+{
+class Transform;
+}
+
 namespace Engine
 {
-class GameObject
+class Entity
 {
 public:
     std::string name;
     std::unique_ptr<Math::Transform> transform;
 
 public:
-    GameObject(const std::string& name = "GameObject", GameObject* parent = nullptr);
-    GameObject(Core::UUID id, const std::string& name = "GameObject", GameObject* parent = nullptr);
+    Entity(const std::string& name = "Entity", Entity* parent = nullptr);
+    Entity(Core::UUID id, const std::string& name = "Entity", Entity* parent = nullptr);
+
+    ~Entity() = default;
 
     // disable copying
-    GameObject(const GameObject&) = delete;
-    GameObject& operator=(const GameObject&) = delete;
+    Entity(const Entity&) = delete;
+    Entity& operator=(const Entity&) = delete;
 
     Core::UUID getID() const { return id; }
-
-    void onGuiRender() { }
 
     template <typename TComponent>
         requires(std::is_base_of_v<Component, TComponent>)
@@ -43,6 +47,8 @@ public:
         return nullptr;
     }
 
+    std::vector<std::unique_ptr<Component>>* getComponents() { return &m_components; }
+
     template <typename TComponent, typename... Args>
         requires(std::is_base_of_v<Component, TComponent>)
     TComponent* addComponent(Args&&... args)
@@ -54,10 +60,10 @@ public:
         return ptr;
     }
 
-    GameObject* getParent() const { return m_parent; }
-    const std::vector<GameObject*>& getChildren() const { return m_children; }
+    Entity* getParent() const { return m_parent; }
+    const std::vector<Entity*>& getChildren() const { return m_children; }
 
-    void setParent(GameObject* parent);
+    void setParent(Entity* parent);
 
     void markChildrenDirty();
 
@@ -66,11 +72,11 @@ private:
 
     std::vector<std::unique_ptr<Component>> m_components;
 
-    GameObject* m_parent;
-    std::vector<GameObject*> m_children;
+    Entity* m_parent;
+    std::vector<Entity*> m_children;
 
 private:
-    void addChild(GameObject* child);
-    void removeChild(GameObject* child);
+    void addChild(Entity* child);
+    void removeChild(Entity* child);
 };
 }

@@ -1,14 +1,10 @@
 #include "SandboxLayer.h"
 
-#include "Engine/Math/Transform.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Renderer/Camera.h"
 
-#include "glm/ext/matrix_clip_space.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/fwd.hpp"
-#include "imgui.h"
-#include "imgui_impl_opengl3.h"
 #include <memory>
 
 SandboxLayer::SandboxLayer()

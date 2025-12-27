@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Engine/Scene/Entity.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
@@ -8,7 +9,7 @@
 
 namespace Engine
 {
-class GameObject;
+class Entity;
 }
 
 namespace Math
@@ -17,7 +18,7 @@ namespace Math
 class Transform
 {
 public:
-    Engine::GameObject* owner = nullptr;
+    Engine::Entity* owner = nullptr;
 
 public:
     Transform() = default;

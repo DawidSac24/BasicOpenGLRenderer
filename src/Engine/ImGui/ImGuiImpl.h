@@ -11,8 +11,8 @@ public:
     ~ImGuiImpl();
     void destroy();
 
-    void newFrame();
-    void draw();
+    void begin();
+    void end();
 
 private:
     Window* m_window;

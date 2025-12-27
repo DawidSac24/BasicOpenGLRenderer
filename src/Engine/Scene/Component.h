@@ -1,6 +1,8 @@
 #pragma once
 
-class GameObject;
+namespace Engine
+{
+class Entity;
 
 class Component
 {
@@ -9,5 +11,8 @@ public:
 
     virtual void onUpdate(float deltaTime) { }
 
-    GameObject* owner = nullptr;
+    virtual void onGuiRender() { }
+
+    Entity* owner = nullptr;
 };
+}

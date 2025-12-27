@@ -56,7 +56,7 @@ public:
 
     template <typename Event> void PushLayerTransition(Event event) { m_pendingEvents.push_back(std::move(event)); }
 
-    void SetActiveScene(std::shared_ptr<Engine::Scene> newScene) { m_activeScene = newScene; }
+    void SetActiveScene(Engine::Scene& newScene) { m_activeScene = std::make_unique<Engine::Scene>(newScene); }
 
 private:
     ApplicationSpecification m_specification;

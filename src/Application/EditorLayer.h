@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Engine/Core/Layer.h"
-#include "Engine/Scene/GameObject.h"
+#include "Engine/ImGui/ImGuiImpl.h"
+#include "Engine/Platform/OpenGL/Application.h"
+#include "Engine/Scene/Entity.h"
 #include "Engine/Scene/Scene.h"
 
 class EditorLayer : public Core::Layer
@@ -17,9 +19,16 @@ public:
 
     virtual void onDetach() override;
 
-    virtual void onGuiRender() override;
+    virtual void onGuiRender();
 
 private:
-    Engine::Scene* m_scene = nullptr;
-    Engine::GameObject* m_selectedContext = nullptr;
+    Core::Application* m_application = nullptr;
+    Core::ImGuiImpl* m_gui = nullptr;
+
+    Engine::Scene* m_activeScene = nullptr;
+    Engine::Entity* m_selectedEntity = nullptr;
+
+private:
+    void drawEntityNode(Engine::Entity* entinty);
+    void drawComponents(Engine::Entity* entity);
 };

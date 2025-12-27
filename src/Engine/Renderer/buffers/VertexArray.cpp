@@ -24,7 +24,7 @@ void VertexArray::addBuffer(const VertexBuffer& vb, const VertexBufferLayout& la
         const auto& element = elements[i];
         glEnableVertexAttribArray(i);
         glVertexAttribPointer(
-            i, element.count, element.type, element.normalized, layout.getStride(), (const void*)offset);
+            i, element.count, element.type, element.normalized, layout.getStride(), (const void*)(uintptr_t)offset);
         offset += element.count * VertexBufferElement::getSizeofType(element.type);
     }
     vb.unbind();

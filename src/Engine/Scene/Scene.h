@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Engine/Core/UUID.h"
-#include "GameObject.h"
+#include "Entity.h"
 
 #include <memory>
 #include <string>
@@ -17,16 +17,15 @@ public:
 public:
     Scene(const std::string& name);
 
-    void onGuiRender();
+    Entity* getEntityByUUID(Core::UUID uuid);
+    std::unordered_map<Core::UUID, std::shared_ptr<Entity>>* getEntityMap() { return &m_entityMap; }
 
-    GameObject* getGameObjectByUUID(Core::UUID uuid);
-
-    GameObject* createGameObject(const std::string& p_name);
-    GameObject* createGameObject();
-    void destroyGameObject(GameObject* obj);
-    void destroyGameObject(Core::UUID id);
+    Entity* createEntity(const std::string& p_name);
+    Entity* createEntity();
+    void destroyEntity(Entity* obj);
+    void destroyEntity(Core::UUID id);
 
 private:
-    std::unordered_map<Core::UUID, std::shared_ptr<GameObject>> m_entityMap;
+    std::unordered_map<Core::UUID, std::shared_ptr<Entity>> m_entityMap;
 };
 }
