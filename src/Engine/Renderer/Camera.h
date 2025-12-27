@@ -5,7 +5,7 @@
 
 #include "glm/fwd.hpp"
 
-namespace Engine
+namespace Renderer
 {
 class Camera
 {
@@ -25,8 +25,25 @@ public:
     Camera(float width, float height, const glm::vec3& initialPosition);
 
     glm::mat4 getMatrix();
-    void matrix(Renderer::Shader& shader, const char* uniform);
 
     void updateDimensions(float width, float height) { m_aspect = width / height; }
+
+    const glm::mat4& getViewMatrix()
+    {
+        glm::mat4 cameraModel = transform.getWorldMatrix();
+        m_view = glm::inverse(cameraModel);
+        return m_view;
+    }
+
+    const glm::mat4& getProjectionMatrix()
+    {
+        m_projection = glm::perspective(glm::radians(m_fov), m_aspect, m_near, m_far);
+        return m_projection;
+    }
+
+    // This is the golden ticket for the Renderer
+    glm::mat4 getViewProjection() { return getProjectionMatrix() * getViewMatrix(); }
+
+    void setViewportSize(float width, float height);
 };
 }

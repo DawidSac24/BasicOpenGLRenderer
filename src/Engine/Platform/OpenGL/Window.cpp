@@ -46,16 +46,19 @@ void Window::create()
         {
             Window& window = *((Window*)glfwGetWindowUserPointer(handle));
 
-            WindowClosedEvent(event);
+            WindowClosedEvent event;
             window.raiseEvent(event);
         });
 
-    glfwSetWindowSizeCallback(m_handle,
+    glfwSetFramebufferSizeCallback(m_handle,
         [](GLFWwindow* handle, int width, int height)
         {
             Window& window = *((Window*)glfwGetWindowUserPointer(handle));
 
+            // 1. Create the event with physical pixel size
             WindowResizeEvent event((uint32_t)width, (uint32_t)height);
+
+            // 2. Dispatch
             window.raiseEvent(event);
         });
 

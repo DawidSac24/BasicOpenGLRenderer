@@ -23,30 +23,14 @@ Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vec
     m_VAO->addBuffer(*m_VBO, layout);
 }
 
-void Mesh::draw(Renderer& renderer, Shader& shader, GLenum drawMode)
+void Mesh::bind() const
 {
-    shader.bind();
+    m_VAO->bind();
+    m_IBO->bind(); // Ensure IBO is bound with VAO
+}
 
-    // Keep track of how many of each type of textures we have
-    unsigned int numDiffuse = 0;
-    unsigned int numSpecular = 0;
-
-    for (unsigned int i = 0; i < m_textures.size(); i++)
-    {
-        std::string num;
-        std::string type = m_textures[i].getType();
-        if (type == "diffuse")
-        {
-            num = std::to_string(numDiffuse++);
-        }
-        else if (type == "specular")
-        {
-            num = std::to_string(numSpecular++);
-        }
-        shader.setUniform1i((type + num).c_str(), i);
-        m_textures[i].bind(i);
-    }
-
-    renderer.draw(*m_VAO, *m_IBO, shader, drawMode);
+int Mesh::getIndexCount() const
+{
+    return m_IBO->getCount(); // Assuming your IndexBuffer has this
 }
 } // namespace Engine

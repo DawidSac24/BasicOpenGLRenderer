@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Core/Layer.h"
+#include "Engine/Events/WindowEvents.h"
 #include "Engine/Renderer/Camera.h"
 #include "Engine/Renderer/Mesh.h"
 #include "Engine/Renderer/Renderer.h"
@@ -11,12 +12,11 @@
 class SandboxLayer : public Core::Layer
 {
 private:
-    std::unique_ptr<Engine::Camera> camera;
+    std::unique_ptr<Renderer::Camera> camera;
 
     std::unique_ptr<Renderer::Mesh> cubeMesh;
     std::unique_ptr<Renderer::Mesh> cubeLineMesh;
 
-    Renderer::Renderer renderer;
     std::unique_ptr<Renderer::Shader> whiteShader;
     std::unique_ptr<Renderer::Shader> basicShader;
 
@@ -30,6 +30,7 @@ public:
     virtual void onRender() override;
 
     virtual void onEvent(Core::Event& event) override;
+    bool onWindowResize(Core::WindowResizeEvent& e);
 
     virtual void onDetach() override;
 };

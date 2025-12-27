@@ -1,5 +1,6 @@
 #include "SandboxLayer.h"
 
+#include "Engine/Events/WindowEvents.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Renderer/Camera.h"
 
@@ -79,7 +80,7 @@ SandboxLayer::SandboxLayer()
     whiteShader
         = std::make_unique<Renderer::Shader>("../res/shaders/whiteShader.vert", "../res/shaders/whiteShader.frag");
     basicShader = std::make_unique<Renderer::Shader>("../res/shaders/basic.vert", "../res/shaders/basic.frag");
-    camera = std::make_unique<Engine::Camera>(frameBufferSize.x, frameBufferSize.y, glm::vec3(0.0f, 0.0f, 2.0f));
+    camera = std::make_unique<Renderer::Camera>(frameBufferSize.x, frameBufferSize.y, glm::vec3(0.0f, 0.0f, 2.0f));
     cubeMesh = std::make_unique<Renderer::Mesh>(vertices, indices, noTextures);
     cubeLineMesh = std::make_unique<Renderer::Mesh>(vertices, lineIndices, noTextures);
 }
@@ -88,108 +89,72 @@ SandboxLayer::~SandboxLayer() { }
 void SandboxLayer::onUpdate()
 {
     m_rotation += 0.5f;
-    // {
-    //     Math::Transform& cameraTransform = camera->transform;
-    //
-    //     ImGui::Begin("Camera"); // Create a window called "Hello, world!" and append into it.
-    //     //
-    //     // ImGui::Text("This is some useful text."); // Display some text (you can use a format strings too)
-    //     // ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
-    //     // ImGui::Checkbox("Another Window", &show_another_window);
-    //
-    //     glm::vec3 cameraPos = cameraTransform.getPosition();
-    //
-    //     ImGui::SliderFloat("x", &cameraPos.x, -10.0f, 10.0f);
-    //     ImGui::SliderFloat("y", &cameraPos.y, -10.0f, 10.0f);
-    //     ImGui::SliderFloat("z", &cameraPos.z, -10.0f, 10.0f);
-    //
-    //     cameraTransform.setPosition(cameraPos);
-    //
-    //     ImGui::Text("Rotation");
-    //     // Step A: Convert Quaternion -> Euler Angles (Radians)
-    //     glm::vec3 eulerRadians = glm::eulerAngles(cameraTransform.getRotation());
-    //
-    //     // Step B: Convert Radians -> Degrees (For humans to read in ImGui)
-    //     glm::vec3 eulerDegrees = glm::degrees(eulerRadians);
-    //
-    //     // Step C: Edit the DEGREES with ImGui
-    //     // We use a helper bool to see if any slider changed
-    //     bool rotationChanged = false;
-    //     rotationChanged |= ImGui::DragFloat("Pitch (X)", &eulerDegrees.x, 0.5f);
-    //     rotationChanged |= ImGui::DragFloat("Yaw   (Y)", &eulerDegrees.y, 0.5f);
-    //     rotationChanged |= ImGui::DragFloat("Roll  (Z)", &eulerDegrees.z, 0.5f);
-    //
-    //     // Step D: If changed, convert Degrees -> Radians -> Quaternion and save back
-    //     if (rotationChanged)
-    //     {
-    //         glm::vec3 finalRadians = glm::radians(eulerDegrees);
-    //         cameraTransform.setRotation(glm::quat(finalRadians));
-    //     }
-    //     // ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-    //
-    //     // if (ImGui::Button(
-    //     //         "Button")) // Buttons return true when clicked (most widgets return true when edited/activated)
-    //     //     counter++;
-    //     // ImGui::SameLine();
-    //     // ImGui::Text("counter = %d", counter);
-    //     //
-    //     // ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-    //     ImGui::End();
-    // }
-
-    // // 3. Show another simple window.
-    // if (show_another_window)
-    // {
-    //     ImGui::Begin(
-    //         "Another Window", &show_another_window); // Pass a pointer to our bool variable (the window will have a
-    //                                                  // closing button that will clear the bool when clicked)
-    //     ImGui::Text("Hello from another window!");
-    //     if (ImGui::Button("Close Me"))
-    //         show_another_window = false;
-    //     ImGui::End();
-    // }
 }
 
 void SandboxLayer::onRender()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // 1. Clear and Prepare
+    Renderer::RenderCommand::setClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+    Renderer::RenderCommand::clear();
 
-    // Update rotation
+    // IMPORTANT: Enable Blending globally for transparency to work
+    Renderer::RenderCommand::enableBlending();
+
+    // 2. Begin Scene
+    Renderer::Renderer::beginScene(*camera);
+
+    // Calculate generic model matrix
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::rotate(model, glm::radians(m_rotation), glm::vec3(0.0f, 1.0f, 0.0f));
 
-    // --- PASS 1: DRAW WHITE LINES ---
+    // --- PASS 1: DRAW TRANSPARENT CUBE ---
     {
-        whiteShader->bind();
-        camera->matrix(*whiteShader.get(), "u_camMatrix");
+        // Disable Depth Mask for transparent objects
+        // (So the cube looks "ghostly" and doesn't hide the lines behind it)
+        Renderer::RenderCommand::disableDepthMask();
 
-        // Scale slightly (1.001) to sit on top of the solid cube
-        glm::mat4 borderModel = glm::scale(model, glm::vec3(1.001f, 1.001f, 1.001f));
-        whiteShader->setUniformMat4f("u_model", borderModel);
-
-        // Don't use glPolygonMode here.
-        // We draw the "cubeLineMesh" using GL_LINES.
-        cubeLineMesh->draw(renderer, *whiteShader.get(), GL_LINES);
+        Renderer::Renderer::submit(cubeMesh, basicShader, model);
     }
 
-    // --- PASS 2: DRAW TRANSPARENT INTERIOR ---
+    // --- PASS 2: DRAW SOLID LINES ---
     {
-        basicShader->bind();
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glDepthMask(GL_FALSE);
+        // Re-enable Depth Mask for solid objects (The lines)
+        Renderer::RenderCommand::enableDepthMask();
 
-        camera->matrix(*basicShader.get(), "u_camMatrix");
-        basicShader->setUniformMat4f("u_model", model);
+        // Scale slightly bigger so lines sit on top
+        glm::mat4 outlineModel = glm::scale(model, glm::vec3(1.01f));
 
-        // Draw the normal mesh using GL_TRIANGLES
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        cubeMesh->draw(renderer, *basicShader.get(), GL_TRIANGLES);
+        Renderer::Renderer::submit(cubeLineMesh, whiteShader, outlineModel, GL_LINES);
+    }
 
-        glDepthMask(GL_TRUE);
+    Renderer::Renderer::endScene();
+}
+
+void SandboxLayer::onEvent(Core::Event& event)
+{
+    // Check type manually (or use a Dispatcher if you have one)
+    if (event.getEventType() == Core::EventType::WindowResize)
+    {
+        // Cast and call helper
+        onWindowResize((Core::WindowResizeEvent&)event);
     }
 }
 
-void SandboxLayer::onEvent(Core::Event& event) { }
+bool SandboxLayer::onWindowResize(Core::WindowResizeEvent& e)
+{
+    // HYPRLAND FIX: Handle minimization (Size 0,0)
+    // If we don't check this, projection matrix calculation divides by zero -> Crash/NaN
+    if (e.getWidth() == 0 || e.getHeight() == 0)
+        return false;
+
+    // 1. Update Camera Projection (Aspect Ratio)
+    // Note: Use 'float' cast to ensure floating point division
+    camera->setViewportSize((float)e.getWidth(), (float)e.getHeight());
+
+    // 2. Update OpenGL Viewport
+    Renderer::RenderCommand::setViewport(0, 0, e.getWidth(), e.getHeight());
+
+    return false; // Return false so other layers can also see this event (e.g., UI Layer)
+}
 
 void SandboxLayer::onDetach() { }

@@ -3,8 +3,6 @@
 #include <memory>
 #include <vector>
 
-#include "Renderer.h"
-#include "Shader.h"
 #include "Texture.h"
 #include "buffers/IndexBuffer.h"
 #include "buffers/VertexArray.h"
@@ -25,6 +23,8 @@ private:
 public:
     Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture>& textures);
 
-    void draw(Renderer& renderer, Shader& shader, GLenum drawMode = GL_TRIANGLES);
+    void bind() const;
+
+    int getIndexCount() const;
 };
 } // namespace Engine
