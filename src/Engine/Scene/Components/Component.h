@@ -11,6 +11,7 @@ public:
 
     virtual void onUpdate(float deltaTime) { }
 
+    virtual void onRender() { }
     virtual void onGuiRender() { }
 
     Entity* owner = nullptr;

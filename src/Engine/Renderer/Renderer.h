@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Camera.h"
+#include "Engine/Renderer/Material.h"
 #include "Mesh.h"
-#include "Shader.h"
 #include <glm/glm.hpp>
 #include <memory>
 
@@ -12,14 +12,13 @@ namespace Renderer
 class Renderer
 {
 public:
-    static void init(); // Optional: for setting up global GL states
+    static void init();
     static void shutdown();
 
-    static void beginScene(Camera& camera); // Pass by reference
+    static void beginScene(Camera& camera);
     static void endScene();
 
-    // Added 'drawMode' with a default value of GL_TRIANGLES
-    static void submit(const std::unique_ptr<Mesh>& mesh, const std::unique_ptr<Shader>& shader,
+    static void submit(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material,
         const glm::mat4& transform, GLenum drawMode = GL_TRIANGLES);
 
 private:

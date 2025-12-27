@@ -2,23 +2,14 @@
 
 #include "Engine/Core/Layer.h"
 #include "Engine/Events/WindowEvents.h"
-#include "Engine/Renderer/Camera.h"
-#include "Engine/Renderer/Mesh.h"
-#include "Engine/Renderer/Renderer.h"
-#include "Engine/Renderer/Shader.h"
+#include "Engine/Scene/Scene.h"
 
 #include <memory>
 
 class SandboxLayer : public Core::Layer
 {
 private:
-    std::unique_ptr<Renderer::Camera> camera;
-
-    std::unique_ptr<Renderer::Mesh> cubeMesh;
-    std::unique_ptr<Renderer::Mesh> cubeLineMesh;
-
-    std::unique_ptr<Renderer::Shader> whiteShader;
-    std::unique_ptr<Renderer::Shader> basicShader;
+    std::shared_ptr<Engine::Scene> m_activeScene = nullptr;
 
     float m_rotation = 0.0f;
 

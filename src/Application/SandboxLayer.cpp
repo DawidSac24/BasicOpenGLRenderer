@@ -12,78 +12,9 @@ SandboxLayer::SandboxLayer()
 {
     Core::Application& application = Core::Application::get();
     glm::vec2 frameBufferSize = application.getWindow()->getFrameBufferSize();
+    m_activeScene = application.getActiveScene();
+};
 
-    std::vector<Renderer::Vertex> vertices = {
-        // Front Face (Normal 0, 0, 1)
-        { { -0.5f, -0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } }, // Bottom-Left
-        { { 0.5f, -0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } }, // Bottom-Right
-        { { 0.5f, 0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } }, // Top-Right
-        { { -0.5f, 0.5f, 0.5f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } }, // Top-Left
-
-        // Back Face (Normal 0, 0, -1)
-        { { 0.5f, -0.5f, -0.5f }, { 0.0f, 0.0f, -1.0f }, { 1.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f } }, // Bottom-Left (from back)
-        { { -0.5f, -0.5f, -0.5f }, { 0.0f, 0.0f, -1.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } }, // Bottom-Right
-        { { -0.5f, 0.5f, -0.5f }, { 0.0f, 0.0f, -1.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } }, // Top-Right
-        { { 0.5f, 0.5f, -0.5f }, { 0.0f, 0.0f, -1.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } }, // Top-Left
-
-        // Left Face (Normal -1, 0, 0)
-        { { -0.5f, -0.5f, -0.5f }, { -1.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
-        { { -0.5f, -0.5f, 0.5f }, { -1.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
-        { { -0.5f, 0.5f, 0.5f }, { -1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
-        { { -0.5f, 0.5f, -0.5f }, { -1.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } },
-
-        // Right Face (Normal 1, 0, 0)
-        { { 0.5f, -0.5f, 0.5f }, { 1.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
-        { { 0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
-        { { 0.5f, 0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
-        { { 0.5f, 0.5f, 0.5f }, { 1.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } },
-
-        // Top Face (Normal 0, 1, 0)
-        { { -0.5f, 0.5f, 0.5f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
-        { { 0.5f, 0.5f, 0.5f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
-        { { 0.5f, 0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
-        { { -0.5f, 0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } },
-
-        // Bottom Face (Normal 0, -1, 0)
-        { { -0.5f, -0.5f, -0.5f }, { 0.0f, -1.0f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
-        { { 0.5f, -0.5f, -0.5f }, { 0.0f, -1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
-        { { 0.5f, -0.5f, 0.5f }, { 0.0f, -1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
-        { { -0.5f, -0.5f, 0.5f }, { 0.0f, -1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } },
-    };
-    // 36 Indices (6 faces * 2 triangles * 3 indices)
-    std::vector<GLuint> indices = {
-        0, 1, 2, 2, 3, 0, // Front
-        4, 5, 6, 6, 7, 4, // Back
-        8, 9, 10, 10, 11, 8, // Left
-        12, 13, 14, 14, 15, 12, // Right
-        16, 17, 18, 18, 19, 16, // Top
-        20, 21, 22, 22, 23, 20 // Bottom
-    };
-    std::vector<GLuint> lineIndices = { // Front Face
-        0, 1, 1, 2, 2, 3, 3, 0,
-        // Back Face
-        4, 5, 5, 6, 6, 7, 7, 4,
-        // Left Face
-        8, 9, 9, 10, 10, 11, 11, 8,
-        // Right Face
-        12, 13, 13, 14, 14, 15, 15, 12,
-        // Top Face
-        16, 17, 17, 18, 18, 19, 19, 16,
-        // Bottom Face
-        20, 21, 21, 22, 22, 23, 23, 20
-    };
-
-    // EMPTY Texture List
-    std::vector<Renderer::Texture> noTextures;
-
-    whiteShader
-        = std::make_unique<Renderer::Shader>("../res/shaders/whiteShader.vert", "../res/shaders/whiteShader.frag");
-    basicShader = std::make_unique<Renderer::Shader>("../res/shaders/basic.vert", "../res/shaders/basic.frag");
-    camera = std::make_unique<Renderer::Camera>(frameBufferSize.x, frameBufferSize.y, glm::vec3(0.0f, 0.0f, 2.0f));
-    cubeMesh = std::make_unique<Renderer::Mesh>(vertices, indices, noTextures);
-    cubeLineMesh = std::make_unique<Renderer::Mesh>(vertices, lineIndices, noTextures);
-}
 SandboxLayer::~SandboxLayer() { }
 
 void SandboxLayer::onUpdate()

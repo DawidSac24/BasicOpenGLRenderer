@@ -20,6 +20,7 @@ public:
     void bind(unsigned int slot = 0) const;
     void unbind() const;
 
+    inline unsigned int getRendererID() { return m_rendererId; }
     inline int getWidth() const { return m_width; }
     inline int getHeight() const { return m_height; }
     inline const char* getType() const { return type; }

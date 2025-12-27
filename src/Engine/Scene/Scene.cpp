@@ -3,7 +3,6 @@
 #include "Engine/Math/Transform.h"
 #include "Entity.h"
 
-#include "imgui.h"
 #include <memory>
 
 namespace Engine

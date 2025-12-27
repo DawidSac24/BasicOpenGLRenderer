@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Engine/Scene/Entity.h"
+
 #include <string>
+
 namespace Engine
 {
 class EntityFactory
@@ -15,5 +17,8 @@ private:
     Entity* createEmptyEntity(std::string* name);
     Entity* createCubeEntity(std::string* name);
     Entity* createSphereEntity(std::string* name);
+    Entity* createPlaneEntity(std::string* name);
+
+    Entity* createCameraEntity(std::string* name);
 };
 }

@@ -21,6 +21,8 @@ enum class EntityType
     Empty,
     Square,
     Sphere,
+    Plane,
+    Camera,
 };
 
 class Entity

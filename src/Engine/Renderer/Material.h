@@ -1,11 +1,15 @@
+#pragma once
+
 #include "Shader.h"
 #include "Texture.h"
+#include <glm/glm.hpp>
 #include <memory>
 #include <string>
 #include <unordered_map>
 
 namespace Renderer
 {
+
 class Material
 {
 public:
@@ -13,25 +17,33 @@ public:
         : m_Shader(shader)
     {
     }
+    std::unordered_map<std::string, glm::vec4>& getUniforms() { return m_UniformsFloat4; }
+    std::unordered_map<std::string, std::shared_ptr<Texture>>& getTextures() { return m_Textures; }
 
-    virtual ~Material() = default;
+    void setTexture(const std::string& name, std::shared_ptr<Texture> texture) { m_Textures[name] = texture; }
 
-    void SetColor(const std::string& name, const glm::vec4& color) { m_Colors[name] = color; }
+    void setFloat4(const std::string& name, const glm::vec4& value) { m_UniformsFloat4[name] = value; }
 
-    void SetFloat(const std::string& name, float value) { m_Floats[name] = value; }
-
-    void Bind()
+    void bind()
     {
         m_Shader->bind();
 
-        for (auto& [name, color] : m_Colors)
+        // Bind all generic uniforms (Colors, etc.)
+        for (auto& [name, value] : m_UniformsFloat4)
         {
-            m_Shader->setUniform4f(name, color);
+            m_Shader->setUniform4f(name, value);
         }
 
-        for (auto& [name, value] : m_Floats)
+        // Bind Textures
+        int slot = 0;
+        for (auto& [name, texture] : m_Textures)
         {
-            m_Shader->setUniform1f(name, value);
+            if (texture)
+            {
+                texture->bind(slot);
+                m_Shader->setUniform1i(name, slot);
+                slot++;
+            }
         }
     }
 
@@ -40,7 +52,8 @@ public:
 private:
     std::shared_ptr<Shader> m_Shader;
 
-    std::unordered_map<std::string, glm::vec4> m_Colors;
-    std::unordered_map<std::string, float> m_Floats;
+    std::unordered_map<std::string, std::shared_ptr<Texture>> m_Textures;
+    std::unordered_map<std::string, glm::vec4> m_UniformsFloat4;
 };
+
 }

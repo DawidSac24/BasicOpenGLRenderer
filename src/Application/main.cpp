@@ -11,6 +11,6 @@ int main()
 
     Core::Application application(spec);
     application.pushLayer<SandboxLayer>();
-    // application.pushLayer<EditorLayer>();
+    application.pushLayer<EditorLayer>();
     application.run();
 }

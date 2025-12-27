@@ -2,12 +2,8 @@
 
 namespace Renderer
 {
-Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture>& textures)
+Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices)
 {
-    m_vertices = vertices;
-    m_indices = indices;
-    m_textures = textures;
-
     m_VAO = std::make_unique<VertexArray>();
     m_VBO = std::make_unique<VertexBuffer>(vertices);
     m_IBO = std::make_unique<IndexBuffer>(indices);
