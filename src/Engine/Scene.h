@@ -1,13 +1,11 @@
 #pragma once
 
 #include "Core/UUID.h"
-#include "Engine/Component.h"
-#include "Engine/GameObject.h"
+#include "Objects/GameObject.h"
 
 #include <memory>
 #include <string>
 #include <unordered_map>
-#include <vector>
 
 namespace Engine
 {
@@ -18,6 +16,8 @@ public:
 
 public:
     Scene(const std::string& name);
+
+    void onGuiRender();
 
     GameObject* getGameObjectByUUID(Core::UUID uuid);
 

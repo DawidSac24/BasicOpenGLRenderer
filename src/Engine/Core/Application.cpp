@@ -8,9 +8,6 @@
 #include "Debug.h"
 #include "Events/ApplicationEvents.h"
 #include "Events/Event.h"
-#include "backends/imgui_impl_glfw.h"
-#include "backends/imgui_impl_opengl3.h"
-#include "imgui.h"
 
 namespace Core
 {
@@ -37,40 +34,14 @@ Application::Application(const ApplicationSpecification& appSpec)
     glewExperimental = GL_TRUE;
     glewInit();
 
-    // ImGUI initialisation
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
-    (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-
-    // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    // ImGui::StyleColorsLight();
-
-    float main_scale = ImGui_ImplGlfw_GetContentScaleForMonitor(glfwGetPrimaryMonitor());
-    // Setup scaling
-    ImGuiStyle& style = ImGui::GetStyle();
-    style.ScaleAllSizes(main_scale); // Bake a fixed style scale. (until we have a solution for
-                                     // dynamic style scaling, changing this requires resetting
-                                     // Style + calling this again)
-    style.FontScaleDpi = main_scale; // Set initial font scale. (using io.ConfigDpiScaleFonts=true
-                                     // makes this unnecessary. We leave both here for
-                                     // documentation purpose)
-
-    // Setup Platform/Renderer backends
-    ImGui_ImplGlfw_InitForOpenGL(m_window->getHandle(), true);
-    ImGui_ImplOpenGL3_Init("#version 460");
+    m_gui = std::make_shared<ImGuiImpl>(*m_window);
 
     Core::getOpenGLErrors();
 }
 
 Application::~Application()
 {
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
-
+    m_gui->destroy();
     m_window->destroy();
     glfwTerminate();
 
@@ -92,18 +63,16 @@ void Application::run()
             break;
         }
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-
         for (const std::unique_ptr<Layer>& layer : m_layerStack)
             layer->onUpdate();
 
         for (const std::unique_ptr<Layer>& layer : m_layerStack)
+        {
             layer->onRender();
-
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+            m_gui->newFrame();
+            layer->onGuiRender();
+            m_gui->draw();
+        }
 
         m_window->update();
         flushEvents();
