@@ -1,8 +1,9 @@
 // GameObject.h
 #pragma once
-#include "Engine/Components/Component.h"
-#include "Engine/Maths/Transform.h"
-#include "Engine/Scene.h"
+#include "Component.h"
+#include "Engine/Math/Transform.h"
+#include "Scene.h"
+
 #include <algorithm>
 #include <memory>
 #include <type_traits>

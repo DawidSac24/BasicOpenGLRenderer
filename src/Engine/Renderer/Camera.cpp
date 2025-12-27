@@ -1,4 +1,5 @@
 #include "Camera.h"
+
 #include "GL/glew.h"
 
 namespace Engine

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/Maths/Transform.h"
+#include "Engine/Math/Transform.h"
 #include "Engine/Renderer/Shader.h"
 
 #include "glm/fwd.hpp"

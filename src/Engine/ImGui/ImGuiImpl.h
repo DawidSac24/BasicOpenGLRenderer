@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Engine/Core/Window.h"
-#include <memory>
-#include <string>
+#include "Engine/Platform/OpenGL/Window.h"
 
 namespace Core
 {

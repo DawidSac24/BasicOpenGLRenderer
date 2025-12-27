@@ -1,16 +1,14 @@
 #pragma once
 
+#include "Engine/Core/Layer.h"
+#include "Engine/Core/LayerStack.h"
+#include "Engine/Events/Event.h"
+#include "Engine/ImGui/ImGuiImpl.h"
+#include "Engine/Platform/OpenGL/Window.h"
+#include "Engine/Scene/Scene.h"
+
 #include <memory>
 #include <string>
-#include <vector>
-
-#include "Engine/Core/ImGuiImpl.h"
-#include "Engine/Scene.h"
-#include "Events/Event.h"
-#include "Layer.h"
-#include "LayerStack.h"
-#include "Window.h"
-
 namespace Core
 {
 struct ApplicationSpecification

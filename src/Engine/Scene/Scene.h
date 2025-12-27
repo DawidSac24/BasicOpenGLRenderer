@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/UUID.h"
-#include "Objects/GameObject.h"
+#include "Engine/Core/UUID.h"
+#include "GameObject.h"
 
 #include <memory>
 #include <string>

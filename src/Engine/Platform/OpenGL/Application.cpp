@@ -1,4 +1,4 @@
-#include "Engine/Core/Application.h"
+#include "Application.h"
 
 #include <cassert>
 #include <iostream>
@@ -6,8 +6,8 @@
 #include <ranges>
 
 #include "Debug.h"
-#include "Events/ApplicationEvents.h"
-#include "Events/Event.h"
+#include "Engine/Events/ApplicationEvents.h"
+#include "Engine/Events/Event.h"
 
 namespace Core
 {
