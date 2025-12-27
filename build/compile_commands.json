@@ -1,0 +1,704 @@
+[
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu++23 -o CMakeFiles/imgui.dir/_deps/imgui-src/imgui.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/imgui.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/imgui.cpp",
+  "output": "CMakeFiles/imgui.dir/_deps/imgui-src/imgui.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu++23 -o CMakeFiles/imgui.dir/_deps/imgui-src/imgui_draw.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/imgui_draw.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/imgui_draw.cpp",
+  "output": "CMakeFiles/imgui.dir/_deps/imgui-src/imgui_draw.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu++23 -o CMakeFiles/imgui.dir/_deps/imgui-src/imgui_tables.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/imgui_tables.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/imgui_tables.cpp",
+  "output": "CMakeFiles/imgui.dir/_deps/imgui-src/imgui_tables.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu++23 -o CMakeFiles/imgui.dir/_deps/imgui-src/imgui_widgets.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/imgui_widgets.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/imgui_widgets.cpp",
+  "output": "CMakeFiles/imgui.dir/_deps/imgui-src/imgui_widgets.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu++23 -o CMakeFiles/imgui.dir/_deps/imgui-src/imgui_demo.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/imgui_demo.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/imgui_demo.cpp",
+  "output": "CMakeFiles/imgui.dir/_deps/imgui-src/imgui_demo.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu++23 -o CMakeFiles/imgui.dir/_deps/imgui-src/backends/imgui_impl_glfw.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends/imgui_impl_glfw.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends/imgui_impl_glfw.cpp",
+  "output": "CMakeFiles/imgui.dir/_deps/imgui-src/backends/imgui_impl_glfw.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu++23 -o CMakeFiles/imgui.dir/_deps/imgui-src/backends/imgui_impl_opengl3.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends/imgui_impl_opengl3.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends/imgui_impl_opengl3.cpp",
+  "output": "CMakeFiles/imgui.dir/_deps/imgui-src/backends/imgui_impl_opengl3.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -std=gnu++23 -o CMakeFiles/stb_image.dir/vendor/stb_image/stb_image.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image/stb_image.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image/stb_image.cpp",
+  "output": "CMakeFiles/stb_image.dir/vendor/stb_image/stb_image.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Application/EditorLayer.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Application/EditorLayer.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Application/EditorLayer.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Application/EditorLayer.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Application/GameLayer.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Application/GameLayer.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Application/GameLayer.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Application/GameLayer.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Application/SandboxLayer.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Application/SandboxLayer.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Application/SandboxLayer.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Application/SandboxLayer.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Application/main.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Application/main.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Application/main.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Application/main.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Core/Application.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Core/Application.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Core/Application.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Core/Application.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Core/ImGuiImpl.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Core/ImGuiImpl.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Core/ImGuiImpl.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Core/ImGuiImpl.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Core/LayerStack.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Core/LayerStack.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Core/LayerStack.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Core/LayerStack.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Core/UUID.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Core/UUID.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Core/UUID.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Core/UUID.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Core/Window.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Core/Window.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Core/Window.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Core/Window.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Maths/Transform.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Maths/Transform.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Maths/Transform.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Maths/Transform.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Objects/Camera.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Objects/Camera.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Objects/Camera.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Objects/Camera.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Objects/GameObject.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Objects/GameObject.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Objects/GameObject.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Objects/GameObject.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/Mesh.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/Mesh.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/Mesh.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/Mesh.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/Renderer.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/Renderer.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/Renderer.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/Renderer.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/Shader.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/Shader.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/Shader.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/Shader.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/Texture.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/Texture.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/Texture.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/Texture.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/buffers/IndexBuffer.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/buffers/IndexBuffer.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/buffers/IndexBuffer.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/buffers/IndexBuffer.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/buffers/VertexArray.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/buffers/VertexArray.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/buffers/VertexArray.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/buffers/VertexArray.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/buffers/VertexBuffer.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/buffers/VertexBuffer.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/buffers/VertexBuffer.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/buffers/VertexBuffer.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/buffers/VertexBufferLayout.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/buffers/VertexBufferLayout.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Renderer/buffers/VertexBufferLayout.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Renderer/buffers/VertexBufferLayout.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/src -I/home/dawid/DEV/projects/OpenGLRenderer/vendor/stb_image -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/imgui-src/backends -std=gnu++23 -o CMakeFiles/OpenGLRenderer.dir/src/Engine/Scene.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Scene.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/src/Engine/Scene.cpp",
+  "output": "CMakeFiles/OpenGLRenderer.dir/src/Engine/Scene.cpp.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/context.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/context.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/context.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/context.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/init.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/init.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/init.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/init.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/input.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/input.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/input.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/input.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/monitor.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/monitor.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/monitor.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/monitor.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/vulkan.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/vulkan.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/vulkan.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/vulkan.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/window.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/window.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/window.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/window.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -o CMakeFiles/glfw.dir/x11_init.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/x11_init.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/x11_init.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/x11_init.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -o CMakeFiles/glfw.dir/x11_monitor.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/x11_monitor.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/x11_monitor.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/x11_monitor.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -o CMakeFiles/glfw.dir/x11_window.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/x11_window.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/x11_window.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/x11_window.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -o CMakeFiles/glfw.dir/xkb_unicode.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/xkb_unicode.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/xkb_unicode.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/xkb_unicode.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -o CMakeFiles/glfw.dir/posix_time.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/posix_time.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/posix_time.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/posix_time.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -o CMakeFiles/glfw.dir/posix_thread.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/posix_thread.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/posix_thread.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/posix_thread.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -o CMakeFiles/glfw.dir/glx_context.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/glx_context.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/glx_context.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/glx_context.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/egl_context.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/egl_context.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/egl_context.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/egl_context.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/osmesa_context.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/osmesa_context.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/osmesa_context.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/osmesa_context.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src",
+  "command": "/usr/bin/cc -D_GLFW_USE_CONFIG_H -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src -std=gnu99 -fPIC -Wall -o CMakeFiles/glfw.dir/linux_joystick.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/linux_joystick.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/src/linux_joystick.c",
+  "output": "_deps/glfw-build/src/CMakeFiles/glfw.dir/linux_joystick.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/boing.dir/boing.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/boing.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/boing.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/boing.dir/boing.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/boing.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/boing.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/gears.dir/gears.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/gears.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/gears.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/gears.dir/gears.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/gears.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/gears.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/heightmap.dir/heightmap.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/heightmap.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/heightmap.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/heightmap.dir/heightmap.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/heightmap.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/heightmap.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/offscreen.dir/offscreen.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/offscreen.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/offscreen.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/offscreen.dir/offscreen.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/offscreen.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/offscreen.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/particles.dir/particles.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/particles.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/particles.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/particles.dir/particles.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/particles.dir/__/deps/tinycthread.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/tinycthread.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/tinycthread.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/particles.dir/__/deps/tinycthread.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/particles.dir/__/deps/getopt.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/particles.dir/__/deps/getopt.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/particles.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/particles.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/sharing.dir/sharing.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/sharing.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/sharing.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/sharing.dir/sharing.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/sharing.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/sharing.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/simple.dir/simple.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/simple.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/simple.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/simple.dir/simple.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/simple.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/simple.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/splitview.dir/splitview.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/splitview.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/splitview.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/splitview.dir/splitview.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/splitview.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/splitview.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/wave.dir/wave.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/wave.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/examples/wave.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/wave.dir/wave.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/wave.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/examples/CMakeFiles/wave.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/clipboard.dir/clipboard.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/clipboard.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/clipboard.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/clipboard.dir/clipboard.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/clipboard.dir/__/deps/getopt.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/clipboard.dir/__/deps/getopt.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/clipboard.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/clipboard.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/events.dir/events.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/events.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/events.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/events.dir/events.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/events.dir/__/deps/getopt.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/events.dir/__/deps/getopt.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/events.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/events.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/msaa.dir/msaa.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/msaa.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/msaa.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/msaa.dir/msaa.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/msaa.dir/__/deps/getopt.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/msaa.dir/__/deps/getopt.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/msaa.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/msaa.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/glfwinfo.dir/glfwinfo.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/glfwinfo.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/glfwinfo.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/glfwinfo.dir/glfwinfo.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/glfwinfo.dir/__/deps/getopt.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/glfwinfo.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/glfwinfo.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/glfwinfo.dir/__/deps/glad_vulkan.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_vulkan.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_vulkan.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/glfwinfo.dir/__/deps/glad_vulkan.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/iconify.dir/iconify.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/iconify.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/iconify.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/iconify.dir/iconify.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/iconify.dir/__/deps/getopt.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/iconify.dir/__/deps/getopt.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/iconify.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/iconify.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/monitors.dir/monitors.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/monitors.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/monitors.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/monitors.dir/monitors.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/monitors.dir/__/deps/getopt.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/monitors.dir/__/deps/getopt.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/monitors.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/monitors.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/reopen.dir/reopen.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/reopen.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/reopen.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/reopen.dir/reopen.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/reopen.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/reopen.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/cursor.dir/cursor.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/cursor.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/cursor.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/cursor.dir/cursor.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/cursor.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/cursor.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/empty.dir/empty.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/empty.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/empty.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/empty.dir/empty.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/empty.dir/__/deps/tinycthread.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/tinycthread.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/tinycthread.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/empty.dir/__/deps/tinycthread.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/empty.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/empty.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/gamma.dir/gamma.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/gamma.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/gamma.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/gamma.dir/gamma.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/gamma.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/gamma.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/icon.dir/icon.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/icon.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/icon.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/icon.dir/icon.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/icon.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/icon.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/inputlag.dir/inputlag.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/inputlag.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/inputlag.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/inputlag.dir/inputlag.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/inputlag.dir/__/deps/getopt.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/inputlag.dir/__/deps/getopt.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/inputlag.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/inputlag.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/joysticks.dir/joysticks.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/joysticks.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/joysticks.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/joysticks.dir/joysticks.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/joysticks.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/joysticks.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/opacity.dir/opacity.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/opacity.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/opacity.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/opacity.dir/opacity.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/opacity.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/opacity.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/tearing.dir/tearing.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/tearing.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/tearing.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/tearing.dir/tearing.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/tearing.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/tearing.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/threads.dir/threads.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/threads.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/threads.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/threads.dir/threads.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/threads.dir/__/deps/tinycthread.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/tinycthread.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/tinycthread.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/threads.dir/__/deps/tinycthread.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/threads.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/threads.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/timeout.dir/timeout.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/timeout.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/timeout.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/timeout.dir/timeout.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/timeout.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/timeout.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/title.dir/title.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/title.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/title.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/title.dir/title.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/title.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/title.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/triangle-vulkan.dir/triangle-vulkan.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/triangle-vulkan.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/triangle-vulkan.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/triangle-vulkan.dir/triangle-vulkan.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/triangle-vulkan.dir/__/deps/glad_vulkan.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_vulkan.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_vulkan.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/triangle-vulkan.dir/__/deps/glad_vulkan.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/windows.dir/windows.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/windows.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/tests/windows.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/windows.dir/windows.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/windows.dir/__/deps/getopt.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/getopt.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/windows.dir/__/deps/getopt.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests",
+  "command": "/usr/bin/cc  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/include -std=gnu99 -o CMakeFiles/windows.dir/__/deps/glad_gl.c.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-src/deps/glad_gl.c",
+  "output": "_deps/glfw-build/tests/CMakeFiles/windows.dir/__/deps/glad_gl.c.o"
+},
+{
+  "directory": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-build/glm",
+  "command": "/usr/bin/c++  -I/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src -std=c++23 -o CMakeFiles/glm.dir/detail/glm.cpp.o -c /home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src/glm/detail/glm.cpp",
+  "file": "/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-src/glm/detail/glm.cpp",
+  "output": "_deps/glm-build/glm/CMakeFiles/glm.dir/detail/glm.cpp.o"
+}
+]

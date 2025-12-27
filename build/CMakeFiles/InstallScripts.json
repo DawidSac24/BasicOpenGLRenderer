@@ -1,0 +1,13 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/dawid/DEV/projects/OpenGLRenderer/build/cmake_install.cmake",
+		"/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/cmake_install.cmake",
+		"/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/src/cmake_install.cmake",
+		"/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/examples/cmake_install.cmake",
+		"/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glfw-build/tests/cmake_install.cmake",
+		"/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-build/cmake_install.cmake",
+		"/home/dawid/DEV/projects/OpenGLRenderer/build/_deps/glm-build/glm/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
