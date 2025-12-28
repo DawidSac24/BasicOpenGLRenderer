@@ -20,9 +20,5 @@ public:
     MeshRenderer(Entity* owner);
     MeshRenderer(Entity* owner, std::shared_ptr<Renderer::Mesh> m, std::shared_ptr<Renderer::Material> mat);
     virtual ~MeshRenderer() = default;
-
-    virtual void onRender() override;
-
-    virtual void onGuiRender() override;
 };
 }

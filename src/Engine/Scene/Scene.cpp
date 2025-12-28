@@ -22,11 +22,10 @@ Scene::Scene(const std::string& name)
 
 void Scene::onRender()
 {
+    // --- 1. Find Main Camera ---
     CameraComponent* mainCam = nullptr;
     TransformComponent* camTransform = nullptr;
 
-    // Iterate through all entities that have a CameraComponent
-    // (Assuming you have a registry or list of entities)
     for (auto& [uuid, entity] : m_entityMap)
     {
         if (auto* cam = entity->getComponent<CameraComponent>())
@@ -34,30 +33,34 @@ void Scene::onRender()
             if (cam->primary)
             {
                 mainCam = cam;
-                camTransform = entity->transform; // Get the standard transform
+                camTransform = entity->transform;
                 break;
             }
         }
     }
 
-    // 2. If we found a camera, Begin the Scene
+    // --- 2. Render Loop ---
     if (mainCam && camTransform)
     {
-        // Calculate matrices
         glm::mat4 projection = mainCam->getProjection();
-
-        // View Matrix is Inverse of World Matrix (Camera moves right = World moves left)
         glm::mat4 view = glm::inverse(camTransform->getWorldMatrix());
 
-        // Pass distinct matrices to Renderer (or multiply them here if Renderer expects VP)
         Renderer::Renderer::beginScene(projection, view);
 
-        // 3. Draw all MeshRenderers
+        // Iterate ALL entities
         for (auto& [uuid, entity] : m_entityMap)
         {
-            if (auto* meshRenderer = entity->getComponent<MeshRenderer>())
+            // Check if it has a MeshRenderer
+            auto* meshRenderer = entity->getComponent<MeshRenderer>();
+
+            // Render it ONLY if it has a Mesh and Material
+            if (meshRenderer && meshRenderer->mesh && meshRenderer->material)
             {
-                meshRenderer->onRender(); // Calls Renderer::submit inside
+                // Get Transform directly
+                glm::mat4 worldMatrix = entity->transform->getWorldMatrix();
+
+                // Submit to Renderer
+                Renderer::Renderer::submit(meshRenderer->mesh, meshRenderer->material, worldMatrix);
             }
         }
 

@@ -35,7 +35,7 @@ void SandboxLayer::onUpdate()
     {
         m_rotation += 0.5f;
 
-        glm::quat rotation = glm::angleAxis(glm::radians(m_rotation), glm::vec3(1.0f, 0.0f, 0.0f));
+        glm::quat rotation = glm::angleAxis(glm::radians(m_rotation), glm::normalize(glm::vec3(1.0f, 1.0f, 0.0f)));
 
         m_CubeEntity->transform->setRotation(rotation);
     }
@@ -46,8 +46,6 @@ void SandboxLayer::onRender()
     // 1. Clear Screen
     Renderer::RenderCommand::setClearColor({ 0.1f, 0.1f, 0.1f, 1 });
     Renderer::RenderCommand::clear();
-    Renderer::RenderCommand::enableBlending();
-    Renderer::RenderCommand::enableDepthMask();
 
     // 2. Let the Scene do the work!
     // This calls Renderer::beginScene(), loops through entities, and calls submit()

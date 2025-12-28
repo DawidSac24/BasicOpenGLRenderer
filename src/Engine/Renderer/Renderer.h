@@ -27,6 +27,8 @@ private:
     };
 
     static std::unique_ptr<SceneData> s_sceneData;
+
+    static std::shared_ptr<Shader> s_currentShader;
 };
 
 class RenderCommand
