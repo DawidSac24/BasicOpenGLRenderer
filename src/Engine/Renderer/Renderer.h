@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Camera.h"
 #include "Engine/Renderer/Material.h"
 #include "Mesh.h"
 #include <glm/glm.hpp>
@@ -15,7 +14,7 @@ public:
     static void init();
     static void shutdown();
 
-    static void beginScene(Camera& camera);
+    static void beginScene(const glm::mat4& projection, const glm::mat4& view);
     static void endScene();
 
     static void submit(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material,

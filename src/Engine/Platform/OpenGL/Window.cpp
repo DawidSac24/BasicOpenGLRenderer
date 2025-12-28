@@ -31,7 +31,8 @@ void Window::create()
     if (!m_handle)
     {
         std::cerr << "Failed to create Window !\n";
-        assert(false);
+        glfwTerminate();
+        return;
     }
 
     glfwMakeContextCurrent(m_handle);

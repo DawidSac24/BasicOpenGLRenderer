@@ -6,6 +6,7 @@
 #include <ranges>
 
 #include "Debug.h"
+#include "Engine/Core/AssetManager.h"
 #include "Engine/Events/ApplicationEvents.h"
 #include "Engine/Events/Event.h"
 #include "Engine/Scene/Scene.h"
@@ -31,13 +32,21 @@ Application::Application(const ApplicationSpecification& appSpec)
     m_window->create();
 
     glfwSwapInterval(1);
-
     glewExperimental = GL_TRUE;
-    glewInit();
+    GLenum err = glewInit();
+    if (err != GLEW_OK)
+    {
+        std::cerr << "GLEW Init Failed: " << glewGetErrorString(err) << std::endl;
+        throw std::runtime_error("Failed to initialize GLEW!");
+    }
+
+    Core::getOpenGLErrors();
 
     m_gui = std::make_shared<ImGuiImpl>(*m_window);
 
-    Core::getOpenGLErrors();
+    m_activeScene = std::make_shared<Engine::Scene>("Default Scene");
+
+    Engine::AssetManager::loadAssets();
 }
 
 Application::~Application()
@@ -52,8 +61,6 @@ Application::~Application()
 void Application::run()
 {
     m_isRunning = true;
-
-    m_activeScene = std::make_shared<Engine::Scene>("Default Scene");
 
     while (m_isRunning)
     {
@@ -72,6 +79,7 @@ void Application::run()
         for (const std::unique_ptr<Layer>& layer : m_layerStack)
         {
             layer->onRender();
+            m_activeScene->onRender();
         }
 
         m_window->update();

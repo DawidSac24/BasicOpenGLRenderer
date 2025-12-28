@@ -1,5 +1,6 @@
 #include "Shader.h"
 
+#include "Engine/Core/FyleSystem.h"
 #include <GL/glew.h>
 #include <fstream>
 #include <glm/glm.hpp>
@@ -15,8 +16,8 @@ Shader::Shader(const std::string vert_filepath, std::string frag_filepath)
     , m_frag_filepath(frag_filepath)
     , m_rendererID(0)
 {
-    std::string vert_source = parseShader(vert_filepath);
-    std::string frag_source = parseShader(frag_filepath);
+    std::string vert_source = parseShader(Core::FileSystem::getPath(vert_filepath));
+    std::string frag_source = parseShader(Core::FileSystem::getPath(frag_filepath));
 
     m_rendererID = createShader(vert_source, frag_source);
 }

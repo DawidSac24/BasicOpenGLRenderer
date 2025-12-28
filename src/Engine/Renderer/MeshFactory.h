@@ -1,8 +1,10 @@
 #pragma once
+
 #include "Engine/Renderer/Mesh.h"
+
 #include <memory>
 
-namespace Engine
+namespace Renderer
 {
 class MeshFactory
 {

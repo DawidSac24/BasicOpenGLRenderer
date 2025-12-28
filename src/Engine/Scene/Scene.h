@@ -9,6 +9,10 @@
 
 namespace Engine
 {
+class Entity;
+class CameraComponent;
+enum class EntityType;
+
 class Scene
 {
 public:
@@ -17,10 +21,12 @@ public:
 public:
     Scene(const std::string& name);
 
+    void onRender();
+
     Entity* getEntityByUUID(Core::UUID uuid);
     std::unordered_map<Core::UUID, std::shared_ptr<Entity>>* getEntityMap() { return &m_entityMap; }
 
-    Entity* createEntity(const std::string* p_name);
+    Entity* createEntity(const std::string& p_name, EntityType type);
     void destroyEntity(Entity* obj);
     void destroyEntity(Core::UUID id);
 

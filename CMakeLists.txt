@@ -37,3 +37,5 @@ target_include_directories(stb_image PUBLIC "vendor/stb_image")
 
 # --- Enter Source Directory ---
 add_subdirectory(src)
+
+target_compile_definitions(MyEngine PUBLIC PROJECT_ROOT="${CMAKE_SOURCE_DIR}")

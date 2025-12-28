@@ -11,5 +11,5 @@ void main()
   // If v_color is (0,0,0) or dark, we can force a fallback:
   // color = vec4(1.0, 0.0, 0.0, 1.0);
 
-  color = vec4(v_color, 0.0);
+  color = vec4(v_color, 1.0);
 };

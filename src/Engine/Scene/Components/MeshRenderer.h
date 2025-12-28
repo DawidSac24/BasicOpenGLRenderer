@@ -1,9 +1,11 @@
 #pragma once
 
+#include "Engine/Math/Transform.h"
 #include "Engine/Renderer/Material.h"
 #include "Engine/Renderer/Mesh.h"
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Scene/Components/Component.h"
+#include "Engine/Scene/Entity.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "imgui.h"
 

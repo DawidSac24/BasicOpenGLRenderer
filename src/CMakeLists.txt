@@ -4,6 +4,8 @@ file(GLOB_RECURSE ENGINE_SOURCES "Engine/*.cpp" "Engine/*.h")
 
 add_library(MyEngine STATIC ${ENGINE_SOURCES})
 
+target_compile_definitions(MyEngine PUBLIC PROJECT_ROOT="${CMAKE_SOURCE_DIR}")
+
 # Define Includes
 # "PUBLIC" means: The Engine uses this, AND anyone using the Engine sees this.
 # This allows you to do #include "Engine/Core/Log.h" anywhere.

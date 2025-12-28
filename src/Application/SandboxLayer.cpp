@@ -1,91 +1,83 @@
 #include "SandboxLayer.h"
 
-#include "Engine/Events/WindowEvents.h"
+#include "Engine/Math/Transform.h"
 #include "Engine/Platform/OpenGL/Application.h"
-#include "Engine/Renderer/Camera.h"
-
-#include "glm/ext/matrix_transform.hpp"
-#include "glm/fwd.hpp"
-#include <memory>
+#include "Engine/Renderer/Renderer.h"
+#include "Engine/Scene/Components/CameraComponent.h"
 
 SandboxLayer::SandboxLayer()
 {
-    Core::Application& application = Core::Application::get();
-    glm::vec2 frameBufferSize = application.getWindow()->getFrameBufferSize();
-    m_activeScene = application.getActiveScene();
-};
+    Core::Application& app = Core::Application::get();
+    m_activeScene = app.getActiveScene();
 
-SandboxLayer::~SandboxLayer() { }
+    // 1. Create the Camera
+    // Your EntityFactory (inside Scene::createEntity) should attach the CameraComponent
+    m_CameraEntity = m_activeScene->createEntity("Main Camera", Engine::EntityType::Camera);
+
+    // IMPORTANT: Move the camera BACK so it can see the object!
+    // (Default is 0,0,0, which is inside the cube)
+    m_CameraEntity->transform->setPosition({ 0.0f, 0.0f, 5.0f });
+
+    // Set initial aspect ratio
+    const auto& camComp = m_CameraEntity->getComponent<Engine::CameraComponent>();
+    glm::vec2 windowSize = app.getWindow()->getFrameBufferSize();
+    camComp->setViewportSize(windowSize.x, windowSize.y);
+
+    // 2. Create the Cube
+    // Your EntityFactory should attach MeshRenderer + Transform
+    m_CubeEntity = m_activeScene->createEntity("First Cube", Engine::EntityType::Cube);
+}
 
 void SandboxLayer::onUpdate()
 {
-    m_rotation += 0.5f;
+    // Spin the cube every frame
+    if (m_CubeEntity)
+    {
+        m_rotation += 0.5f;
+
+        // Update the Transform Component directly
+        // The Scene::onRender will pick up this new matrix automatically
+        glm::quat rotation = glm::quat(glm::vec3(glm::radians(m_rotation * 0.5f), // Pitch (X axis)
+            glm::radians(m_rotation), // Yaw   (Y axis)
+            0.0f // Roll  (Z axis)
+            ));
+        m_CubeEntity->transform->setRotation(rotation);
+    }
 }
 
 void SandboxLayer::onRender()
 {
-    // 1. Clear and Prepare
+    // 1. Clear Screen
     Renderer::RenderCommand::setClearColor({ 0.1f, 0.1f, 0.1f, 1 });
     Renderer::RenderCommand::clear();
 
-    // IMPORTANT: Enable Blending globally for transparency to work
-    Renderer::RenderCommand::enableBlending();
-
-    // 2. Begin Scene
-    Renderer::Renderer::beginScene(*camera);
-
-    // Calculate generic model matrix
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::rotate(model, glm::radians(m_rotation), glm::vec3(0.0f, 1.0f, 0.0f));
-
-    // --- PASS 1: DRAW TRANSPARENT CUBE ---
-    {
-        // Disable Depth Mask for transparent objects
-        // (So the cube looks "ghostly" and doesn't hide the lines behind it)
-        Renderer::RenderCommand::disableDepthMask();
-
-        Renderer::Renderer::submit(cubeMesh, basicShader, model);
-    }
-
-    // --- PASS 2: DRAW SOLID LINES ---
-    {
-        // Re-enable Depth Mask for solid objects (The lines)
-        Renderer::RenderCommand::enableDepthMask();
-
-        // Scale slightly bigger so lines sit on top
-        glm::mat4 outlineModel = glm::scale(model, glm::vec3(1.01f));
-
-        Renderer::Renderer::submit(cubeLineMesh, whiteShader, outlineModel, GL_LINES);
-    }
-
-    Renderer::Renderer::endScene();
+    // 2. Let the Scene do the work!
+    // This calls Renderer::beginScene(), loops through entities, and calls submit()
+    if (m_activeScene)
+        m_activeScene->onRender();
 }
 
 void SandboxLayer::onEvent(Core::Event& event)
 {
-    // Check type manually (or use a Dispatcher if you have one)
     if (event.getEventType() == Core::EventType::WindowResize)
     {
-        // Cast and call helper
         onWindowResize((Core::WindowResizeEvent&)event);
     }
 }
 
 bool SandboxLayer::onWindowResize(Core::WindowResizeEvent& e)
 {
-    // HYPRLAND FIX: Handle minimization (Size 0,0)
-    // If we don't check this, projection matrix calculation divides by zero -> Crash/NaN
     if (e.getWidth() == 0 || e.getHeight() == 0)
         return false;
 
-    // 1. Update Camera Projection (Aspect Ratio)
-    // Note: Use 'float' cast to ensure floating point division
-    camera->setViewportSize((float)e.getWidth(), (float)e.getHeight());
-
-    // 2. Update OpenGL Viewport
     Renderer::RenderCommand::setViewport(0, 0, e.getWidth(), e.getHeight());
 
-    return false; // Return false so other layers can also see this event (e.g., UI Layer)
-}
+    // Update the Camera Component
+    if (m_CameraEntity)
+    {
+        const auto& cam = m_CameraEntity->getComponent<Engine::CameraComponent>();
+        cam->setViewportSize(e.getWidth(), e.getHeight());
+    }
 
-void SandboxLayer::onDetach() { }
+    return false;
+}

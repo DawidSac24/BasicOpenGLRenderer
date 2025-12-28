@@ -1,60 +1,83 @@
 #include "EntityFactory.h"
+
+#include "Components/CameraComponent.h"
 #include "Engine/Core/AssetManager.h"
 #include "Engine/Renderer/Mesh.h"
+#include "Engine/Renderer/MeshFactory.h"
 #include "Engine/Scene/Components/MeshRenderer.h"
 #include "Engine/Scene/Entity.h"
-#include "MeshFactory.h"
+
 #include <memory>
 
 namespace Engine
 {
-EntityFactory::EntityFactory() { }
-
-Entity* EntityFactory::createEntity(EntityType type, std::string* name)
+std::unique_ptr<Entity> EntityFactory::create(const std::string& name, EntityType type)
 {
     switch (type)
     {
     case EntityType::Empty:
-        return createEmptyEntity(name);
-    case EntityType::Square:
-        return createCubeEntity(name);
+        return createEmpty(name);
+    case EntityType::Cube:
+        return createCube(name);
     case EntityType::Sphere:
-        return createSphereEntity(name);
+        return createSphere(name);
     case EntityType::Plane:
-        return createPlaneEntity(name);
+        return createPlane(name);
     case EntityType::Camera:
-        return createCameraEntity(name);
+        return createCamera(name);
     }
 }
 
-Entity* EntityFactory::createEmptyEntity(std::string* name)
+std::unique_ptr<Entity> EntityFactory::createEmpty(const std::string& name)
 {
-    return new Entity(name);
+    return std::make_unique<Entity>(name);
 }
 
-Entity* EntityFactory::createCubeEntity(std::string* name)
+std::unique_ptr<Entity> EntityFactory::createCube(const std::string& name)
 {
-    Entity* newEntity = new Entity(name);
+    auto newEntity = std::make_unique<Entity>(name);
 
-    std::shared_ptr<Renderer::Mesh> cubeMesh = AssetManager::getMesh("CubeMesh");
-
-    if (cubeMesh == nullptr)
+    // --- 1. Get Mesh (Safely) ---
+    auto mesh = AssetManager::getMesh("Cube");
+    if (!mesh)
     {
-        cubeMesh = MeshFactory::CreateCube();
-        AssetManager::addMesh("CubeMesh", cubeMesh);
+        std::cerr << "CRITICAL: 'Cube' mesh missing! Generating fallback." << std::endl;
+        mesh = Renderer::MeshFactory::CreateCube(); // Force create it
+        AssetManager::addMesh("Cube", mesh);
     }
 
-    newEntity->addComponent<MeshRenderer>();
+    // --- 2. Get Shader (Safely) ---
+    auto shader = AssetManager::getShader("BasicShader");
+    if (!shader)
+    {
+        std::cerr << "CRITICAL: 'BasicShader' missing!" << std::endl;
+        // You might want to return here or load a hardcoded fallback shader
+    }
+
+    // --- 3. Create Material ---
+    auto material = std::make_shared<Renderer::Material>(shader);
+    material->setFloat4("u_Color", { 1.0f, 1.0f, 1.0f, 1.0f });
+
+    // --- 4. Add Component ---
+    // If mesh or material are nullptr here, the Inspector will show them as empty.
+    newEntity->addComponent<MeshRenderer>(mesh, material);
 
     return newEntity;
 }
 
-Entity* EntityFactory::createSphereEntity(std::string* name) { }
+std::unique_ptr<Entity> EntityFactory::createSphere(const std::string& name) { }
 
-Entity* EntityFactory::createPlaneEntity(std::string* name) { }
+std::unique_ptr<Entity> EntityFactory::createPlane(const std::string& name) { }
 
-Entity* EntityFactory::createCameraEntity(std::string* name)
+std::unique_ptr<Entity> EntityFactory::createCamera(const std::string& name)
 {
-    // Entity* newEntity = new Entity
+    auto entity = std::make_unique<Entity>(name);
+
+    entity->transform->setPosition({ 0.0f, 0.0f, 5.0f });
+
+    auto* camComp = entity->addComponent<CameraComponent>();
+    camComp->primary = true; // Make it active
+
+    return entity;
 }
 }

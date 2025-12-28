@@ -2,6 +2,7 @@
 
 #include "Engine/Scene/Entity.h"
 
+#include <memory>
 #include <string>
 
 namespace Engine
@@ -9,16 +10,15 @@ namespace Engine
 class EntityFactory
 {
 public:
-    EntityFactory();
-
-    Entity* createEntity(EntityType type, std::string* name);
+    static std::unique_ptr<Entity> create(const std::string& name, EntityType type);
 
 private:
-    Entity* createEmptyEntity(std::string* name);
-    Entity* createCubeEntity(std::string* name);
-    Entity* createSphereEntity(std::string* name);
-    Entity* createPlaneEntity(std::string* name);
+    static std::unique_ptr<Entity> createEmpty(const std::string& name);
 
-    Entity* createCameraEntity(std::string* name);
+    static std::unique_ptr<Entity> createCamera(const std::string& name);
+
+    static std::unique_ptr<Entity> createCube(const std::string& name);
+    static std::unique_ptr<Entity> createSphere(const std::string& name);
+    static std::unique_ptr<Entity> createPlane(const std::string& name);
 };
 }

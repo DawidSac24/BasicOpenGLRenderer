@@ -19,7 +19,7 @@ namespace Engine
 enum class EntityType
 {
     Empty,
-    Square,
+    Cube,
     Sphere,
     Plane,
     Camera,
@@ -32,8 +32,8 @@ public:
     std::unique_ptr<Math::Transform> transform;
 
 public:
-    Entity(const std::string* name, Entity* parent = nullptr);
-    Entity(Core::UUID id, const std::string* name, Entity* parent = nullptr);
+    Entity(const std::string& name, Entity* parent = nullptr);
+    Entity(Core::UUID id, const std::string& name, Entity* parent = nullptr);
 
     ~Entity() = default;
 

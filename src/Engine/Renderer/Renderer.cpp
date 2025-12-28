@@ -17,9 +17,9 @@ void Renderer::shutdown()
     // Cleanup if needed
 }
 
-void Renderer::beginScene(Camera& camera)
+void Renderer::beginScene(const glm::mat4& projection, const glm::mat4& view)
 {
-    s_sceneData->viewProjectionMatrix = camera.getViewProjection();
+    s_sceneData->viewProjectionMatrix = projection * view;
 }
 
 void Renderer::endScene() { }
@@ -31,9 +31,9 @@ void Renderer::submit(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<M
 
     std::shared_ptr<Shader> shader = material->getShader();
 
-    shader->setUniformMat4f("u_ViewProjection", s_sceneData->viewProjectionMatrix);
+    shader->setUniformMat4f("u_viewProjection", s_sceneData->viewProjectionMatrix);
 
-    shader->setUniformMat4f("u_Model", transform);
+    shader->setUniformMat4f("u_model", transform);
 
     mesh->bind();
     glDrawElements(drawMode, mesh->getIndexCount(), GL_UNSIGNED_INT, nullptr);
