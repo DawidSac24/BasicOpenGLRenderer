@@ -17,11 +17,22 @@ namespace Core
 {
 static Application* s_application = nullptr;
 
+void glfwErrorCallback(int error, const char* description)
+{
+    std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
+}
+
 Application::Application(const ApplicationSpecification& appSpec)
 {
     s_application = this;
 
-    glfwInit();
+    glfwSetErrorCallback(glfwErrorCallback);
+
+    if (!glfwInit())
+    {
+        std::cerr << "Failed to initialize GLFW" << std::endl;
+        return;
+    }
 
     if (m_specification.windowSpec.title.empty())
     {

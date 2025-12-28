@@ -65,9 +65,15 @@ std::unique_ptr<Entity> EntityFactory::createCube(const std::string& name)
     return newEntity;
 }
 
-std::unique_ptr<Entity> EntityFactory::createSphere(const std::string& name) { }
+std::unique_ptr<Entity> EntityFactory::createSphere(const std::string& name)
+{
+    return nullptr;
+}
 
-std::unique_ptr<Entity> EntityFactory::createPlane(const std::string& name) { }
+std::unique_ptr<Entity> EntityFactory::createPlane(const std::string& name)
+{
+    return nullptr;
+}
 
 std::unique_ptr<Entity> EntityFactory::createCamera(const std::string& name)
 {

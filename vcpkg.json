@@ -1,0 +1,19 @@
+{
+  "name": "opengl-game-engine",
+  "version-string": "1.0.0",
+  "dependencies": [
+    "glm",
+    "glew",
+    "stb",
+    "assimp",
+    "nativefiledialog-extended",
+    {
+      "name": "glfw3",
+      "default-features": true
+    },
+    {
+      "name": "imgui",
+      "features": ["glfw-binding", "opengl3-binding", "docking-experimental"]
+    }
+  ]
+}

@@ -168,8 +168,8 @@ void EditorLayer::drawComponents(Engine::Entity* entity)
                     ImGui::Text("%s:", name.c_str());
                     if (texture)
                     {
-                        ImGui::Image(
-                            (void*)(intptr_t)texture->getRendererID(), ImVec2(64, 64), ImVec2(0, 1), ImVec2(1, 0));
+                        ImGui::Image((ImTextureID)(intptr_t)texture->getRendererID(), ImVec2(64, 64), ImVec2(0, 1),
+                            ImVec2(1, 0));
                     }
                 }
             }
