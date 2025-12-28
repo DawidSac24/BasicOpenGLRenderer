@@ -1,9 +1,12 @@
 #include "EditorLayer.h"
 
 #include "Engine/Platform/OpenGL/Application.h"
+#include "Engine/Scene/Components/CameraComponent.h"
+#include "Engine/Scene/Components/MeshRenderer.h"
 #include "Engine/Scene/Entity.h"
 #include "Engine/Scene/Scene.h"
 
+#include "glm/gtc/type_ptr.hpp"
 #include "imgui.h"
 #include <memory>
 
@@ -95,10 +98,80 @@ void EditorLayer::drawEntityNode(Engine::Entity* entity)
 
 void EditorLayer::drawComponents(Engine::Entity* entity)
 {
-    auto& components = *entity->getComponents();
+    // --- 1. Transform Component ---
+    drawComponent<Engine::TransformComponent>("Transform", entity,
+        [](auto& component)
+        {
+            // Position
+            float pos[3] = { component.getPosition().x, component.getPosition().y, component.getPosition().z };
+            if (ImGui::DragFloat3("Position", pos, 0.1f))
+                component.setPosition({ pos[0], pos[1], pos[2] });
 
-    for (auto& component : components)
-    {
-        component->onGuiRender();
-    }
+            // Rotation (Euler conversion)
+            glm::vec3 euler = glm::degrees(glm::eulerAngles(component.getRotation()));
+            if (ImGui::DragFloat3("Rotation", glm::value_ptr(euler), 0.1f))
+                component.setRotation(glm::quat(glm::radians(euler)));
+
+            // Scale
+            glm::vec3 scale = component.getScale();
+            if (ImGui::DragFloat3("Scale", glm::value_ptr(scale), 0.1f))
+                component.setScale(scale);
+        });
+
+    // --- 2. Camera Component ---
+    drawComponent<Engine::CameraComponent>("Camera", entity,
+        [](auto& component)
+        {
+            ImGui::Checkbox("Primary", &component.primary);
+
+            float fov = component.fov;
+            if (ImGui::DragFloat("FOV", &fov, 0.1f, 1.0f, 180.0f))
+                component.fov = fov;
+
+            ImGui::DragFloat("Near Clip", &component.nearClip, 0.1f);
+            ImGui::DragFloat("Far Clip", &component.farClip, 10.0f);
+        });
+
+    // --- 3. Mesh Renderer (With Material Logic) ---
+    drawComponent<Engine::MeshRenderer>("Mesh Renderer", entity,
+        [](auto& component)
+        {
+            // Mesh Info
+            if (component.mesh)
+                ImGui::Text("Mesh: Loaded (%d indices)", component.mesh->getIndexCount());
+            else
+                ImGui::TextColored({ 1, 0, 0, 1 }, "Mesh: Missing");
+
+            ImGui::Separator();
+
+            // Material Logic
+            if (component.material)
+            {
+                ImGui::Text("Material Properties");
+
+                // A. Uniforms (Colors)
+                auto& uniforms = component.material->getUniforms();
+                for (auto& [name, value] : uniforms)
+                {
+                    ImGui::PushID(name.c_str());
+                    if (name.find("Color") != std::string::npos)
+                        ImGui::ColorEdit4(name.c_str(), glm::value_ptr(value));
+                    else
+                        ImGui::DragFloat4(name.c_str(), glm::value_ptr(value), 0.1f);
+                    ImGui::PopID();
+                }
+
+                // B. Textures
+                auto& textures = component.material->getTextures();
+                for (auto& [name, texture] : textures)
+                {
+                    ImGui::Text("%s:", name.c_str());
+                    if (texture)
+                    {
+                        ImGui::Image(
+                            (void*)(intptr_t)texture->getRendererID(), ImVec2(64, 64), ImVec2(0, 1), ImVec2(1, 0));
+                    }
+                }
+            }
+        });
 }

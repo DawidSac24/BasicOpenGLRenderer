@@ -12,7 +12,7 @@ class TransformComponent : public Component
 public:
     TransformComponent(Entity* owner);
 
-    inline glm::vec3 getPosition() const;
+    inline glm::vec3 getPosition() const { return m_handle.position; }
     inline glm::quat getRotation() const { return m_handle.rotation; }
     inline glm::vec3 getScale() const { return m_handle.scale; }
 

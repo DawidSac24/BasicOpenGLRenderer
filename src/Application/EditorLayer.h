@@ -5,6 +5,7 @@
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Scene/Entity.h"
 #include "Engine/Scene/Scene.h"
+#include "imgui.h"
 
 class EditorLayer : public Core::Layer
 {
@@ -31,4 +32,34 @@ private:
 private:
     void drawEntityNode(Engine::Entity* entinty);
     void drawComponents(Engine::Entity* entity);
+
+    template <typename T, typename UIFunction>
+    void drawComponent(const std::string& name, Engine::Entity* entity, UIFunction uiFunction)
+    {
+        const ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed
+            | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowOverlap | ImGuiTreeNodeFlags_FramePadding;
+
+        if (entity->hasComponent<T>())
+        {
+            auto& component = *entity->getComponent<T>();
+            ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
+
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2 { 4, 4 });
+
+            ImGui::Separator();
+
+            // Draw Header
+            bool open = ImGui::TreeNodeEx((void*)typeid(T).hash_code(), treeNodeFlags, "%s", name.c_str());
+            ImGui::PopStyleVar();
+
+            // Calculate context menu options (Right Click)
+            // ... (We can add a "Remove Component" button logic here later)
+
+            if (open)
+            {
+                uiFunction(component);
+                ImGui::TreePop();
+            }
+        }
+    }
 };
