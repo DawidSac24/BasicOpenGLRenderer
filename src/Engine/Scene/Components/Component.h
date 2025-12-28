@@ -7,6 +7,10 @@ class Entity;
 class Component
 {
 public:
+    Component(Entity* owner)
+        : owner(owner)
+    {
+    }
     virtual ~Component() = default;
 
     virtual void onUpdate(float deltaTime) { }

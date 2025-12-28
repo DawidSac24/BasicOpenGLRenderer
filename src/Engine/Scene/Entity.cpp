@@ -1,6 +1,7 @@
 #include "Entity.h"
 
 #include "Engine/Math/Transform.h"
+#include "Engine/Scene/Components/TransformComponent.h"
 #include "Scene.h"
 
 namespace Engine
@@ -10,8 +11,7 @@ Entity::Entity(const std::string& name, Entity* parent)
     , name(name)
     , m_parent(parent)
 {
-    transform = std::make_unique<Math::Transform>();
-    transform->owner = this;
+    transform = addComponent<TransformComponent>(this);
 }
 
 Entity::Entity(Core::UUID id, const std::string& name, Entity* parent)
@@ -19,8 +19,7 @@ Entity::Entity(Core::UUID id, const std::string& name, Entity* parent)
     , name(name)
     , m_parent(parent)
 {
-    transform = std::make_unique<Math::Transform>();
-    transform->owner = this;
+    transform = addComponent<TransformComponent>(this);
 }
 
 void Entity::setParent(Entity* parent)

@@ -4,25 +4,13 @@
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Scene/Components/CameraComponent.h"
 #include "Engine/Scene/Components/MeshRenderer.h"
+#include "Engine/Scene/Components/TransformComponent.h"
 #include "Engine/Scene/EntityFactory.h"
 #include "Entity.h"
 
 #include <algorithm>
 #include <iostream>
 #include <memory>
-
-// Temporary debug function
-void printMat4(const glm::mat4& mat)
-{
-    for (int i = 0; i < 4; ++i)
-    {
-        for (int j = 0; j < 4; ++j)
-        {
-            std::cout << mat[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-}
 
 namespace Engine
 {
@@ -35,7 +23,7 @@ Scene::Scene(const std::string& name)
 void Scene::onRender()
 {
     CameraComponent* mainCam = nullptr;
-    Math::Transform* camTransform = nullptr;
+    TransformComponent* camTransform = nullptr;
 
     // Iterate through all entities that have a CameraComponent
     // (Assuming you have a registry or list of entities)
@@ -46,7 +34,7 @@ void Scene::onRender()
             if (cam->primary)
             {
                 mainCam = cam;
-                camTransform = entity->transform.get(); // Get the standard transform
+                camTransform = entity->transform; // Get the standard transform
                 break;
             }
         }
@@ -60,11 +48,6 @@ void Scene::onRender()
 
         // View Matrix is Inverse of World Matrix (Camera moves right = World moves left)
         glm::mat4 view = glm::inverse(camTransform->getWorldMatrix());
-
-        std::cout << "Projection Matrix:" << std::endl;
-        printMat4(projection);
-        std::cout << "View Matrix:" << std::endl;
-        printMat4(view);
 
         // Pass distinct matrices to Renderer (or multiply them here if Renderer expects VP)
         Renderer::Renderer::beginScene(projection, view);

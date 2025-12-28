@@ -60,7 +60,7 @@ std::unique_ptr<Entity> EntityFactory::createCube(const std::string& name)
 
     // --- 4. Add Component ---
     // If mesh or material are nullptr here, the Inspector will show them as empty.
-    newEntity->addComponent<MeshRenderer>(mesh, material);
+    newEntity->addComponent<MeshRenderer>(newEntity.get(), mesh, material);
 
     return newEntity;
 }
@@ -75,7 +75,7 @@ std::unique_ptr<Entity> EntityFactory::createCamera(const std::string& name)
 
     entity->transform->setPosition({ 0.0f, 0.0f, 5.0f });
 
-    auto* camComp = entity->addComponent<CameraComponent>();
+    auto* camComp = entity->addComponent<CameraComponent>(entity.get());
     camComp->primary = true; // Make it active
 
     return entity;

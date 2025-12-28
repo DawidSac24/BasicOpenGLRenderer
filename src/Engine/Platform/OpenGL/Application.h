@@ -3,6 +3,7 @@
 #include "Engine/Core/Layer.h"
 #include "Engine/Core/LayerStack.h"
 #include "Engine/Events/Event.h"
+#include "Engine/Events/WindowEvents.h"
 #include "Engine/ImGui/ImGuiImpl.h"
 #include "Engine/Platform/OpenGL/Window.h"
 #include "Engine/Scene/Scene.h"
@@ -73,5 +74,7 @@ private:
 
 private:
     void flushEvents();
+
+    bool onWindowResize(Core::WindowResizeEvent& e);
 };
 } // namespace Core

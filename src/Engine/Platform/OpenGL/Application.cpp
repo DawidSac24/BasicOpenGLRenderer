@@ -1,15 +1,17 @@
 #include "Application.h"
 
-#include <cassert>
-#include <iostream>
-#include <memory>
-#include <ranges>
-
 #include "Debug.h"
 #include "Engine/Core/AssetManager.h"
 #include "Engine/Events/ApplicationEvents.h"
 #include "Engine/Events/Event.h"
+#include "Engine/Events/WindowEvents.h"
+#include "Engine/Renderer/Renderer.h"
 #include "Engine/Scene/Scene.h"
+
+#include <cassert>
+#include <iostream>
+#include <memory>
+#include <ranges>
 
 namespace Core
 {

@@ -18,7 +18,10 @@ public:
 
     bool primary = true;
 
-    CameraComponent() = default;
+    CameraComponent(Entity* owner)
+        : Component(owner)
+    {
+    }
 
     glm::mat4 getProjection() const { return glm::perspective(glm::radians(fov), aspectRatio, nearClip, farClip); }
 

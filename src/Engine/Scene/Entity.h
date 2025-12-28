@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Components/Component.h"
+#include "Engine/Scene/Components/TransformComponent.h"
 #include "Scene.h"
 
 #include <algorithm>
@@ -29,7 +30,8 @@ class Entity
 {
 public:
     std::string name = "newEntity";
-    std::unique_ptr<Math::Transform> transform;
+
+    TransformComponent* transform;
 
 public:
     Entity(const std::string& name, Entity* parent = nullptr);
@@ -64,7 +66,6 @@ public:
     TComponent* addComponent(Args&&... args)
     {
         auto newComponent = std::make_unique<TComponent>(std::forward<Args>(args)...);
-        newComponent->owner = this;
         TComponent* ptr = newComponent.get();
         m_components.push_back(std::move(newComponent));
         return ptr;

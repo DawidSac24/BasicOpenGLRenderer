@@ -1,14 +1,16 @@
-#include "Transform.h"
+#include "TransformComponent.h"
 
+#include "Engine/Scene/Components/Component.h"
 #include "Engine/Scene/Entity.h"
 
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/quaternion.hpp>
-
-namespace Math
+namespace Engine
 {
+TransformComponent::TransformComponent(Entity* owner)
+    : Component(owner)
+{
+}
 
-void Transform::markDirty()
+void TransformComponent::markDirty()
 {
     if (m_isDirty)
         return;
@@ -19,16 +21,16 @@ void Transform::markDirty()
         owner->markChildrenDirty();
 }
 
-glm::mat4 Transform::getLocalMatrix() const
+glm::mat4 TransformComponent::getLocalMatrix() const
 {
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, m_position);
-    model *= glm::toMat4(m_rotation);
-    model = glm::scale(model, m_scale);
+    model = glm::translate(model, m_handle.position);
+    model *= glm::toMat4(m_handle.rotation);
+    model = glm::scale(model, m_handle.scale);
     return model;
 }
 
-glm::mat4 Transform::getWorldMatrix()
+glm::mat4 TransformComponent::getWorldMatrix()
 {
     if (m_isDirty)
     {
@@ -38,7 +40,7 @@ glm::mat4 Transform::getWorldMatrix()
     return m_worldMatrix;
 }
 
-glm::mat4 Transform::computeWorldMatrix()
+glm::mat4 TransformComponent::computeWorldMatrix()
 {
     glm::mat4 localMat = getLocalMatrix();
 
@@ -49,4 +51,4 @@ glm::mat4 Transform::computeWorldMatrix()
 
     return localMat;
 }
-} // namespace Math
+}
