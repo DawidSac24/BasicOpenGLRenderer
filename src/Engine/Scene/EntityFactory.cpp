@@ -2,7 +2,6 @@
 
 #include "Components/CameraComponent.h"
 #include "Engine/Core/AssetManager.h"
-#include "Engine/Renderer/Mesh.h"
 #include "Engine/Renderer/MeshFactory.h"
 #include "Engine/Scene/Components/MeshRenderer.h"
 #include "Engine/Scene/Entity.h"
@@ -26,6 +25,9 @@ std::unique_ptr<Entity> EntityFactory::create(const std::string& name, EntityTyp
     case EntityType::Camera:
         return createCamera(name);
     }
+
+    std::cerr << "Entity creation error: invalid Entity Type" << std::endl;
+    return nullptr;
 }
 
 std::unique_ptr<Entity> EntityFactory::createEmpty(const std::string& name)

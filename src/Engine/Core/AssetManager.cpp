@@ -1,7 +1,5 @@
 #include "AssetManager.h"
 
-#include "Engine/Core/FyleSystem.h"
-#include "Engine/Renderer/Material.h"
 #include "Engine/Renderer/MeshFactory.h"
 
 namespace Engine
@@ -17,22 +15,22 @@ std::unordered_map<std::string, std::shared_ptr<Renderer::Material>> AssetManage
 std::shared_ptr<Renderer::Shader> AssetManager::loadShader(
     const std::string& name, const std::string& vertPath, const std::string& fragPath)
 {
-    // 1. Create the shader
+    if (s_shaders.find(name) != s_shaders.end())
+    {
+        return s_shaders[name];
+    }
+
     auto shader = std::make_shared<Renderer::Shader>(vertPath, fragPath);
-
-    // 2. Store it
     s_shaders[name] = shader;
-
     return shader;
 }
 
 std::shared_ptr<Renderer::Shader> AssetManager::getShader(const std::string& name)
 {
-    // Check if key exists
     if (s_shaders.find(name) == s_shaders.end())
     {
         std::cerr << "[AssetManager] Shader not found: " << name << std::endl;
-        return nullptr; // Or return a default "Error Pink" shader
+        return nullptr;
     }
     return s_shaders[name];
 }
@@ -41,6 +39,11 @@ std::shared_ptr<Renderer::Shader> AssetManager::getShader(const std::string& nam
 std::shared_ptr<Renderer::Texture> AssetManager::loadTexture(
     const std::string& name, const std::string& filepath, const std::string& type)
 {
+    if (s_textures.find(name) != s_textures.end())
+    {
+        return s_textures[name];
+    }
+
     auto texture = std::make_shared<Renderer::Texture>(filepath, type.c_str());
     s_textures[name] = texture;
     return texture;

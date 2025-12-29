@@ -10,7 +10,6 @@ private:
     unsigned int m_rendererId;
     const char* type;
     std::string m_filepath;
-    unsigned char* m_localBuffer;
     int m_width, m_height, m_BPP;
 
 public:
