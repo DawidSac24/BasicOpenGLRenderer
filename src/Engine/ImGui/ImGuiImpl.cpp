@@ -45,6 +45,8 @@ void ImGuiImpl::begin()
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+
+    ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
 }
 
 void ImGuiImpl::end()
@@ -52,10 +54,6 @@ void ImGuiImpl::end()
     ImGuiIO& io = ImGui::GetIO();
     Application& app = Application::get();
 
-    // REMOVED: Manual io.DisplaySize setting.
-    // ImGui_ImplGlfw_NewFrame handles this automatically and handles High-DPI better.
-
-    // Rendering
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

@@ -5,6 +5,7 @@
 #include "Scene.h"
 
 #include <algorithm>
+#include <bits/types/cookie_io_functions_t.h>
 #include <memory>
 #include <type_traits>
 #include <vector>
@@ -78,8 +79,30 @@ public:
         return ptr;
     }
 
-    Entity* getParent() const { return m_parent; }
-    const std::vector<Entity*>& getChildren() const { return m_children; }
+    template <typename TComponent>
+        requires(std::is_base_of_v<Component, TComponent>)
+    bool removeComponent()
+    {
+        auto component = std::ranges::find_if(m_components.begin(), m_components.end(),
+            [](const std::unique_ptr<Component>& component)
+            { return dynamic_cast<TComponent*>(component.get()) != nullptr; });
+
+        if (component != m_components.end())
+        {
+            m_components.erase(component);
+            return true;
+        }
+        return false;
+    }
+
+    Entity* getParent() const
+    {
+        return m_parent;
+    }
+    const std::vector<Entity*>& getChildren() const
+    {
+        return m_children;
+    }
 
     void setParent(Entity* parent);
 
