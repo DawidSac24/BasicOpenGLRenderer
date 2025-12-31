@@ -4,6 +4,7 @@
 #include "Entity.h"
 
 #include <cstdint>
+#include <list>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -26,14 +27,15 @@ public:
 
     Entity* getEntityByUUID(Core::UUID uuid);
     std::unordered_map<Core::UUID, std::shared_ptr<Entity>>* getEntityMap() { return &m_entityMap; }
+    std::list<Entity*>* getEntityList() { return &m_entityList; }
 
     Entity* createEntity(const std::string& p_name, EntityType type);
     void destroyEntity(Entity* obj);
-    void destroyEntity(Core::UUID id);
 
     void updateCamerasViewport(uint32_t width, uint32_t heigth);
 
 private:
     std::unordered_map<Core::UUID, std::shared_ptr<Entity>> m_entityMap;
+    std::list<Entity*> m_entityList;
 };
 }

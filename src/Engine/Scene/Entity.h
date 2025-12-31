@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <bits/types/cookie_io_functions_t.h>
+#include <list>
 #include <memory>
 #include <type_traits>
 #include <vector>
@@ -33,6 +34,7 @@ public:
     std::string name = "newEntity";
 
     TransformComponent* transform;
+    std::list<Entity*>::iterator orderIterator;
 
 public:
     Entity(const std::string& name, Entity* parent = nullptr);

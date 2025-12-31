@@ -72,12 +72,12 @@ void EditorLayer::renderUI()
         if (scene)
         {
             // Iterate through all entities in the map
-            for (auto& [uuid, entity] : *scene->getEntityMap())
+            for (auto& entity : *scene->getEntityList())
             {
                 // Only draw root nodes (children are drawn recursively)
                 if (entity->getParent() == nullptr)
                 {
-                    drawEntityNode(entity.get());
+                    drawEntityNode(entity);
                 }
             }
 

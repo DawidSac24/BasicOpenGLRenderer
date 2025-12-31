@@ -27,7 +27,7 @@ void Scene::onRender()
     CameraComponent* mainCam = nullptr;
     TransformComponent* camTransform = nullptr;
 
-    for (auto& [uuid, entity] : m_entityMap)
+    for (auto entity : m_entityList)
     {
         if (auto* cam = entity->getComponent<CameraComponent>())
         {
@@ -49,7 +49,7 @@ void Scene::onRender()
         Renderer::Renderer::beginScene(projection, view);
 
         // Iterate ALL entities
-        for (auto& [uuid, entity] : m_entityMap)
+        for (auto entity : m_entityList)
         {
             // Check if it has a MeshRenderer
             auto* meshRenderer = entity->getComponent<MeshRenderer>();
@@ -85,7 +85,12 @@ Entity* Scene::createEntity(const std::string& p_name, EntityType type)
     Core::UUID id = newEntity->getID();
     Entity* rawPointer = newEntity.get();
 
-    m_entityMap[id] = std::move(newEntity);
+    m_entityList.push_back(rawPointer);
+
+    rawPointer->orderIterator = std::prev(m_entityList.end());
+
+    m_entityMap[id]
+        = std::move(newEntity);
 
     return rawPointer;
 }
@@ -95,11 +100,8 @@ void Scene::destroyEntity(Entity* obj)
     if (!obj)
         return;
 
+    m_entityList.erase(obj->orderIterator);
     m_entityMap.erase(obj->getID());
-}
-void Scene::destroyEntity(Core::UUID id)
-{
-    m_entityMap.erase(id);
 }
 
 void Scene::updateCamerasViewport(uint32_t width, uint32_t height)
