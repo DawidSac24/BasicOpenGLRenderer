@@ -95,14 +95,14 @@ void AssetManager::loadAssets()
 {
     // 1. Load Defaults
     // Create a default shader so we never crash
-    loadShader("BasicShader", "res/default/Shaders/default.vert", "res/default/Shaders/default.frag");
+    loadShader("defaultShader", "res/default/Shaders/default.vert", "res/default/Shaders/default.frag");
 
     // 2. Load Models
     addMesh("Cube", Renderer::MeshFactory::CreateCube());
     addMesh("Sphere", Renderer::MeshFactory::CreateSphere(32));
 
     // 3. Load Default Texture
-    loadTexture("basicTexture", "res/default/Textures/greyTexture.jpg"); // Create a 1x1 white png or generate it
+    loadTexture("defaultTexture", "res/default/Textures/greyTexture.jpg"); // Create a 1x1 white png or generate it
 }
 
 void AssetManager::clear()

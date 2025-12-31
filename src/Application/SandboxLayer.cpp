@@ -26,7 +26,7 @@ SandboxLayer::SandboxLayer()
     // 2. Create the Cube
     // Your EntityFactory should attach MeshRenderer + Transform
     m_CubeEntity = m_activeScene->createEntity("First Cube", Engine::EntityType::Cube);
-    m_activeScene->createEntity("Second Cube", Engine::EntityType::Cube);
+    m_activeScene->createEntity("First Sphere", Engine::EntityType::Sphere);
 }
 
 void SandboxLayer::onUpdate()
