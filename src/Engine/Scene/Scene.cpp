@@ -23,6 +23,7 @@ Scene::Scene(const std::string& name)
 
 void Scene::onRender()
 {
+    if (m_entityList.empty()) return;
     // --- 1. Find Main Camera ---
     CameraComponent* mainCam = nullptr;
     TransformComponent* camTransform = nullptr;

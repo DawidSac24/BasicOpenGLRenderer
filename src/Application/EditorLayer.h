@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Core/Layer.h"
+#include "Engine/Events/InputEvents.h"
 #include "Engine/ImGui/ImGuiImpl.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Scene/Entity.h"
@@ -18,6 +19,7 @@ public:
     virtual void onUpdate() override;
     virtual void onRender() override;
     virtual void onEvent(Core::Event& event) override;
+    bool onKeyPressed(Core::KeyPressedEvent& event);
     virtual void onDetach() override;
 
     void renderUI();

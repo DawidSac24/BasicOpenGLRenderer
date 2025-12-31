@@ -1,6 +1,8 @@
 #include "EditorLayer.h"
 
 // Engine Includes
+#include "Engine/Core/keyCodes.h"
+#include "Engine/Events/InputEvents.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Scene/Components/CameraComponent.h"
 #include "Engine/Scene/Components/MeshRenderer.h"
@@ -11,7 +13,7 @@
 // Third Party
 #include "glm/gtc/type_ptr.hpp"
 #include "imgui.h"
-#include "imgui_internal.h"
+#include <cstring>
 
 EditorLayer::EditorLayer()
 {
@@ -36,7 +38,37 @@ void EditorLayer::onRender()
 
 void EditorLayer::onEvent(Core::Event& event)
 {
-    // Handle input events here
+    // Create a dispatcher
+    Core::EventDispatcher dispatcher(event);
+
+    // Dispatch KeyPressedEvent to our handler
+    dispatcher.dispatch<Core::KeyPressedEvent>([this](Core::KeyPressedEvent& e)
+        { return onKeyPressed(e); });
+}
+
+bool EditorLayer::onKeyPressed(Core::KeyPressedEvent& event)
+{
+    // 1. Check if the pressed key is "Delete"
+    if (event.getKeyCode() == Core::Key::Delete)
+    {
+        // 2. Ensure we have a valid selection
+        if (m_selectedEntity)
+        {
+            // 3. Get Scene
+            auto scene = Core::Application::get().getActiveScene();
+            if (scene)
+            {
+                // 4. Remove the entity
+                scene->destroyEntity(m_selectedEntity);
+
+                // 5. Clear selection so we don't crash accessing a dead pointer later
+                m_selectedEntity = nullptr;
+
+                return true; // Consume the event
+            }
+        }
+    }
+    return false;
 }
 
 void EditorLayer::onDetach()
@@ -44,15 +76,15 @@ void EditorLayer::onDetach()
 }
 
 // --- Main UI Rendering ---
-
 void EditorLayer::renderUI()
 {
-    // Start the ImGui Frame (If not handled by Application)
+    // Start the ImGui Frame
     m_gui->begin();
 
     // 1. Menu Bar
     if (ImGui::BeginMainMenuBar())
     {
+        // --- A. File / View Menus ---
         if (ImGui::BeginMenu("View"))
         {
             ImGui::MenuItem("Scene", nullptr, &m_showSceneWindow);
@@ -60,6 +92,37 @@ void EditorLayer::renderUI()
             ImGui::MenuItem("Engine Options", nullptr, &m_showOptionsWindow);
             ImGui::EndMenu();
         }
+
+        // --- B. Entity Creation Menu (NEW) ---
+        if (ImGui::BeginMenu("Entity"))
+        {
+            auto scene = Core::Application::get().getActiveScene();
+
+            if (scene)
+            {
+                if (ImGui::MenuItem("Add Empty"))
+                {
+                    scene->createEntity("Empty Entity", Engine::EntityType::Empty);
+                }
+
+                if (ImGui::MenuItem("Add Square"))
+                {
+                    scene->createEntity("Square", Engine::EntityType::Cube);
+                }
+
+                if (ImGui::MenuItem("Add Cube"))
+                {
+                    scene->createEntity("Cube", Engine::EntityType::Cube);
+                }
+            }
+            else
+            {
+                ImGui::TextDisabled("No Active Scene");
+            }
+
+            ImGui::EndMenu();
+        }
+
         ImGui::EndMainMenuBar();
     }
 
@@ -71,19 +134,30 @@ void EditorLayer::renderUI()
         auto scene = Core::Application::get().getActiveScene();
         if (scene)
         {
-            // Iterate through all entities in the map
+            // Iterate through all entities in the list
+            // Note: Ensure getEntityList() returns a container that preserves order (std::list)
             for (auto& entity : *scene->getEntityList())
             {
-                // Only draw root nodes (children are drawn recursively)
+                // Only draw root nodes (parents)
+                // If your entity system doesn't have parenting yet, just draw all of them.
                 if (entity->getParent() == nullptr)
                 {
                     drawEntityNode(entity);
                 }
             }
 
-            // Deselect if clicking in empty space within the window
+            // Deselect if clicking in empty space
             if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
                 m_selectedEntity = nullptr;
+
+            // Context Menu for Scene Panel (Right-click blank space to create)
+            if (ImGui::BeginPopupContextWindow(0, 1))
+            {
+                if (ImGui::MenuItem("Create Empty Entity"))
+                    scene->createEntity("Empty Entity", Engine::EntityType::Empty);
+
+                ImGui::EndPopup();
+            }
         }
         ImGui::End();
     }
@@ -94,16 +168,65 @@ void EditorLayer::renderUI()
         ImGui::Begin("Inspector", &m_showInspectorWindow);
         if (m_selectedEntity)
         {
+            // Display Name field at the top
+            char buffer[256];
+            memset(buffer, 0, sizeof(buffer));
+
+            // NEW (Cross-platform)
+            // Copy the string, leaving room for the null terminator
+            strncpy(buffer, m_selectedEntity->name.c_str(), sizeof(buffer) - 1);
+
+            // Manually ensure the last character is null, just in case the name is too long
+            buffer[sizeof(buffer) - 1] = '\0';
+
+            // Allow renaming the entity
+            if (ImGui::InputText("##Name", buffer, sizeof(buffer)))
+            {
+                m_selectedEntity->name = std::string(buffer);
+            }
+
+            ImGui::SameLine();
+            ImGui::TextDisabled("(ID: %llu)", (uint64_t)m_selectedEntity->getID()); // Debug ID
+
+            ImGui::Separator();
+
             drawComponents(m_selectedEntity);
+
+            // button to add new components
+            ImGui::Separator();
+            if (ImGui::Button("Add Component"))
+                ImGui::OpenPopup("AddComponentPopup");
+
+            if (ImGui::BeginPopup("AddComponentPopup"))
+            {
+                if (!m_selectedEntity->hasComponent<Engine::CameraComponent>())
+                {
+                    if (ImGui::MenuItem("Camera"))
+                    {
+                        m_selectedEntity->addComponent<Engine::CameraComponent>(m_selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                }
+
+                if (!m_selectedEntity->hasComponent<Engine::MeshRenderer>())
+                {
+                    if (ImGui::MenuItem("Mesh Renderer"))
+                    {
+                        m_selectedEntity->addComponent<Engine::MeshRenderer>(m_selectedEntity);
+                        ImGui::CloseCurrentPopup();
+                    }
+                }
+
+                // Add other components here...
+
+                ImGui::EndPopup();
+            }
         }
         ImGui::End();
     }
 
-    // End ImGui Frame
     m_gui->end();
 }
-
-// --- Helper: Draw Entity Node (Recursive) ---
 
 void EditorLayer::drawEntityNode(Engine::Entity* entity)
 {
@@ -137,7 +260,6 @@ void EditorLayer::drawEntityNode(Engine::Entity* entity)
 }
 
 // --- Helper: Draw Components ---
-
 void EditorLayer::drawComponents(Engine::Entity* entity)
 {
     // --- 1. Transform Component ---
