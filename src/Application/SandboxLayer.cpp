@@ -26,7 +26,10 @@ SandboxLayer::SandboxLayer()
     // 2. Create the Cube
     // Your EntityFactory should attach MeshRenderer + Transform
     m_CubeEntity = m_activeScene->createEntity("First Cube", Engine::EntityType::Cube);
-    m_activeScene->createEntity("First Sphere", Engine::EntityType::Sphere);
+    auto sphere = m_activeScene->createEntity("First Sphere", Engine::EntityType::Sphere);
+    sphere->transform->setPosition(glm::vec3(1, 0, 0));
+    auto plane = m_activeScene->createEntity("First Plane", Engine::EntityType::Plane);
+    plane->transform->setPosition(glm::vec3(0, -1, 0));
 }
 
 void SandboxLayer::onUpdate()
