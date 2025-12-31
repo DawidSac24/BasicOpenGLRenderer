@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Engine/Core/keyCodes.h"
 #include "Event.h"
 
 #include <format>
@@ -13,27 +14,30 @@ namespace Core
 
 class KeyEvent : public Event
 {
-  protected:
-    KeyEvent(int keycode) : m_keyCode(keycode)
+protected:
+    KeyEvent(int keycode)
+        : m_keyCode(keycode)
     {
     }
 
     int m_keyCode;
 
-  public:
-    inline int getKeyCode() const
+public:
+    inline Key getKeyCode() const
     {
-        return m_keyCode;
+        return static_cast<Key>(m_keyCode);
     }
 };
 
 class KeyPressedEvent : public KeyEvent
 {
-  private:
+private:
     bool m_isRepeat;
 
-  public:
-    KeyPressedEvent(int keycode, bool isRepeat) : KeyEvent(keycode), m_isRepeat(isRepeat)
+public:
+    KeyPressedEvent(int keycode, bool isRepeat)
+        : KeyEvent(keycode)
+        , m_isRepeat(isRepeat)
     {
     }
 
@@ -52,8 +56,9 @@ class KeyPressedEvent : public KeyEvent
 
 class KeyReleasedEvent : public KeyEvent
 {
-  public:
-    KeyReleasedEvent(int keycode) : KeyEvent(keycode)
+public:
+    KeyReleasedEvent(int keycode)
+        : KeyEvent(keycode)
     {
     }
 
@@ -71,11 +76,13 @@ class KeyReleasedEvent : public KeyEvent
 
 class MouseMovedEvent : public Event
 {
-  private:
+private:
     double m_mouseX, m_mouseY;
 
-  public:
-    MouseMovedEvent(double x, double y) : m_mouseX(x), m_mouseY(y)
+public:
+    MouseMovedEvent(double x, double y)
+        : m_mouseX(x)
+        , m_mouseY(y)
     {
     }
 
@@ -98,11 +105,13 @@ class MouseMovedEvent : public Event
 
 class MouseScrolledEvent : public Event
 {
-  private:
+private:
     double m_xOffset, m_yOffset;
 
-  public:
-    MouseScrolledEvent(double xOffset, double yOffset) : m_xOffset(xOffset), m_yOffset(yOffset)
+public:
+    MouseScrolledEvent(double xOffset, double yOffset)
+        : m_xOffset(xOffset)
+        , m_yOffset(yOffset)
     {
     }
 
@@ -125,14 +134,15 @@ class MouseScrolledEvent : public Event
 
 class MouseButtonEvent : public Event
 {
-  protected:
-    MouseButtonEvent(int button) : m_button(button)
+protected:
+    MouseButtonEvent(int button)
+        : m_button(button)
     {
     }
 
     int m_button;
 
-  public:
+public:
     inline int GetMouseButton() const
     {
         return m_button;
@@ -141,8 +151,9 @@ class MouseButtonEvent : public Event
 
 class MouseButtonPressedEvent : public MouseButtonEvent
 {
-  public:
-    MouseButtonPressedEvent(int button) : MouseButtonEvent(button)
+public:
+    MouseButtonPressedEvent(int button)
+        : MouseButtonEvent(button)
     {
     }
 
@@ -156,8 +167,9 @@ class MouseButtonPressedEvent : public MouseButtonEvent
 
 class MouseButtonReleasedEvent : public MouseButtonEvent
 {
-  public:
-    MouseButtonReleasedEvent(int button) : MouseButtonEvent(button)
+public:
+    MouseButtonReleasedEvent(int button)
+        : MouseButtonEvent(button)
     {
     }
 
