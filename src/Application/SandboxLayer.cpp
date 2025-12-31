@@ -26,6 +26,7 @@ SandboxLayer::SandboxLayer()
     // 2. Create the Cube
     // Your EntityFactory should attach MeshRenderer + Transform
     m_CubeEntity = m_activeScene->createEntity("First Cube", Engine::EntityType::Cube);
+    m_activeScene->createEntity("Second Cube", Engine::EntityType::Cube);
 }
 
 void SandboxLayer::onUpdate()
@@ -55,25 +56,4 @@ void SandboxLayer::onRender()
 
 void SandboxLayer::onEvent(Core::Event& event)
 {
-    if (event.getEventType() == Core::EventType::WindowResize)
-    {
-        onWindowResize((Core::WindowResizeEvent&)event);
-    }
-}
-
-bool SandboxLayer::onWindowResize(Core::WindowResizeEvent& e)
-{
-    if (e.getWidth() == 0 || e.getHeight() == 0)
-        return false;
-
-    Renderer::RenderCommand::setViewport(0, 0, e.getWidth(), e.getHeight());
-
-    // Update the Camera Component
-    if (m_CameraEntity)
-    {
-        const auto& cam = m_CameraEntity->getComponent<Engine::CameraComponent>();
-        cam->setViewportSize(e.getWidth(), e.getHeight());
-    }
-
-    return false;
 }

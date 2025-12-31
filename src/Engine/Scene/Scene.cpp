@@ -9,6 +9,7 @@
 #include "Entity.h"
 
 #include <algorithm>
+#include <cstdint>
 #include <iostream>
 #include <memory>
 
@@ -99,5 +100,20 @@ void Scene::destroyEntity(Entity* obj)
 void Scene::destroyEntity(Core::UUID id)
 {
     m_entityMap.erase(id);
+}
+
+void Scene::updateCamerasViewport(uint32_t width, uint32_t height)
+{
+    for (auto& [uuid, entity] : m_entityMap)
+    {
+        if (auto* cam = entity->getComponent<CameraComponent>())
+        {
+            if (cam->primary)
+            {
+                cam->setViewportSize(width, height);
+                break;
+            }
+        }
+    }
 }
 }

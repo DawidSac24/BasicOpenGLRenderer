@@ -3,6 +3,7 @@
 #include "Engine/Core/UUID.h"
 #include "Entity.h"
 
+#include <cstdint>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -29,6 +30,8 @@ public:
     Entity* createEntity(const std::string& p_name, EntityType type);
     void destroyEntity(Entity* obj);
     void destroyEntity(Core::UUID id);
+
+    void updateCamerasViewport(uint32_t width, uint32_t heigth);
 
 private:
     std::unordered_map<Core::UUID, std::shared_ptr<Entity>> m_entityMap;

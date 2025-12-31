@@ -39,7 +39,8 @@ Application::Application(const ApplicationSpecification& appSpec)
         m_specification.windowSpec.title = m_specification.applicationName;
     }
 
-    m_specification.windowSpec.eventCallback = [this](Event& event) { raiseEvent(event); };
+    m_specification.windowSpec.eventCallback = [this](Event& event)
+    { raiseEvent(event); };
 
     m_window = std::make_shared<Window>(m_specification.windowSpec);
     m_window->create();
@@ -122,7 +123,8 @@ void Application::flushEvents()
     {
         EventDispatcher dispatcher(eventPtr);
         dispatcher.dispatch<LayerTransitionEvent>(
-            [this](LayerTransitionEvent& e) { return m_layerStack.onLayerTransition(e); });
+            [this](LayerTransitionEvent& e)
+            { return m_layerStack.onLayerTransition(e); });
         // might need to dispatch otter Events
     }
 
@@ -133,5 +135,20 @@ Application& Application::get()
 {
     assert(s_application);
     return *s_application;
+}
+
+bool Application::onWindowResize(Core::WindowResizeEvent& e)
+{
+    if (e.getWidth() == 0 || e.getHeight() == 0)
+        return false;
+
+    Renderer::RenderCommand::setViewport(0, 0, e.getWidth(), e.getHeight());
+
+    if (m_activeScene)
+    {
+        m_activeScene->updateCamerasViewport(e.getWidth(), e.getHeight());
+    }
+
+    return false;
 }
 } // namespace Core

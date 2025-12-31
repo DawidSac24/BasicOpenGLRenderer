@@ -9,6 +9,17 @@
 
 class SandboxLayer : public Core::Layer
 {
+public:
+    SandboxLayer();
+    virtual ~SandboxLayer() = default;
+
+    virtual void onUpdate() override;
+    virtual void onRender() override;
+
+    virtual void onEvent(Core::Event& event) override;
+
+    virtual void onDetach() override { }
+
 private:
     std::shared_ptr<Engine::Scene> m_activeScene = nullptr;
 
@@ -18,16 +29,4 @@ private:
     Engine::Entity* m_CubeEntity = nullptr;
 
     float m_rotation = 0.0f;
-
-public:
-    SandboxLayer();
-    virtual ~SandboxLayer() = default;
-
-    virtual void onUpdate() override;
-    virtual void onRender() override;
-
-    virtual void onEvent(Core::Event& event) override;
-    bool onWindowResize(Core::WindowResizeEvent& e);
-
-    virtual void onDetach() override { }
 };
