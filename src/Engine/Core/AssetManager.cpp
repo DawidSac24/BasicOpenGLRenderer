@@ -1,8 +1,9 @@
 #include "AssetManager.h"
 
+#include "Engine/Core/FileSystem.h"
 #include "Engine/Renderer/MeshFactory.h"
 
-namespace Engine
+namespace Core
 {
 
 // Initialize static members
@@ -94,14 +95,14 @@ void AssetManager::loadAssets()
 {
     // 1. Load Defaults
     // Create a default shader so we never crash
-    loadShader("BasicShader", "res/shaders/basic.vert", "res/shaders/basic.frag");
+    loadShader("BasicShader", "res/default/Shaders/default.vert", "res/default/Shaders/default.frag");
 
     // 2. Load Models
     addMesh("Cube", Renderer::MeshFactory::CreateCube());
     addMesh("Sphere", Renderer::MeshFactory::CreateSphere(32));
 
     // 3. Load Default Texture
-    loadTexture("basicTexture", "res/textures/texture.png"); // Create a 1x1 white png or generate it
+    loadTexture("basicTexture", "res/default/Textures/greyTexture.jpg"); // Create a 1x1 white png or generate it
 }
 
 void AssetManager::clear()

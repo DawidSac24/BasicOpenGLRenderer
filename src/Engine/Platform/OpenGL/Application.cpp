@@ -64,7 +64,7 @@ Application::Application(const ApplicationSpecification& appSpec)
 
     m_activeScene = std::make_shared<Engine::Scene>("Default Scene");
 
-    Engine::AssetManager::loadAssets();
+    AssetManager::loadAssets();
 }
 
 Application::~Application()

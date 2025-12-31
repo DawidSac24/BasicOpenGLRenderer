@@ -40,21 +40,21 @@ std::unique_ptr<Entity> EntityFactory::createCube(const std::string& name)
 {
     auto newEntity = std::make_unique<Entity>(name);
 
-    auto mesh = AssetManager::getMesh("Cube");
+    auto mesh = Core::AssetManager::getMesh("Cube");
     if (!mesh)
     {
         std::cerr << "CRITICAL: 'Cube' mesh missing! Generating fallback." << std::endl;
         mesh = Renderer::MeshFactory::CreateCube(); // Force create it
-        AssetManager::addMesh("Cube", mesh);
+        Core::AssetManager::addMesh("Cube", mesh);
     }
 
-    auto shader = AssetManager::getShader("BasicShader");
+    auto shader = Core::AssetManager::getShader("BasicShader");
     if (!shader)
     {
         std::cerr << "CRITICAL: 'BasicShader' missing!" << std::endl;
     }
 
-    auto texture = AssetManager::getTexture("basicTexture");
+    auto texture = Core::AssetManager::getTexture("basicTexture");
     if (!texture)
     {
         std::cerr << "CRITICAL: 'GreyTexture' missing!" << std::endl;
