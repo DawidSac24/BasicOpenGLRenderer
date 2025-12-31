@@ -112,6 +112,9 @@ void Application::stop()
 
 void Application::raiseEvent(Event& event)
 {
+    EventDispatcher dispatcher(event);
+    dispatcher.dispatch<WindowResizeEvent>([this](WindowResizeEvent& e)
+        { return onWindowResize(e); });
     for (auto& layer : std::views::reverse(m_layerStack))
     {
         layer->onEvent(event);
