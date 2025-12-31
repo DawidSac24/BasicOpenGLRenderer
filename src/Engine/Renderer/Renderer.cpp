@@ -13,12 +13,13 @@ void Renderer::init()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    // 2. Fix Depth Testing
     glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS); // <--- CHANGED: Draw things that are CLOSER (the default)
 
-    glDepthFunc(GL_LESS);
-
+    // 3. Fix Culling
     glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
+    glCullFace(GL_BACK); // Hide the back faces
     glFrontFace(GL_CCW);
 }
 

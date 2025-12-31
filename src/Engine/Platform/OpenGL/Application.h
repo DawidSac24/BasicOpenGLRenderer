@@ -55,7 +55,8 @@ public:
         m_layerStack.popLayer<TLayer>();
     }
 
-    template <typename Event> void PushLayerTransition(Event event) { m_pendingEvents.push_back(std::move(event)); }
+    template <typename Event>
+    void PushLayerTransition(Event event) { m_pendingEvents.push_back(std::move(event)); }
 
     void SetActiveScene(Engine::Scene& newScene) { m_activeScene = std::make_unique<Engine::Scene>(newScene); }
 

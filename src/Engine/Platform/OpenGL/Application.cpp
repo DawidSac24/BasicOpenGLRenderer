@@ -54,7 +54,11 @@ Application::Application(const ApplicationSpecification& appSpec)
         throw std::runtime_error("Failed to initialize GLEW!");
     }
 
-    Core::getOpenGLErrors();
+    Renderer::Renderer renderer;
+    renderer.init();
+
+    if (appSpec.windowSpec.enableOpenGLDebugInfo)
+        Core::getOpenGLErrors();
 
     m_gui = std::make_shared<ImGuiImpl>(*m_window);
 

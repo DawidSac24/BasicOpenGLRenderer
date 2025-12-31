@@ -1,15 +1,19 @@
-#version 460 core
+#version 330 core
 
 layout(location = 0) out vec4 color;
 
-in vec2 v_textCoord;
-in vec3 v_color;
+// 1. INPUTS (From Vertex Shader)
+in vec2 v_TexCoord; // Now this matches the Vertex Shader output!
+
+// 2. UNIFORMS
+uniform sampler2D u_Texture;
+uniform vec4 u_Color;
 
 void main()
 {
-  // Use the vertex color passed from C++
-  // If v_color is (0,0,0) or dark, we can force a fallback:
-  // color = vec4(1.0, 0.0, 0.0, 1.0);
+  // Sample texture
+  vec4 texColor = texture(u_Texture, v_TexCoord);
 
-  color = vec4(v_color, 1.0);
-};
+  // Apply tint and output
+  color = texColor * u_Color;
+}

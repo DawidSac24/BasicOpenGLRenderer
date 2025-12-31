@@ -3,6 +3,7 @@
 #include "Components/CameraComponent.h"
 #include "Engine/Core/AssetManager.h"
 #include "Engine/Renderer/MeshFactory.h"
+#include "Engine/Renderer/Texture.h"
 #include "Engine/Scene/Components/MeshRenderer.h"
 #include "Engine/Scene/Entity.h"
 
@@ -39,7 +40,6 @@ std::unique_ptr<Entity> EntityFactory::createCube(const std::string& name)
 {
     auto newEntity = std::make_unique<Entity>(name);
 
-    // --- 1. Get Mesh (Safely) ---
     auto mesh = AssetManager::getMesh("Cube");
     if (!mesh)
     {
@@ -48,16 +48,23 @@ std::unique_ptr<Entity> EntityFactory::createCube(const std::string& name)
         AssetManager::addMesh("Cube", mesh);
     }
 
-    // --- 2. Get Shader (Safely) ---
     auto shader = AssetManager::getShader("BasicShader");
     if (!shader)
     {
         std::cerr << "CRITICAL: 'BasicShader' missing!" << std::endl;
-        // You might want to return here or load a hardcoded fallback shader
+    }
+
+    auto texture = AssetManager::getTexture("basicTexture");
+    if (!texture)
+    {
+        std::cerr << "CRITICAL: 'GreyTexture' missing!" << std::endl;
     }
 
     // --- 3. Create Material ---
-    auto material = std::make_shared<Renderer::Material>(shader);
+    auto material
+        = std::make_shared<Renderer::Material>(shader);
+
+    material->setTexture("u_Texture", texture);
     material->setFloat4("u_Color", { 1.0f, 1.0f, 1.0f, 1.0f });
 
     // --- 4. Add Component ---

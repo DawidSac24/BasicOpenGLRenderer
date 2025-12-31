@@ -19,6 +19,7 @@ struct WindowSpecification
     bool isResizeable = true;
     bool VSync = true;
     bool isInDEbugMode = false;
+    bool enableOpenGLDebugInfo = false;
 
     using EventCallbackFn = std::function<void(Event&)>;
     EventCallbackFn eventCallback;
