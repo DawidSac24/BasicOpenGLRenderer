@@ -2,12 +2,12 @@
 
 #include "Engine/Platform/OpenGL/Window.h"
 
-namespace Core
+namespace Gui
 {
 class ImGuiImpl
 {
 public:
-    ImGuiImpl(Window& window);
+    ImGuiImpl(Core::Window& window);
     ~ImGuiImpl();
     void destroy();
 
@@ -15,6 +15,6 @@ public:
     void end();
 
 private:
-    Window* m_window;
+    Core::Window* m_window;
 };
 }

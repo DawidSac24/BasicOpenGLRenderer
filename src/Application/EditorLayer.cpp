@@ -1,25 +1,46 @@
 #include "EditorLayer.h"
-
 // Engine Includes
 #include "Engine/Core/keyCodes.h"
 #include "Engine/Events/InputEvents.h"
+#include "Engine/ImGui/MenuItems.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Scene/Components/CameraComponent.h"
 #include "Engine/Scene/Components/MeshRenderer.h"
-#include "Engine/Scene/Components/TransformComponent.h" // Ensure this is included
+#include "Engine/Scene/Components/TransformComponent.h"
 #include "Engine/Scene/Entity.h"
 #include "Engine/Scene/Scene.h"
 
-// Third Party
 #include "glm/gtc/type_ptr.hpp"
 #include "imgui.h"
-#include <cstring>
 
 EditorLayer::EditorLayer()
 {
     m_application = &Core::Application::get();
-    // Assuming m_gui is a shared_ptr or unique_ptr in Application
     m_gui = m_application->getGui().get();
+
+    Gui::Menu viewMenu("View");
+    viewMenu.addItem(std::make_shared<Gui::MenuFlagItem>("Scene", &m_hierarchyPanel.isDisplayed));
+    viewMenu.addItem(std::make_shared<Gui::MenuFlagItem>("Inspector", &m_inspectorPanel.isDisplayed));
+
+    m_menuBar.addMenu(viewMenu);
+
+    Gui::Menu entityMenu("Entity");
+
+    for (int i = 0; i < (int)Engine::EntityType::Count; i++)
+    {
+        Engine::EntityType type = (Engine::EntityType)i;
+
+        std::string label = "Add " + EntityTypeToString(type);
+
+        entityMenu.addItem(std::make_shared<Gui::MenuActionItem>(label, [this, type]()
+            {
+        if (auto scene = Core::Application::get().getActiveScene())
+        {
+            scene->createEntity("New " + EntityTypeToString(type), type);
+        } }));
+    }
+
+    m_menuBar.addMenu(entityMenu);
 }
 
 EditorLayer::~EditorLayer()
@@ -28,7 +49,9 @@ EditorLayer::~EditorLayer()
 
 void EditorLayer::onUpdate()
 {
-    // Update logic (e.g., camera movement, shortcuts) goes here
+    auto scene = Core::Application::get().getActiveScene();
+    m_hierarchyPanel.setContext(scene.get());
+    m_inspectorPanel.setSelectedEntity(m_hierarchyPanel.getSelectedEntity());
 }
 
 void EditorLayer::onRender()
@@ -38,34 +61,23 @@ void EditorLayer::onRender()
 
 void EditorLayer::onEvent(Core::Event& event)
 {
-    // Create a dispatcher
     Core::EventDispatcher dispatcher(event);
 
-    // Dispatch KeyPressedEvent to our handler
     dispatcher.dispatch<Core::KeyPressedEvent>([this](Core::KeyPressedEvent& e)
         { return onKeyPressed(e); });
 }
 
 bool EditorLayer::onKeyPressed(Core::KeyPressedEvent& event)
 {
-    // 1. Check if the pressed key is "Delete"
     if (event.getKeyCode() == Core::Key::Delete)
     {
-        // 2. Ensure we have a valid selection
-        if (m_selectedEntity)
+        Engine::Entity* selected = m_hierarchyPanel.getSelectedEntity();
+        if (selected)
         {
-            // 3. Get Scene
             auto scene = Core::Application::get().getActiveScene();
-            if (scene)
-            {
-                // 4. Remove the entity
-                scene->destroyEntity(m_selectedEntity);
-
-                // 5. Clear selection so we don't crash accessing a dead pointer later
-                m_selectedEntity = nullptr;
-
-                return true; // Consume the event
-            }
+            scene->destroyEntity(selected);
+            m_hierarchyPanel.setSelectedEntity(nullptr);
+            return true;
         }
     }
     return false;
@@ -75,155 +87,14 @@ void EditorLayer::onDetach()
 {
 }
 
-// --- Main UI Rendering ---
 void EditorLayer::renderUI()
 {
-    // Start the ImGui Frame
     m_gui->begin();
 
-    // 1. Menu Bar
-    if (ImGui::BeginMainMenuBar())
-    {
-        // --- A. File / View Menus ---
-        if (ImGui::BeginMenu("View"))
-        {
-            ImGui::MenuItem("Scene", nullptr, &m_showSceneWindow);
-            ImGui::MenuItem("Inspector", nullptr, &m_showInspectorWindow);
-            ImGui::MenuItem("Engine Options", nullptr, &m_showOptionsWindow);
-            ImGui::EndMenu();
-        }
+    m_menuBar.render();
 
-        // --- B. Entity Creation Menu (NEW) ---
-        if (ImGui::BeginMenu("Entity"))
-        {
-            auto scene = Core::Application::get().getActiveScene();
-
-            if (scene)
-            {
-                if (ImGui::MenuItem("Add Empty"))
-                {
-                    scene->createEntity("Empty Entity", Engine::EntityType::Empty);
-                }
-
-                if (ImGui::MenuItem("Add Square"))
-                {
-                    scene->createEntity("Square", Engine::EntityType::Cube);
-                }
-
-                if (ImGui::MenuItem("Add Cube"))
-                {
-                    scene->createEntity("Cube", Engine::EntityType::Cube);
-                }
-            }
-            else
-            {
-                ImGui::TextDisabled("No Active Scene");
-            }
-
-            ImGui::EndMenu();
-        }
-
-        ImGui::EndMainMenuBar();
-    }
-
-    // 2. Scene Hierarchy Panel
-    if (m_showSceneWindow)
-    {
-        ImGui::Begin("Scene Hierarchy", &m_showSceneWindow);
-
-        auto scene = Core::Application::get().getActiveScene();
-        if (scene)
-        {
-            // Iterate through all entities in the list
-            // Note: Ensure getEntityList() returns a container that preserves order (std::list)
-            for (auto& entity : *scene->getEntityList())
-            {
-                // Only draw root nodes (parents)
-                // If your entity system doesn't have parenting yet, just draw all of them.
-                if (entity->getParent() == nullptr)
-                {
-                    drawEntityNode(entity);
-                }
-            }
-
-            // Deselect if clicking in empty space
-            if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
-                m_selectedEntity = nullptr;
-
-            // Context Menu for Scene Panel (Right-click blank space to create)
-            if (ImGui::BeginPopupContextWindow(0, 1))
-            {
-                if (ImGui::MenuItem("Create Empty Entity"))
-                    scene->createEntity("Empty Entity", Engine::EntityType::Empty);
-
-                ImGui::EndPopup();
-            }
-        }
-        ImGui::End();
-    }
-
-    // 3. Inspector Panel
-    if (m_showInspectorWindow)
-    {
-        ImGui::Begin("Inspector", &m_showInspectorWindow);
-        if (m_selectedEntity)
-        {
-            // Display Name field at the top
-            char buffer[256];
-            memset(buffer, 0, sizeof(buffer));
-
-            // NEW (Cross-platform)
-            // Copy the string, leaving room for the null terminator
-            strncpy(buffer, m_selectedEntity->name.c_str(), sizeof(buffer) - 1);
-
-            // Manually ensure the last character is null, just in case the name is too long
-            buffer[sizeof(buffer) - 1] = '\0';
-
-            // Allow renaming the entity
-            if (ImGui::InputText("##Name", buffer, sizeof(buffer)))
-            {
-                m_selectedEntity->name = std::string(buffer);
-            }
-
-            ImGui::SameLine();
-            ImGui::TextDisabled("(ID: %llu)", (uint64_t)m_selectedEntity->getID()); // Debug ID
-
-            ImGui::Separator();
-
-            drawComponents(m_selectedEntity);
-
-            // button to add new components
-            ImGui::Separator();
-            if (ImGui::Button("Add Component"))
-                ImGui::OpenPopup("AddComponentPopup");
-
-            if (ImGui::BeginPopup("AddComponentPopup"))
-            {
-                if (!m_selectedEntity->hasComponent<Engine::CameraComponent>())
-                {
-                    if (ImGui::MenuItem("Camera"))
-                    {
-                        m_selectedEntity->addComponent<Engine::CameraComponent>(m_selectedEntity);
-                        ImGui::CloseCurrentPopup();
-                    }
-                }
-
-                if (!m_selectedEntity->hasComponent<Engine::MeshRenderer>())
-                {
-                    if (ImGui::MenuItem("Mesh Renderer"))
-                    {
-                        m_selectedEntity->addComponent<Engine::MeshRenderer>(m_selectedEntity);
-                        ImGui::CloseCurrentPopup();
-                    }
-                }
-
-                // Add other components here...
-
-                ImGui::EndPopup();
-            }
-        }
-        ImGui::End();
-    }
+    m_hierarchyPanel.onImGuiRender();
+    m_inspectorPanel.onImGuiRender();
 
     m_gui->end();
 }

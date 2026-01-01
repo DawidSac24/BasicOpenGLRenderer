@@ -1,8 +1,10 @@
 #pragma once
 
+#include "Application/EditoPanels.h"
 #include "Engine/Core/Layer.h"
 #include "Engine/Events/InputEvents.h"
 #include "Engine/ImGui/ImGuiImpl.h"
+#include "Engine/ImGui/MenuItems.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Scene/Entity.h"
 #include "Engine/Scene/Scene.h"
@@ -10,6 +12,7 @@
 #include "imgui.h"
 #include <string>
 #include <typeinfo>
+
 class EditorLayer : public Core::Layer
 {
 public:
@@ -25,9 +28,20 @@ public:
     void renderUI();
 
 private:
+    Core::Application* m_application = nullptr;
+    Gui::ImGuiImpl* m_gui = nullptr;
+
+    Engine::Scene* m_activeScene = nullptr;
+    Engine::Entity* m_selectedEntity = nullptr;
+
+    Gui::MenuBar m_menuBar;
+
+    Gui::SceneHierarchyPanel m_hierarchyPanel;
+    Gui::InspectorPanel m_inspectorPanel;
+
+private:
     void drawEntityNode(Engine::Entity* entity);
     void drawComponents(Engine::Entity* entity);
-
     template <typename T, typename UIFunction>
     void drawComponent(const std::string& name, Engine::Entity* entity, UIFunction uiFunction)
     {
@@ -75,17 +89,4 @@ private:
                 entity->removeComponent<T>();
         }
     }
-
-private:
-    Core::Application* m_application = nullptr;
-    Core::ImGuiImpl* m_gui = nullptr;
-
-    // Scene & Selection
-    Engine::Scene* m_activeScene = nullptr;
-    Engine::Entity* m_selectedEntity = nullptr;
-
-    // Editor Window States (Added these so the MenuBar works)
-    bool m_showSceneWindow = true;
-    bool m_showInspectorWindow = true;
-    bool m_showOptionsWindow = false;
 };

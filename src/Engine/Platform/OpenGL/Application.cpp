@@ -60,7 +60,7 @@ Application::Application(const ApplicationSpecification& appSpec)
     if (appSpec.windowSpec.enableOpenGLDebugInfo)
         Core::getOpenGLErrors();
 
-    m_gui = std::make_shared<ImGuiImpl>(*m_window);
+    m_gui = std::make_shared<Gui::ImGuiImpl>(*m_window);
 
     m_activeScene = std::make_shared<Engine::Scene>("Default Scene");
 

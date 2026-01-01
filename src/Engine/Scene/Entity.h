@@ -26,7 +26,26 @@ enum class EntityType
     Sphere,
     Plane,
     Camera,
+    Count,
 };
+static std::string EntityTypeToString(Engine::EntityType type)
+{
+    switch (type)
+    {
+    case Engine::EntityType::Empty:
+        return "Empty";
+    case Engine::EntityType::Cube:
+        return "Cube";
+    case Engine::EntityType::Sphere:
+        return "Sphere";
+    case Engine::EntityType::Plane:
+        return "Plane";
+    case Engine::EntityType::Camera:
+        return "Camera";
+    default:
+        return "Unknown";
+    }
+}
 
 class Entity
 {

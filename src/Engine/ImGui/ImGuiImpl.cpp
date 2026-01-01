@@ -4,9 +4,9 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
-namespace Core
+namespace Gui
 {
-ImGuiImpl::ImGuiImpl(Window& window)
+ImGuiImpl::ImGuiImpl(Core::Window& window)
     : m_window(&window)
 {
     IMGUI_CHECKVERSION();
@@ -52,7 +52,7 @@ void ImGuiImpl::begin()
 void ImGuiImpl::end()
 {
     ImGuiIO& io = ImGui::GetIO();
-    Application& app = Application::get();
+    Core::Application& app = Core::Application::get();
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
