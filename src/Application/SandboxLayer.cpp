@@ -10,26 +10,15 @@ SandboxLayer::SandboxLayer()
     Core::Application& app = Core::Application::get();
     m_activeScene = app.getActiveScene();
 
-    // 1. Create the Camera
-    // Your EntityFactory (inside Scene::createEntity) should attach the CameraComponent
     m_CameraEntity = m_activeScene->createEntity("Main Camera", Engine::EntityType::Camera);
 
-    // IMPORTANT: Move the camera BACK so it can see the object!
-    // (Default is 0,0,0, which is inside the cube)
     m_CameraEntity->transform->setPosition({ 0.0f, 0.0f, 5.0f });
 
-    // Set initial aspect ratio
     const auto& camComp = m_CameraEntity->getComponent<Engine::CameraComponent>();
     glm::vec2 windowSize = app.getWindow()->getFrameBufferSize();
     camComp->setViewportSize(windowSize.x, windowSize.y);
 
-    // 2. Create the Cube
-    // Your EntityFactory should attach MeshRenderer + Transform
-    m_CubeEntity = m_activeScene->createEntity("First Cube", Engine::EntityType::Cube);
-    auto sphere = m_activeScene->createEntity("First Sphere", Engine::EntityType::Sphere);
-    sphere->transform->setPosition(glm::vec3(1, 0, 0));
-    auto plane = m_activeScene->createEntity("First Plane", Engine::EntityType::Plane);
-    plane->transform->setPosition(glm::vec3(0, -1, 0));
+    m_activeScene->setPrimaryCamera(m_CameraEntity);
 }
 
 void SandboxLayer::onUpdate()

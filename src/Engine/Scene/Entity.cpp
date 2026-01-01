@@ -6,17 +6,19 @@
 
 namespace Engine
 {
-Entity::Entity(const std::string& name, Entity* parent)
+Entity::Entity(const std::string& name, Scene* scene, Entity* parent)
     : id()
     , name(name)
+    , m_scene(scene)
     , m_parent(parent)
 {
     transform = addComponent<TransformComponent>(this);
 }
 
-Entity::Entity(Core::UUID id, const std::string& name, Entity* parent)
+Entity::Entity(Core::UUID id, const std::string& name, Scene* scene, Entity* parent)
     : id(id)
     , name(name)
+    , m_scene(scene)
     , m_parent(parent)
 {
     transform = addComponent<TransformComponent>(this);

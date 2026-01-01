@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Components/Component.h"
+#include "Engine/Core/UUID.h"
 #include "Engine/Scene/Components/TransformComponent.h"
-#include "Scene.h"
 
 #include <algorithm>
 #include <bits/types/cookie_io_functions_t.h>
@@ -18,6 +18,8 @@ class Transform;
 
 namespace Engine
 {
+
+class Scene;
 
 enum class EntityType
 {
@@ -56,8 +58,8 @@ public:
     std::list<Entity*>::iterator orderIterator;
 
 public:
-    Entity(const std::string& name, Entity* parent = nullptr);
-    Entity(Core::UUID id, const std::string& name, Entity* parent = nullptr);
+    Entity(const std::string& name, Scene* scene, Entity* parent = nullptr);
+    Entity(Core::UUID id, const std::string& name, Scene* scene, Entity* parent = nullptr);
 
     ~Entity() = default;
 
@@ -116,6 +118,8 @@ public:
         return false;
     }
 
+    Scene* getScene() { return m_scene; }
+
     Entity* getParent() const
     {
         return m_parent;
@@ -124,13 +128,13 @@ public:
     {
         return m_children;
     }
-
     void setParent(Entity* parent);
 
     void markChildrenDirty();
 
 private:
     Core::UUID id;
+    Scene* m_scene;
 
     std::vector<std::unique_ptr<Component>> m_components;
 

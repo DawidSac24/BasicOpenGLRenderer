@@ -25,6 +25,8 @@ std::unique_ptr<Entity> EntityFactory::create(const std::string& name, EntityTyp
         return createPlane(name);
     case EntityType::Camera:
         return createCamera(name);
+    case EntityType::Count:
+        return nullptr;
     }
 
     std::cerr << "Entity creation error: invalid Entity Type" << std::endl;
@@ -33,12 +35,12 @@ std::unique_ptr<Entity> EntityFactory::create(const std::string& name, EntityTyp
 
 std::unique_ptr<Entity> EntityFactory::createEmpty(const std::string& name)
 {
-    return std::make_unique<Entity>(name);
+    return std::make_unique<Entity>(name, m_scene);
 }
 
 std::unique_ptr<Entity> EntityFactory::createCube(const std::string& name)
 {
-    auto newEntity = std::make_unique<Entity>(name);
+    auto newEntity = std::make_unique<Entity>(name, m_scene);
 
     auto mesh = Core::AssetManager::getMesh("Cube");
     if (!mesh)
@@ -76,7 +78,7 @@ std::unique_ptr<Entity> EntityFactory::createCube(const std::string& name)
 
 std::unique_ptr<Entity> EntityFactory::createSphere(const std::string& name)
 {
-    auto newEntity = std::make_unique<Entity>(name);
+    auto newEntity = std::make_unique<Entity>(name, m_scene);
 
     auto mesh = Core::AssetManager::getMesh("Sphere");
     if (!mesh)
@@ -114,7 +116,7 @@ std::unique_ptr<Entity> EntityFactory::createSphere(const std::string& name)
 
 std::unique_ptr<Entity> EntityFactory::createPlane(const std::string& name)
 {
-    auto newEntity = std::make_unique<Entity>(name);
+    auto newEntity = std::make_unique<Entity>(name, m_scene);
 
     auto mesh = Core::AssetManager::getMesh("Plane");
     if (!mesh)
@@ -152,12 +154,11 @@ std::unique_ptr<Entity> EntityFactory::createPlane(const std::string& name)
 
 std::unique_ptr<Entity> EntityFactory::createCamera(const std::string& name)
 {
-    auto entity = std::make_unique<Entity>(name);
+    auto entity = std::make_unique<Entity>(name, m_scene);
 
     entity->transform->setPosition({ 0.0f, 0.0f, 5.0f });
 
     auto* camComp = entity->addComponent<CameraComponent>(entity.get());
-    camComp->primary = true; // Make it active
 
     return entity;
 }

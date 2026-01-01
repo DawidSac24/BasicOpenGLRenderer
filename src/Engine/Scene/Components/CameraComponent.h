@@ -8,6 +8,8 @@
 namespace Engine
 {
 
+class Entity;
+
 class CameraComponent : public Component
 {
 public:
@@ -15,9 +17,7 @@ public:
     float nearClip = 0.1f;
     float farClip = 100.0f;
     float aspectRatio = 1.778f; // 16:9 default
-
-    bool primary = true;
-
+public:
     CameraComponent(Entity* owner)
         : Component(owner)
     {
@@ -30,6 +30,12 @@ public:
         if (height > 0)
             aspectRatio = (float)width / (float)height;
     }
+
+    bool isPrimary() const { return m_isPrimary; }
+    void setIsPrimary(const bool value) { m_isPrimary = value; }
+
+private:
+    bool m_isPrimary = false;
 };
 
 }

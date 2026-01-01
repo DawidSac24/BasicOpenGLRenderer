@@ -18,12 +18,14 @@ namespace Engine
 
 Scene::Scene(const std::string& name)
     : name(name)
+    , m_entityFactory(this)
 {
 }
 
 void Scene::onRender()
 {
-    if (m_entityList.empty()) return;
+    if (m_entityList.empty())
+        return;
     // --- 1. Find Main Camera ---
     CameraComponent* mainCam = nullptr;
     TransformComponent* camTransform = nullptr;
@@ -32,7 +34,7 @@ void Scene::onRender()
     {
         if (auto* cam = entity->getComponent<CameraComponent>())
         {
-            if (cam->primary)
+            if (cam->isPrimary())
             {
                 mainCam = cam;
                 camTransform = entity->transform;
@@ -81,7 +83,7 @@ Entity* Scene::getEntityByUUID(Core::UUID uuid)
 
 Entity* Scene::createEntity(const std::string& p_name, EntityType type)
 {
-    auto newEntity = EntityFactory::create(p_name, type);
+    auto newEntity = m_entityFactory.create(p_name, type);
 
     Core::UUID id = newEntity->getID();
     Entity* rawPointer = newEntity.get();
@@ -105,13 +107,26 @@ void Scene::destroyEntity(Entity* obj)
     m_entityMap.erase(obj->getID());
 }
 
+void Scene::setPrimaryCamera(Entity* targetEntity)
+{
+    for (auto& entity : *this->getEntityList())
+    {
+        if (entity->hasComponent<CameraComponent>())
+        {
+            auto& cam = *entity->getComponent<CameraComponent>();
+
+            cam.setIsPrimary(entity == targetEntity);
+        }
+    }
+}
+
 void Scene::updateCamerasViewport(uint32_t width, uint32_t height)
 {
     for (auto& [uuid, entity] : m_entityMap)
     {
         if (auto* cam = entity->getComponent<CameraComponent>())
         {
-            if (cam->primary)
+            if (cam->isPrimary())
             {
                 cam->setViewportSize(width, height);
                 break;

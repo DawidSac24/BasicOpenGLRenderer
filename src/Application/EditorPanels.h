@@ -17,7 +17,7 @@ namespace Gui
 class SceneHierarchyPanel
 {
 public:
-    bool isDisplayed = true;
+    bool isDisplayed = false;
 
 public:
     SceneHierarchyPanel() = default;
@@ -29,9 +29,6 @@ public:
 
     void onImGuiRender()
     {
-        if (!isDisplayed)
-            return;
-
         ImGui::Begin("Scene Hierarchy");
 
         if (m_context)
@@ -88,7 +85,7 @@ private:
 class InspectorPanel
 {
 public:
-    bool isDisplayed = true;
+    bool isDisplayed = false;
 
 public:
     InspectorPanel() = default;
@@ -97,9 +94,6 @@ public:
 
     void onImGuiRender()
     {
-        if (!isDisplayed)
-            return;
-
         ImGui::Begin("Inspector");
         if (m_selectedEntity)
         {
@@ -158,18 +152,31 @@ private:
 
                 // ... (Add Rotation/Scale logic here) ...
             });
-
-        drawComponent<Engine::CameraComponent>("Camera", entity, [](auto& component)
+        drawComponent<Engine::CameraComponent>("Camera", entity, [entity](auto& component) // <--- CAPTURE entity here
             {
-                ImGui::Checkbox("Primary", &component.primary);
-                ImGui::DragFloat("FOV", &component.fov); });
+                bool isPrimary = component.isPrimary();
+
+                if (ImGui::Checkbox("Primary", &isPrimary))
+                {
+                    component.setIsPrimary(isPrimary);
+
+                    // If turned ON, enforce single primary
+                    if (isPrimary)
+                    {
+                        // Now we can access 'entity' because we captured it
+                        if (auto scene = entity->getScene())
+                        {
+                            scene->setPrimaryCamera(entity);
+                        }
+                    }
+                }
+
+               ImGui::DragFloat("FOV", &component.fov); });
 
         drawComponent<Engine::MeshRenderer>("Mesh Renderer", entity, [](auto& component)
             {
                 if (component.mesh)
-                    ImGui::Text("Mesh: Loaded");
-                // ... (Add Material logic here) ...
-            });
+                    ImGui::Text("Mesh: Loaded"); });
     }
 
     // Generic Helper for UI Node Styling

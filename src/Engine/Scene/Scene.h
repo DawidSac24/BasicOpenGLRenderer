@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Core/UUID.h"
+#include "Engine/Scene/EntityFactory.h"
 #include "Entity.h"
 
 #include <cstdint>
@@ -32,10 +33,13 @@ public:
     Entity* createEntity(const std::string& p_name, EntityType type);
     void destroyEntity(Entity* obj);
 
+    void setPrimaryCamera(Entity* targetEntity);
     void updateCamerasViewport(uint32_t width, uint32_t heigth);
 
 private:
     std::unordered_map<Core::UUID, std::shared_ptr<Entity>> m_entityMap;
     std::list<Entity*> m_entityList;
+
+    EntityFactory m_entityFactory;
 };
 }

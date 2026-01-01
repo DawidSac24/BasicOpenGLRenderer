@@ -1,4 +1,5 @@
-// UUID.h
+#pragma once
+
 #include <random>
 
 namespace Core
