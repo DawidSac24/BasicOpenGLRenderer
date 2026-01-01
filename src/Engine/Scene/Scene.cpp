@@ -8,9 +8,7 @@
 #include "Engine/Scene/EntityFactory.h"
 #include "Entity.h"
 
-#include <algorithm>
 #include <cstdint>
-#include <iostream>
 #include <memory>
 
 namespace Engine
@@ -20,30 +18,18 @@ Scene::Scene(const std::string& name)
     : name(name)
     , m_entityFactory(this)
 {
+    m_primaryCamera = createEntity("Main Camera", EntityType::Camera);
+    m_primaryCamera->getComponent<CameraComponent>()->setIsPrimary(true);
 }
 
 void Scene::onRender()
 {
     if (m_entityList.empty())
         return;
-    // --- 1. Find Main Camera ---
-    CameraComponent* mainCam = nullptr;
-    TransformComponent* camTransform = nullptr;
 
-    for (auto entity : m_entityList)
-    {
-        if (auto* cam = entity->getComponent<CameraComponent>())
-        {
-            if (cam->isPrimary())
-            {
-                mainCam = cam;
-                camTransform = entity->transform;
-                break;
-            }
-        }
-    }
+    CameraComponent* mainCam = m_primaryCamera->getComponent<CameraComponent>();
+    TransformComponent* camTransform = m_primaryCamera->transform;
 
-    // --- 2. Render Loop ---
     if (mainCam && camTransform)
     {
         glm::mat4 projection = mainCam->getProjection();
@@ -51,19 +37,14 @@ void Scene::onRender()
 
         Renderer::Renderer::beginScene(projection, view);
 
-        // Iterate ALL entities
         for (auto entity : m_entityList)
         {
-            // Check if it has a MeshRenderer
             auto* meshRenderer = entity->getComponent<MeshRenderer>();
 
-            // Render it ONLY if it has a Mesh and Material
             if (meshRenderer && meshRenderer->mesh && meshRenderer->material)
             {
-                // Get Transform directly
                 glm::mat4 worldMatrix = entity->transform->getWorldMatrix();
 
-                // Submit to Renderer
                 Renderer::Renderer::submit(meshRenderer->mesh, meshRenderer->material, worldMatrix);
             }
         }
@@ -109,15 +90,9 @@ void Scene::destroyEntity(Entity* obj)
 
 void Scene::setPrimaryCamera(Entity* targetEntity)
 {
-    for (auto& entity : *this->getEntityList())
-    {
-        if (entity->hasComponent<CameraComponent>())
-        {
-            auto& cam = *entity->getComponent<CameraComponent>();
-
-            cam.setIsPrimary(entity == targetEntity);
-        }
-    }
+    m_primaryCamera->getComponent<CameraComponent>()->setIsPrimary(false);
+    m_primaryCamera = targetEntity;
+    targetEntity->getComponent<CameraComponent>()->setIsPrimary(true);
 }
 
 void Scene::updateCamerasViewport(uint32_t width, uint32_t height)

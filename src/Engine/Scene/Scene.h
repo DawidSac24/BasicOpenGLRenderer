@@ -40,6 +40,8 @@ private:
     std::unordered_map<Core::UUID, std::shared_ptr<Entity>> m_entityMap;
     std::list<Entity*> m_entityList;
 
+    Entity* m_primaryCamera;
+
     EntityFactory m_entityFactory;
 };
 }

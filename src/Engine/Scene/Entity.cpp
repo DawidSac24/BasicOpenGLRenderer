@@ -13,6 +13,7 @@ Entity::Entity(const std::string& name, Scene* scene, Entity* parent)
     , m_parent(parent)
 {
     transform = addComponent<TransformComponent>(this);
+    
 }
 
 Entity::Entity(Core::UUID id, const std::string& name, Scene* scene, Entity* parent)
