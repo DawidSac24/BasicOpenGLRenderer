@@ -2,6 +2,9 @@
 
 #include "Engine/Core/Layer.h"
 #include "Engine/Events/WindowEvents.h"
+#include "Engine/Platform/OpenGL/Application.h"
+#include "Engine/Scene/Scene.h"
+#include <memory>
 
 class ShaderTestLayer : public Core::Layer
 {
@@ -18,4 +21,5 @@ public:
     virtual void onDetach() override { }
 
 private:
+    std::shared_ptr<Engine::Scene> m_activeScene;
 };

@@ -91,6 +91,7 @@ void Scene::destroyEntity(Entity* obj)
 void Scene::setPrimaryCamera(Entity* targetEntity)
 {
     m_primaryCamera->getComponent<CameraComponent>()->setIsPrimary(false);
+
     m_primaryCamera = targetEntity;
     targetEntity->getComponent<CameraComponent>()->setIsPrimary(true);
 }

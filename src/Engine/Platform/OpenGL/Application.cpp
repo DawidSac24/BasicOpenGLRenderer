@@ -96,6 +96,9 @@ void Application::run()
 
         for (const std::unique_ptr<Layer>& layer : m_layerStack)
         {
+            Renderer::RenderCommand::clear();
+            Renderer::RenderCommand::setClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+
             layer->onRender();
             m_activeScene->onRender();
         }

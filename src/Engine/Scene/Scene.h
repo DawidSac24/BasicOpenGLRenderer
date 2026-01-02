@@ -33,6 +33,7 @@ public:
     Entity* createEntity(const std::string& p_name, EntityType type);
     void destroyEntity(Entity* obj);
 
+    Entity* getPrimaryCamera() { return m_primaryCamera; }
     void setPrimaryCamera(Entity* targetEntity);
     void updateCamerasViewport(uint32_t width, uint32_t heigth);
 
