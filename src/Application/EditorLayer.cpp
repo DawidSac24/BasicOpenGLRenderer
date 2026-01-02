@@ -2,6 +2,7 @@
 
 #include "Engine/Core/keyCodes.h"
 #include "Engine/Events/InputEvents.h"
+#include "Engine/ImGui/ImGuiImpl.h"
 #include "Engine/ImGui/MenuItems.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Scene/Components/CameraComponent.h"
@@ -13,7 +14,6 @@
 EditorLayer::EditorLayer()
 {
     m_application = &Core::Application::get();
-    m_gui = m_application->getGui().get();
 
     Gui::Menu viewMenu("View");
     viewMenu.addItem(std::make_shared<Gui::MenuFlagItem>("Scene", &m_hierarchyPanel.isDisplayed));
@@ -30,11 +30,12 @@ EditorLayer::EditorLayer()
         std::string label = "Add " + EntityTypeToString(type);
 
         entityMenu.addItem(std::make_shared<Gui::MenuActionItem>(label, [this, type]()
-            {
-        if (auto scene = Core::Application::get().getActiveScene())
         {
-            scene->createEntity("New " + EntityTypeToString(type), type);
-        } }));
+            if (auto scene = Core::Application::get().getActiveScene())
+            {
+                scene->createEntity("New " + EntityTypeToString(type), type);
+            }
+        }));
     }
 
     m_menuBar.addMenu(entityMenu);
@@ -61,7 +62,9 @@ void EditorLayer::onEvent(Core::Event& event)
     Core::EventDispatcher dispatcher(event);
 
     dispatcher.dispatch<Core::KeyPressedEvent>([this](Core::KeyPressedEvent& e)
-        { return onKeyPressed(e); });
+    {
+        return onKeyPressed(e);
+    });
 }
 
 bool EditorLayer::onKeyPressed(Core::KeyPressedEvent& event)
@@ -86,14 +89,14 @@ void EditorLayer::onDetach()
 
 void EditorLayer::renderUI()
 {
-    m_gui->begin();
+    Gui::ImGuiImpl::begin();
 
     m_menuBar.render();
 
     m_hierarchyPanel.onImGuiRender();
     m_inspectorPanel.onImGuiRender();
 
-    m_gui->end();
+    Gui::ImGuiImpl::end();
 }
 
 void EditorLayer::drawEntityNode(Engine::Entity* entity)

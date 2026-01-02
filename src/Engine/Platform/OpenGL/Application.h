@@ -31,7 +31,6 @@ public:
     void raiseEvent(Event& event);
 
     std::shared_ptr<Window> getWindow() const { return m_window; }
-    std::shared_ptr<Gui::ImGuiImpl> getGui() const { return m_gui; }
 
     std::shared_ptr<Engine::Scene> getActiveScene() { return m_activeScene; }
 
@@ -65,7 +64,6 @@ private:
     ApplicationSpecification m_specification;
 
     std::shared_ptr<Window> m_window = nullptr;
-    std::shared_ptr<Gui::ImGuiImpl> m_gui = nullptr;
 
     std::shared_ptr<Engine::Scene> m_activeScene = nullptr;
 

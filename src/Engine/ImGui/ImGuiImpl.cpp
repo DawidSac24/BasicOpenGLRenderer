@@ -1,13 +1,16 @@
 #include "ImGuiImpl.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "imgui.h"
+#include <glm/gtc/type_ptr.hpp>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
 namespace Gui
 {
-ImGuiImpl::ImGuiImpl(Core::Window& window)
-    : m_window(&window)
+
+static ImGuiImpl* s_impl = nullptr;
+
+void ImGuiImpl::init(Core::Window& window)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -20,13 +23,8 @@ ImGuiImpl::ImGuiImpl(Core::Window& window)
 
     // Setup Platform/Renderer backends
     // 'true' installs GLFW callbacks. Ensure this is called AFTER Window creation.
-    ImGui_ImplGlfw_InitForOpenGL(m_window->getHandle(), true);
+    ImGui_ImplGlfw_InitForOpenGL(window.getHandle(), true);
     ImGui_ImplOpenGL3_Init("#version 460");
-}
-
-ImGuiImpl::~ImGuiImpl()
-{
-    destroy();
 }
 
 void ImGuiImpl::destroy()
@@ -64,5 +62,24 @@ void ImGuiImpl::end()
         ImGui::RenderPlatformWindowsDefault();
         glfwMakeContextCurrent(backup_current_context);
     }
+}
+
+bool ImGuiImpl::drawVec3Control(const std::string& label, glm::vec3& values, float resetValue, float columnWidth)
+{
+    bool changed = false;
+
+    ImGui::AlignTextToFramePadding();
+
+    ImGui::Text("%s", label.c_str());
+
+    ImGui::SameLine(columnWidth);
+
+    std::string id = "##" + label;
+    if (ImGui::DragFloat3(id.c_str(), glm::value_ptr(values), 0.1f))
+    {
+        changed = true;
+    }
+
+    return changed;
 }
 }

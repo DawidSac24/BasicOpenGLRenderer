@@ -7,14 +7,12 @@ namespace Gui
 class ImGuiImpl
 {
 public:
-    ImGuiImpl(Core::Window& window);
-    ~ImGuiImpl();
-    void destroy();
+    static void init(Core::Window& window);
+    static void destroy();
 
-    void begin();
-    void end();
+    static void begin();
+    static void end();
 
-private:
-    Core::Window* m_window;
+    static bool drawVec3Control(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f);
 };
 }

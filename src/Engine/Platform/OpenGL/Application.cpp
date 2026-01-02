@@ -40,7 +40,9 @@ Application::Application(const ApplicationSpecification& appSpec)
     }
 
     m_specification.windowSpec.eventCallback = [this](Event& event)
-    { raiseEvent(event); };
+    {
+        raiseEvent(event);
+    };
 
     m_window = std::make_shared<Window>(m_specification.windowSpec);
     m_window->create();
@@ -60,7 +62,7 @@ Application::Application(const ApplicationSpecification& appSpec)
     if (appSpec.windowSpec.enableOpenGLDebugInfo)
         Core::getOpenGLErrors();
 
-    m_gui = std::make_shared<Gui::ImGuiImpl>(*m_window);
+    Gui::ImGuiImpl::init(*m_window);
 
     m_activeScene = std::make_shared<Engine::Scene>("Default Scene");
 
@@ -69,7 +71,7 @@ Application::Application(const ApplicationSpecification& appSpec)
 
 Application::~Application()
 {
-    m_gui->destroy();
+    Gui::ImGuiImpl::destroy();
     m_window->destroy();
     glfwTerminate();
 
@@ -117,7 +119,9 @@ void Application::raiseEvent(Event& event)
 {
     EventDispatcher dispatcher(event);
     dispatcher.dispatch<WindowResizeEvent>([this](WindowResizeEvent& e)
-        { return onWindowResize(e); });
+    {
+        return onWindowResize(e);
+    });
     for (auto& layer : std::views::reverse(m_layerStack))
     {
         layer->onEvent(event);
@@ -134,7 +138,9 @@ void Application::flushEvents()
         EventDispatcher dispatcher(eventPtr);
         dispatcher.dispatch<LayerTransitionEvent>(
             [this](LayerTransitionEvent& e)
-            { return m_layerStack.onLayerTransition(e); });
+        {
+            return m_layerStack.onLayerTransition(e);
+        });
         // might need to dispatch otter Events
     }
 

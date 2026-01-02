@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Engine/ImGui/ImGuiImpl.h"
 #include "Engine/Scene/Components/CameraComponent.h"
 #include "Engine/Scene/Components/MeshRenderer.h"
 #include "Engine/Scene/Components/TransformComponent.h"
@@ -145,38 +146,57 @@ private:
     void drawComponents(Engine::Entity* entity)
     {
         drawComponent<Engine::TransformComponent>("Transform", entity, [](auto& component)
-            {
-                float pos[3] = { component.getPosition().x, component.getPosition().y, component.getPosition().z };
-                if (ImGui::DragFloat3("Position", pos, 0.1f))
-                    component.setPosition({ pos[0], pos[1], pos[2] });
+        {
+            glm::vec3 pos = component.getPosition();
 
-                // ... (Add Rotation/Scale logic here) ...
-            });
+            // 2. Pass local variable to helper
+            if (ImGuiImpl::drawVec3Control("Position", pos))
+            {
+                // 3. Write back ONLY if changed
+                component.setPosition(pos);
+            }
+
+            // --- ROTATION ---
+            glm::vec3 euler = glm::degrees(glm::eulerAngles(component.getRotation()));
+
+            if (ImGuiImpl::drawVec3Control("Rotation", euler))
+            {
+                component.setRotation(glm::quat(glm::radians(euler)));
+            }
+
+            // --- SCALE ---
+            glm::vec3 scale = component.getScale();
+
+            if (ImGuiImpl::drawVec3Control("Scale", scale))
+            {
+                component.setScale(scale);
+            }
+        });
         drawComponent<Engine::CameraComponent>("Camera", entity, [entity](auto& component) // <--- CAPTURE entity here
+        {
+            bool isPrimary = component.isPrimary();
+
+            if (ImGui::Checkbox("Primary", &isPrimary))
             {
-                bool isPrimary = component.isPrimary();
+                component.setIsPrimary(isPrimary);
 
-                if (ImGui::Checkbox("Primary", &isPrimary))
+                if (isPrimary)
                 {
-                    component.setIsPrimary(isPrimary);
-
-                    // If turned ON, enforce single primary
-                    if (isPrimary)
+                    if (auto scene = entity->getScene())
                     {
-                        // Now we can access 'entity' because we captured it
-                        if (auto scene = entity->getScene())
-                        {
-                            scene->setPrimaryCamera(entity);
-                        }
+                        scene->setPrimaryCamera(entity);
                     }
                 }
+            }
 
-               ImGui::DragFloat("FOV", &component.fov); });
+            ImGui::DragFloat("FOV", &component.fov);
+        });
 
         drawComponent<Engine::MeshRenderer>("Mesh Renderer", entity, [](auto& component)
-            {
-                if (component.mesh)
-                    ImGui::Text("Mesh: Loaded"); });
+        {
+            if (component.mesh)
+                ImGui::Text("Mesh: Loaded");
+        });
     }
 
     // Generic Helper for UI Node Styling

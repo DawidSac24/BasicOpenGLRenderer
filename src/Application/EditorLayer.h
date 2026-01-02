@@ -29,7 +29,6 @@ public:
 
 private:
     Core::Application* m_application = nullptr;
-    Gui::ImGuiImpl* m_gui = nullptr;
 
     Engine::Scene* m_activeScene = nullptr;
     Engine::Entity* m_selectedEntity = nullptr;
