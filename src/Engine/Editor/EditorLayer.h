@@ -3,16 +3,14 @@
 #include "EditorPanels.h"
 #include "Engine/Core/Layer.h"
 #include "Engine/Events/InputEvents.h"
-#include "Engine/ImGui/ImGuiImpl.h"
 #include "Engine/ImGui/MenuItems.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Scene/Entity.h"
 #include "Engine/Scene/Scene.h"
+#include <memory>
 
-#include "imgui.h"
-#include <string>
-#include <typeinfo>
-
+namespace Engine
+{
 class EditorLayer : public Core::Layer
 {
 public:
@@ -30,7 +28,7 @@ public:
 private:
     Core::Application* m_application = nullptr;
 
-    Engine::Scene* m_activeScene = nullptr;
+    std::shared_ptr<Engine::Scene> m_activeScene = nullptr;
     Engine::Entity* m_selectedEntity = nullptr;
 
     Gui::MenuBar m_menuBar;
@@ -41,3 +39,4 @@ private:
 private:
     void drawEntityNode(Engine::Entity* entity);
 };
+}

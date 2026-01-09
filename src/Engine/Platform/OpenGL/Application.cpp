@@ -5,6 +5,7 @@
 #include "Engine/Events/ApplicationEvents.h"
 #include "Engine/Events/Event.h"
 #include "Engine/Events/WindowEvents.h"
+#include "Engine/ImGui/ImGuiImpl.h"
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Scene/Scene.h"
 
@@ -98,11 +99,7 @@ void Application::run()
 
         for (const std::unique_ptr<Layer>& layer : m_layerStack)
         {
-            Renderer::RenderCommand::clear();
-            Renderer::RenderCommand::setClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-
             layer->onRender();
-            m_activeScene->onRender();
         }
 
         m_window->update();

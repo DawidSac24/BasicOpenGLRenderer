@@ -11,9 +11,12 @@
 
 #include "imgui.h"
 
+namespace Engine
+{
 EditorLayer::EditorLayer()
 {
     m_application = &Core::Application::get();
+    m_activeScene = m_application->getActiveScene();
 
     Gui::Menu viewMenu("View");
     viewMenu.addItem(std::make_shared<Gui::MenuFlagItem>("Scene", &m_hierarchyPanel.isDisplayed));
@@ -31,10 +34,7 @@ EditorLayer::EditorLayer()
 
         entityMenu.addItem(std::make_shared<Gui::MenuActionItem>(label, [this, type]()
         {
-            if (auto scene = Core::Application::get().getActiveScene())
-            {
-                scene->createEntity("New " + EntityTypeToString(type), type);
-            }
+            m_activeScene->createEntity("New " + EntityTypeToString(type), type);
         }));
     }
 
@@ -47,8 +47,7 @@ EditorLayer::~EditorLayer()
 
 void EditorLayer::onUpdate()
 {
-    auto scene = Core::Application::get().getActiveScene();
-    m_hierarchyPanel.setContext(scene.get());
+    m_hierarchyPanel.setContext(m_activeScene.get());
     m_inspectorPanel.setSelectedEntity(m_hierarchyPanel.getSelectedEntity());
 }
 
@@ -74,8 +73,7 @@ bool EditorLayer::onKeyPressed(Core::KeyPressedEvent& event)
         Engine::Entity* selected = m_hierarchyPanel.getSelectedEntity();
         if (selected)
         {
-            auto scene = Core::Application::get().getActiveScene();
-            scene->destroyEntity(selected);
+            m_activeScene->destroyEntity(selected);
             m_hierarchyPanel.setSelectedEntity(nullptr);
             return true;
         }
@@ -128,4 +126,6 @@ void EditorLayer::drawEntityNode(Engine::Entity* entity)
         }
         ImGui::TreePop();
     }
+}
+
 }

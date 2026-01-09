@@ -3,7 +3,7 @@
   "configurePresets": [
     {
       "name": "default",
-      "displayName": "Default Config",
+      "displayName": "Config",
       "description": "Default build using Vcpkg",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build",
