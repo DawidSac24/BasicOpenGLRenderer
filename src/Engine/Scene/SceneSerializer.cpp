@@ -1,5 +1,7 @@
 #include "SceneSerializer.h"
 #include "Engine/Scene/Components/CameraComponent.h"
+#include "Engine/Scene/Components/Component.h"
+#include "Engine/Scene/Components/MeshRenderer.h"
 #include "Engine/Scene/Components/TransformComponent.h"
 
 #include <fstream>
@@ -11,8 +13,14 @@
     if (entity->hasComponent<T>())                   \
     {                                                \
         json& componentNode = outJson[#T];           \
-        auto& component = entity->getComponent<T>(); \
-        serialize##T(component, componentNode);      \
+        auto* component = entity->getComponent<T>(); \
+        serialize##T(*component, componentNode);     \
+    }
+#define DESERIALIZE_COMPONENT(T, entity, data) \
+    if (data.contains(#T))                     \
+    {                                          \
+        json& componentNode = data[#T];        \
+        deserialize##T(entity, componentNode); \
     }
 
 namespace Engine
@@ -20,6 +28,24 @@ namespace Engine
 SceneSerializer::SceneSerializer(Scene* scene)
     : m_scene(scene)
 {
+}
+
+bool SceneSerializer::serialize(const std::string& filepath)
+{
+    std::ofstream newFile(filepath + m_scene->name + ".scene");
+    if (!newFile.is_open())
+    {
+        std::cerr << "Failed to create file: " << filepath << std::endl;
+        return false;
+    }
+    json data;
+    data["name"] = m_scene->name;
+    data["entities"] = serializeEntities(m_scene->getEntityList());
+
+    newFile << data.dump(4);
+    newFile.close();
+
+    return true;
 }
 
 bool SceneSerializer::deserialize(const std::string& filepath)
@@ -50,24 +76,6 @@ bool SceneSerializer::deserialize(const std::string& filepath)
     return true;
 }
 
-bool SceneSerializer::serialize(const std::string& filepath)
-{
-    std::ofstream newFile(filepath + m_scene->name + ".scene");
-    if (!newFile.is_open())
-    {
-        std::cerr << "Failed to create file: " << filepath << std::endl;
-        return false;
-    }
-    json data;
-    data["name"] = m_scene->name;
-    data["entities"] = serializeEntities(m_scene->getEntityList());
-
-    newFile << data.dump(4);
-    newFile.close();
-
-    return true;
-}
-
 json SceneSerializer::serializeEntities(std::list<Entity*>* entityList) const
 {
     json entities = json::array();
@@ -87,14 +95,27 @@ json SceneSerializer::serializeEntities(std::list<Entity*>* entityList) const
             entityJson["parentID"] = nullptr;
         }
 
-        serializeComponents(entity, entityJson);
+        if (entity->hasComponents())
+            entityJson["components"] = serializeComponents(entity);
 
         entities.push_back(entityJson);
     }
     return entities;
 }
 
-void SceneSerializer::deserializeEntities(const json& data)
+json SceneSerializer::serializeComponents(Entity* entity) const
+{
+    json components = json::array();
+
+    SERIALIZE_COMPONENT(TransformComponent, entity, components)
+    SERIALIZE_COMPONENT(CameraComponent, entity, components)
+    // SERIALIZE_COMPONENT(MeshRenderer, entity, components)
+    // SERIALIZE_COMPONENT(ScriptComponent, entity, components)
+
+    return components;
+}
+
+void SceneSerializer::deserializeEntities(json& data)
 {
     if (!data.contains("entities"))
         return;
@@ -106,6 +127,9 @@ void SceneSerializer::deserializeEntities(const json& data)
 
         std::shared_ptr<Entity> entity = std::make_shared<Entity>(Core::UUID(uuid), name, m_scene);
         m_scene->addEntity(entity);
+
+        if (data.contains("components"))
+            deserializeComponents(entity.get(), entityData["components"]);
     }
 
     for (auto& entityData : data["entities"])
@@ -124,20 +148,20 @@ void SceneSerializer::deserializeEntities(const json& data)
                 child->setParent(parent);
             }
         }
-
-        deserializeComponents(entityData);
     }
 
     return;
 }
 
-void SceneSerializer::deserializeComponents(const json& data)
+void SceneSerializer::deserializeComponents(Entity* entity, json& components)
 {
-    if (!data.contains("components"))
-        return;
+    DESERIALIZE_COMPONENT(TransformComponent, entity, components)
+    SERIALIZE_COMPONENT(CameraComponent, entity, components)
+    // SERIALIZE_COMPONENT(MeshRenderer, entity, components)
+    // SERIALIZE_COMPONENT(ScriptComponent, entity, components)
 }
 
-static void serializeTransform(TransformComponent& c, json& out)
+void SceneSerializer::serializeTransformComponent(TransformComponent& c, json& out)
 {
     glm::vec3 pos = c.getPosition();
     glm::quat rot = c.getRotation();
@@ -147,10 +171,34 @@ static void serializeTransform(TransformComponent& c, json& out)
     out["rotation"] = { rot.x, rot.y, rot.z, rot.w };
     out["scale"] = { scale.x, scale.y, scale.z };
 }
+void SceneSerializer::deserializeTransformComponent(Entity* entity, json& data)
+{
+    auto transform = entity->getComponent<TransformComponent>();
+    json pos = data["position"];
+    transform->setPosition({ pos[0], pos[1], pos[2] });
+    json rot = data["rotation"];
+    transform->setRotation({ rot[0], rot[1], rot[2], rot[3] });
+    json scale = data["scale"];
+    transform->setScale({ scale[0], scale[1], scale[2] });
+}
 
-static void serializeCamera(CameraComponent& c, json& out)
+void SceneSerializer::serializeCameraComponent(CameraComponent& c, json& out)
 {
     out["isPrimary"] = c.isPrimary();
+}
+void SceneSerializer::deserializeCameraComponent(Entity* entity, json& data)
+{
+    auto camera = entity->addComponent<CameraComponent>(entity);
+    if (data["isPrimary"])
+        camera->setIsPrimary(true);
+}
+
+void SceneSerializer::serializeMeshRenderer(MeshRenderer& c, json& out)
+{
+    out["mesh"] = json::array();
+    json& mesh = out["mesh"];
+    out["materila"] = json::array();
+    json& material = out["material"];
 }
 
 }

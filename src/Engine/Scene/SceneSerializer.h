@@ -1,8 +1,12 @@
 #pragma once
 
+#include "Components/ScriptComponent.h"
 #include "Engine/Scene/Components/CameraComponent.h"
+#include "Engine/Scene/Components/MeshRenderer.h"
+#include "Engine/Scene/Components/TransformComponent.h"
 #include "Scene.h"
 
+#include <memory>
 #include <nlohmann/json.hpp>
 #include <string>
 
@@ -23,15 +27,19 @@ private:
 
 private:
     json serializeEntities(std::list<Entity*>* entityList) const;
-    json& serializeComponents(Entity* entity, json& data) const;
+    json serializeComponents(Entity* entity) const;
 
-    void deserializeEntities(const json& data);
-    void deserializeComponents(const json& data);
+    void deserializeEntities(json& data);
+    void deserializeComponents(Entity* entity, json& components);
 
 private:
-    static void serializeTransform(TransformComponent& c, json& out);
-    static void serializeCamera(CameraComponent& c, json& out);
-    static void serializeMeshRenderer(TransformComponent& c, json& out);
-    static void serializeScript(TransformComponent& c, json& out);
+    static void serializeTransformComponent(TransformComponent& c, json& out);
+    static void deserializeTransformComponent(Entity* entity, json& data);
+    static void serializeCameraComponent(CameraComponent& c, json& out);
+    static void deserializeCameraComponent(Entity* entity, json& data);
+    static void serializeMeshRenderer(MeshRenderer& c, json& out);
+    static void deserializeMeshRenderer(Entity* entity, json& data);
+    static void serializeScriptComponent(ScriptComponent& c, json& out);
+    static void deserializeScriptComponent(Entity* entity, json& data);
 };
 }

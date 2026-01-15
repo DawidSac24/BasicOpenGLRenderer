@@ -22,5 +22,8 @@ public:
     void bind() const;
 
     int getIndexCount() const;
+    VertexArray* getVAO() { return m_VAO.get(); }
+    VertexBuffer* getVBO() { return m_VBO.get(); }
+    IndexBuffer* getIBO() { return m_IBO.get(); }
 };
 } // namespace Engine

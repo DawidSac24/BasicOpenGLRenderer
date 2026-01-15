@@ -75,6 +75,10 @@ public:
     {
         return getComponent<TComponent>() != nullptr;
     }
+    bool hasComponents()
+    {
+        return !m_components.empty();
+    }
 
     template <typename TComponent>
         requires(std::is_base_of_v<Component, TComponent>)
