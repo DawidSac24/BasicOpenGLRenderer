@@ -101,6 +101,12 @@ public:
         m_components.push_back(std::move(newComponent));
         return ptr;
     }
+    Component* addComponent(std::unique_ptr<Component> newComponent)
+    {
+        Component* ptr = newComponent.get();
+        m_components.push_back(std::move(newComponent));
+        return ptr;
+    }
 
     template <typename TComponent>
         requires(std::is_base_of_v<Component, TComponent>)
@@ -108,7 +114,9 @@ public:
     {
         auto component = std::ranges::find_if(m_components.begin(), m_components.end(),
             [](const std::unique_ptr<Component>& component)
-            { return dynamic_cast<TComponent*>(component.get()) != nullptr; });
+        {
+            return dynamic_cast<TComponent*>(component.get()) != nullptr;
+        });
 
         if (component != m_components.end())
         {

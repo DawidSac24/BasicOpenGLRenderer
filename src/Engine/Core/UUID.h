@@ -1,6 +1,7 @@
 #pragma once
 
 #include <random>
+#include <string>
 
 namespace Core
 {
@@ -10,6 +11,15 @@ class UUID
 public:
     UUID()
         : m_UUID(s_UniformDistribution(s_Engine))
+    {
+    }
+    UUID(uint64_t uuid)
+        : m_UUID(uuid)
+    {
+    }
+
+    UUID(const std::string& id)
+        : m_UUID(std::stoull(id))
     {
     }
 
@@ -27,7 +37,8 @@ private:
 
 namespace std
 {
-template <> struct hash<Core::UUID>
+template <>
+struct hash<Core::UUID>
 {
     std::size_t operator()(const Core::UUID& uuid) const { return hash<uint64_t>()((uint64_t)uuid); }
 };

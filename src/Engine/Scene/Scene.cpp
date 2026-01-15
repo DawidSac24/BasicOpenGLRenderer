@@ -1,5 +1,6 @@
 #include "Scene.h"
 
+#include "Engine/Core/keyCodes.h"
 #include "Engine/Math/Transform.h"
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Scene/Components/CameraComponent.h"
@@ -8,6 +9,7 @@
 #include "Engine/Scene/EntityFactory.h"
 #include "Entity.h"
 
+#include <algorithm>
 #include <cstdint>
 #include <memory>
 
@@ -17,6 +19,10 @@ namespace Engine
 Scene::Scene(const std::string& name)
     : name(name)
     , m_entityFactory(this)
+{
+}
+
+void Scene::init()
 {
     m_primaryCamera = createEntity("Main Camera", EntityType::Camera);
     m_primaryCamera->getComponent<CameraComponent>()->setIsPrimary(true);
@@ -53,13 +59,26 @@ void Scene::onRender()
     }
 }
 
-Entity* Scene::getEntityByUUID(Core::UUID uuid)
+Entity* Scene::getEntityByUUID(Core::UUID uuid) const
 {
     auto it = m_entityMap.find(uuid);
     if (it != m_entityMap.end())
         return it->second.get();
 
     return nullptr;
+}
+
+bool Scene::addEntity(std::shared_ptr<Entity> entity)
+{
+    if (!m_entityMap.insert({ entity->getID(), entity }).second)
+        return false;
+
+    m_entityList.push_back(entity.get());
+    CameraComponent* camera = entity->getComponent<CameraComponent>();
+    if (camera)
+        camera->setIsPrimary(false);
+
+    return true;
 }
 
 Entity* Scene::createEntity(const std::string& p_name, EntityType type)

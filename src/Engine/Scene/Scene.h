@@ -22,14 +22,18 @@ public:
     std::string name;
 
 public:
-    Scene(const std::string& name);
+    Scene(const std::string& name = "New Scene");
+    void init();
 
     void onRender();
 
-    Entity* getEntityByUUID(Core::UUID uuid);
+    void setName(const std::string& name) { this->name = name; }
+
+    Entity* getEntityByUUID(Core::UUID uuid) const;
     std::unordered_map<Core::UUID, std::shared_ptr<Entity>>* getEntityMap() { return &m_entityMap; }
     std::list<Entity*>* getEntityList() { return &m_entityList; }
 
+    bool addEntity(std::shared_ptr<Entity> entity);
     Entity* createEntity(const std::string& p_name, EntityType type);
     void destroyEntity(Entity* obj);
 
