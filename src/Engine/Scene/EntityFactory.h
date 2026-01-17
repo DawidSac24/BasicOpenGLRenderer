@@ -21,12 +21,8 @@ private:
     Scene* m_scene;
 
 private:
-    std::unique_ptr<Entity> createEmpty(const std::string& name);
+    std::unique_ptr<Entity> createPrimitiveEntity(const std::string& name, EntityType type);
 
     std::unique_ptr<Entity> createCamera(const std::string& name);
-
-    std::unique_ptr<Entity> createCube(const std::string& name);
-    std::unique_ptr<Entity> createSphere(const std::string& name);
-    std::unique_ptr<Entity> createPlane(const std::string& name);
 };
 }

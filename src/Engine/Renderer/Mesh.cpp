@@ -2,7 +2,8 @@
 
 namespace Renderer
 {
-Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices)
+Mesh::Mesh(const std::string& name, std::vector<Vertex>& vertices, std::vector<GLuint>& indices)
+    : m_name(name)
 {
     m_VAO = std::make_unique<VertexArray>();
     m_VBO = std::make_unique<VertexBuffer>(vertices);

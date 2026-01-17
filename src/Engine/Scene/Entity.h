@@ -23,6 +23,7 @@ class Scene;
 
 enum class EntityType
 {
+    Unknown,
     Empty,
     Cube,
     Sphere,
@@ -93,6 +94,8 @@ public:
         }
         return nullptr;
     }
+
+    TransformComponent* getTransform() { return getComponent<TransformComponent>(); }
 
     std::vector<std::unique_ptr<Component>>* getComponents() { return &m_components; }
 

@@ -12,7 +12,7 @@ SandboxLayer::SandboxLayer()
 
     m_CameraEntity = m_activeScene->getPrimaryCamera();
 
-    m_CameraEntity->transform->setPosition({ 0.0f, 0.0f, 5.0f });
+    m_CameraEntity->getTransform()->setPosition({ 0.0f, 0.0f, 5.0f });
 }
 
 void SandboxLayer::onUpdate()

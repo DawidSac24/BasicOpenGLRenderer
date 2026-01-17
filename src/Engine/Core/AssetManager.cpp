@@ -1,18 +1,19 @@
 #include "AssetManager.h"
 
 #include "Engine/Core/FileSystem.h"
+#include "Engine/Renderer/Material.h"
 #include "Engine/Renderer/MeshFactory.h"
+#include "Engine/Scene/Entity.h"
+#include <iostream>
 
 namespace Core
 {
 
-// Initialize static members
 std::unordered_map<std::string, std::shared_ptr<Renderer::Shader>> AssetManager::s_shaders;
 std::unordered_map<std::string, std::shared_ptr<Renderer::Texture>> AssetManager::s_textures;
 std::unordered_map<std::string, std::shared_ptr<Renderer::Mesh>> AssetManager::s_meshes;
 std::unordered_map<std::string, std::shared_ptr<Renderer::Material>> AssetManager::s_materials;
 
-// --- SHADERS ---
 std::shared_ptr<Renderer::Shader> AssetManager::loadShader(
     const std::string& name, const std::string& vertPath, const std::string& fragPath)
 {
@@ -36,7 +37,6 @@ std::shared_ptr<Renderer::Shader> AssetManager::getShader(const std::string& nam
     return s_shaders[name];
 }
 
-// --- TEXTURES ---
 std::shared_ptr<Renderer::Texture> AssetManager::loadTexture(
     const std::string& name, const std::string& filepath, const std::string& type)
 {
@@ -61,7 +61,6 @@ std::shared_ptr<Renderer::Texture> AssetManager::getTexture(const std::string& n
     return s_textures[name];
 }
 
-// --- MESHES ---
 void AssetManager::addMesh(const std::string& name, std::shared_ptr<Renderer::Mesh> mesh)
 {
     s_meshes[name] = mesh;
@@ -76,7 +75,6 @@ std::shared_ptr<Renderer::Mesh> AssetManager::getMesh(const std::string& name)
     return s_meshes[name];
 }
 
-// --- MATERIALS ---
 void AssetManager::addMaterial(const std::string& name, std::shared_ptr<Renderer::Material> material)
 {
     s_materials[name] = material;
@@ -93,13 +91,17 @@ std::shared_ptr<Renderer::Material> AssetManager::getMaterial(const std::string&
 
 void AssetManager::loadAssets()
 {
-
-    addMesh("Cube", Renderer::MeshFactory::CreateCube());
-    addMesh("Sphere", Renderer::MeshFactory::CreateSphere(32));
-    addMesh("Plane", Renderer::MeshFactory::CreatePlane());
-
     loadShader("defaultShader", "res/default/Shaders/default.vert", "res/default/Shaders/default.frag");
-    loadTexture("defaultTexture", "res/default/Textures/greyTexture.jpg"); // Create a 1x1 white png or generate it
+    loadTexture("defaultTexture", "res/default/Textures/greyTexture.jpg");
+
+    std::shared_ptr<Renderer::Material> defaultMaterial = Renderer::MeshFactory::getDefaultMaterial();
+    addMaterial(defaultMaterial->getName(), defaultMaterial);
+
+    addMesh(Engine::EntityTypeToString(Engine::EntityType::Cube), Renderer::MeshFactory::create(Engine::EntityType::Cube));
+    addMesh(Engine::EntityTypeToString(Engine::EntityType::Sphere), Renderer::MeshFactory::create(Engine::EntityType::Sphere));
+    addMesh(Engine::EntityTypeToString(Engine::EntityType::Plane), Renderer::MeshFactory::create(Engine::EntityType::Plane));
+
+    std::cout << "[AssetManager] Default assets initialized." << std::endl;
 }
 
 void AssetManager::clear()

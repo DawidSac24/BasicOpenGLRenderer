@@ -6,6 +6,7 @@ GameLayer::GameLayer()
 {
     m_application = &Core::Application::get();
     m_scene = m_application->getActiveScene();
+    m_scene->init();
 }
 
 GameLayer::~GameLayer() { }

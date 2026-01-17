@@ -10,8 +10,6 @@ int main()
     spec.applicationName = "BasicOpenGLRenderer";
     spec.windowSpec.isInDEbugMode = true;
 
-
-
     Core::Application application(spec);
     application.pushLayer<GameLayer>();
     application.pushLayer<SandboxLayer>();

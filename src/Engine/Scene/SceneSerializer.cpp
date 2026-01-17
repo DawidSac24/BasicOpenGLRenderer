@@ -1,8 +1,12 @@
 #include "SceneSerializer.h"
+#include "Engine/Renderer/Material.h"
+#include "Engine/Renderer/Mesh.h"
+#include "Engine/Renderer/MeshFactory.h"
 #include "Engine/Scene/Components/CameraComponent.h"
 #include "Engine/Scene/Components/Component.h"
 #include "Engine/Scene/Components/MeshRenderer.h"
 #include "Engine/Scene/Components/TransformComponent.h"
+#include "Engine/Scene/Entity.h"
 
 #include <fstream>
 #include <glm/fwd.hpp>
@@ -195,10 +199,47 @@ void SceneSerializer::deserializeCameraComponent(Entity* entity, json& data)
 
 void SceneSerializer::serializeMeshRenderer(MeshRenderer& c, json& out)
 {
-    out["mesh"] = json::array();
     json& mesh = out["mesh"];
-    out["materila"] = json::array();
+    mesh["name"] = c.mesh->getName();
+
     json& material = out["material"];
+    material["name"] = c.material->getName();
+
+    mesh["filepath"] = c.mesh->getFilepath();
+    material["filepath"] = c.material->getFilepath();
 }
 
+void SceneSerializer::deserializeMeshRenderer(Entity* entity, json& data)
+{
+    std::shared_ptr<Renderer::Mesh> mesh;
+    std::shared_ptr<Renderer::Material> material;
+
+    int typeInt = data.value("primitiveType", (int)EntityType::Unknown);
+    EntityType type = static_cast<EntityType>(typeInt);
+
+    if (type != EntityType::Unknown && type != EntityType::Empty)
+    {
+        mesh = Renderer::MeshFactory::create(type);
+    }
+    else if (data.contains("filePath"))
+    {
+        std::string path = data["filePath"];
+        // Use your AssetManager to load/retrieve it
+        // mesh = Core::AssetManager::getMesh(path);
+    }
+
+    // 2. Handle Material (Simplified for now)
+    // You might want to save a "materialPath" in JSON later.
+    material = Renderer::MeshFactory::getDefaultMaterial();
+
+    // 3. Add Component
+    // Safety check: ensure mesh exists before adding component
+    if (mesh)
+    {
+        // NOTE: You don't need to pass 'entity' as the first arg if addComponent handles it implicitly.
+        // If your Component constructor needs the Entity*, then keep it.
+        entity->addComponent<MeshRenderer>(entity, mesh, material);
+    }
 }
+
+};

@@ -13,8 +13,9 @@ namespace Renderer
 class Material
 {
 public:
-    Material(std::shared_ptr<Shader> shader)
-        : m_Shader(shader)
+    Material(std::string& name, std::shared_ptr<Shader> shader)
+        : m_name(name)
+        , m_Shader(shader)
     {
     }
     std::unordered_map<std::string, glm::vec4>& getUniforms() { return m_UniformsFloat4; }
@@ -47,9 +48,16 @@ public:
         }
     }
 
+    const std::string& getName() const { return m_name; }
+    const std::string& getFilepath() const { return m_filepath; }
+    void setFilepath(const std::string& filepath) { m_filepath = filepath; }
+
     std::shared_ptr<Shader> getShader() { return m_Shader; }
 
 private:
+    std::string m_name;
+    std::string m_filepath;
+
     std::shared_ptr<Shader> m_Shader;
 
     std::unordered_map<std::string, std::shared_ptr<Texture>> m_Textures;

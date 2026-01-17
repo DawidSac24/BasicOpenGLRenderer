@@ -3,150 +3,58 @@
 #include "Components/CameraComponent.h"
 #include "Engine/Core/AssetManager.h"
 #include "Engine/Renderer/MeshFactory.h"
-#include "Engine/Renderer/Texture.h"
 #include "Engine/Scene/Components/MeshRenderer.h"
 #include "Engine/Scene/Entity.h"
 
+#include <iostream>
 #include <memory>
+#include <string>
 
 namespace Engine
 {
 std::unique_ptr<Entity> EntityFactory::create(const std::string& name, EntityType type)
 {
+    if (type == EntityType::Empty)
+    {
+        return std::make_unique<Entity>(name, m_scene);
+    }
+
     switch (type)
     {
+    case EntityType::Unknown:
+        std::cerr << "Entity creation error: invalid Entity Type" << std::endl;
+        return nullptr;
+
     case EntityType::Empty:
-        return createEmpty(name);
-    case EntityType::Cube:
-        return createCube(name);
-    case EntityType::Sphere:
-        return createSphere(name);
-    case EntityType::Plane:
-        return createPlane(name);
+        return std::make_unique<Entity>(name, m_scene);
+
     case EntityType::Camera:
         return createCamera(name);
+
     case EntityType::Count:
         return nullptr;
+
+    default:
+        return createPrimitiveEntity(name, type);
     }
-
-    std::cerr << "Entity creation error: invalid Entity Type" << std::endl;
-    return nullptr;
 }
 
-std::unique_ptr<Entity> EntityFactory::createEmpty(const std::string& name)
-{
-    return std::make_unique<Entity>(name, m_scene);
-}
-
-std::unique_ptr<Entity> EntityFactory::createCube(const std::string& name)
+std::unique_ptr<Entity> EntityFactory::createPrimitiveEntity(const std::string& name, EntityType type)
 {
     auto newEntity = std::make_unique<Entity>(name, m_scene);
 
-    auto mesh = Core::AssetManager::getMesh("Cube");
+    std::string entityName = EntityTypeToString(type);
+    auto mesh = Core::AssetManager::getMesh(entityName);
+
     if (!mesh)
     {
-        std::cerr << "CRITICAL: 'Cube' mesh missing! Generating fallback." << std::endl;
-        mesh = Renderer::MeshFactory::CreateCube(); // Force create it
-        Core::AssetManager::addMesh("Cube", mesh);
+        std::cerr << "CRITICAL: " << entityName << " mesh missing! Generating fallback." << std::endl;
+        mesh = Renderer::MeshFactory::create(type); // Force create it
+        Core::AssetManager::addMesh(entityName, mesh);
     }
 
-    auto shader = Core::AssetManager::getShader("defaultShader");
-    if (!shader)
-    {
-        std::cerr << "CRITICAL: 'BasicShader' missing!" << std::endl;
-    }
+    auto material = Renderer::MeshFactory::getDefaultMaterial();
 
-    auto texture = Core::AssetManager::getTexture("defaultTexture");
-    if (!texture)
-    {
-        std::cerr << "CRITICAL: 'GreyTexture' missing!" << std::endl;
-    }
-
-    // --- 3. Create Material ---
-    auto material
-        = std::make_shared<Renderer::Material>(shader);
-
-    material->setTexture("u_Texture", texture);
-    material->setFloat4("u_Color", { 1.0f, 1.0f, 1.0f, 1.0f });
-
-    // --- 4. Add Component ---
-    // If mesh or material are nullptr here, the Inspector will show them as empty.
-    newEntity->addComponent<MeshRenderer>(newEntity.get(), mesh, material);
-
-    return newEntity;
-}
-
-std::unique_ptr<Entity> EntityFactory::createSphere(const std::string& name)
-{
-    auto newEntity = std::make_unique<Entity>(name, m_scene);
-
-    auto mesh = Core::AssetManager::getMesh("Sphere");
-    if (!mesh)
-    {
-        std::cerr << "CRITICAL: 'Sphere' mesh missing! Generating fallback." << std::endl;
-        mesh = Renderer::MeshFactory::CreateCube(); // Force create it
-        Core::AssetManager::addMesh("Sphere", mesh);
-    }
-
-    auto shader = Core::AssetManager::getShader("defaultShader");
-    if (!shader)
-    {
-        std::cerr << "CRITICAL: 'defaultShader' missing!" << std::endl;
-    }
-
-    auto texture = Core::AssetManager::getTexture("defaultTexture");
-    if (!texture)
-    {
-        std::cerr << "CRITICAL: 'defaultTexture' missing!" << std::endl;
-    }
-
-    // --- 3. Create Material ---
-    auto material
-        = std::make_shared<Renderer::Material>(shader);
-
-    material->setTexture("u_Texture", texture);
-    material->setFloat4("u_Color", { 1.0f, 1.0f, 1.0f, 1.0f });
-
-    // --- 4. Add Component ---
-    // If mesh or material are nullptr here, the Inspector will show them as empty.
-    newEntity->addComponent<MeshRenderer>(newEntity.get(), mesh, material);
-
-    return newEntity;
-}
-
-std::unique_ptr<Entity> EntityFactory::createPlane(const std::string& name)
-{
-    auto newEntity = std::make_unique<Entity>(name, m_scene);
-
-    auto mesh = Core::AssetManager::getMesh("Plane");
-    if (!mesh)
-    {
-        std::cerr << "CRITICAL: 'Sphere' mesh missing! Generating fallback." << std::endl;
-        mesh = Renderer::MeshFactory::CreateCube(); // Force create it
-        Core::AssetManager::addMesh("Plane", mesh);
-    }
-
-    auto shader = Core::AssetManager::getShader("defaultShader");
-    if (!shader)
-    {
-        std::cerr << "CRITICAL: 'defaultShader' missing!" << std::endl;
-    }
-
-    auto texture = Core::AssetManager::getTexture("defaultTexture");
-    if (!texture)
-    {
-        std::cerr << "CRITICAL: 'defaultTexture' missing!" << std::endl;
-    }
-
-    // --- 3. Create Material ---
-    auto material
-        = std::make_shared<Renderer::Material>(shader);
-
-    material->setTexture("u_Texture", texture);
-    material->setFloat4("u_Color", { 1.0f, 1.0f, 1.0f, 1.0f });
-
-    // --- 4. Add Component ---
-    // If mesh or material are nullptr here, the Inspector will show them as empty.
     newEntity->addComponent<MeshRenderer>(newEntity.get(), mesh, material);
 
     return newEntity;
