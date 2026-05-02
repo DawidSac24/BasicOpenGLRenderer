@@ -2,7 +2,6 @@
 
 #include "Engine/Math/Transform.h"
 #include "Engine/Platform/OpenGL/Application.h"
-#include "Engine/Renderer/Renderer.h"
 #include "Engine/Scene/Components/CameraComponent.h"
 
 SandboxLayer::SandboxLayer()

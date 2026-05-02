@@ -1,2 +1,4 @@
 - Correct the Layer Transitions
-- 
+- Change build configuration. Maybe using a json ? The current commands required:
+cmake -B build -S . -G Ninja -DCMAKE_TOOLCHAIN_FILE=/home/dawid/Apps/vcpkg/scripts/buildsystems/vcpkg.cmake
+cmake --build build

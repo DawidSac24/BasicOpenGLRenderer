@@ -1,6 +1,5 @@
 #include "AssetManager.h"
 
-#include "Engine/Core/FileSystem.h"
 #include "Engine/Renderer/Material.h"
 #include "Engine/Renderer/MeshFactory.h"
 #include "Engine/Scene/Entity.h"
