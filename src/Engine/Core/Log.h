@@ -30,7 +30,7 @@ private:
 #define CORE_ERROR(...) SPDLOG_LOGGER_ERROR(Core::Log::getCoreLogger(), __VA_ARGS__)
 #define CORE_CRITICAL(...) SPDLOG_LOGGER_CRITICAL(Core::Log::getCoreLogger(), __VA_ARGS__)
 
-// Client Log Macros (For the Game/App)
+// Client Log Macros
 #define APP_TRACE(...) SPDLOG_LOGGER_TRACE(Core::Log::getClientLogger(), __VA_ARGS__)
 #define APP_INFO(...) SPDLOG_LOGGER_INFO(Core::Log::getClientLogger(), __VA_ARGS__)
 #define APP_WARN(...) SPDLOG_LOGGER_WARN(Core::Log::getClientLogger(), __VA_ARGS__)

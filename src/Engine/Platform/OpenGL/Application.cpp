@@ -2,6 +2,7 @@
 
 #include "Debug.h"
 #include "Engine/Core/AssetManager.h"
+#include "Engine/Core/Log.h"
 #include "Engine/Events/ApplicationEvents.h"
 #include "Engine/Events/Event.h"
 #include "Engine/Events/WindowEvents.h"
@@ -10,7 +11,6 @@
 #include "Engine/Scene/Scene.h"
 
 #include <cassert>
-#include <iostream>
 #include <memory>
 #include <ranges>
 
@@ -20,18 +20,20 @@ static Application* s_application = nullptr;
 
 void glfwErrorCallback(int error, const char* description)
 {
-    std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
+    CORE_ERROR("GLFW Error ({}): {}", error, description);
 }
 
 Application::Application(const ApplicationSpecification& appSpec)
 {
     s_application = this;
 
+    Log::Init();
+
     glfwSetErrorCallback(glfwErrorCallback);
 
     if (!glfwInit())
     {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
+        CORE_CRITICAL("Failed to initialize GLFW");
         return;
     }
 
@@ -53,8 +55,9 @@ Application::Application(const ApplicationSpecification& appSpec)
     GLenum err = glewInit();
     if (err != GLEW_OK)
     {
-        std::cerr << "GLEW Init Failed: " << glewGetErrorString(err) << std::endl;
-        throw std::runtime_error("Failed to initialize GLEW!");
+        const char* errorString = (const char*)glewGetErrorString(err);
+        CORE_CRITICAL("GLEW Init Failed: {}", errorString);
+        return;
     }
 
     Renderer::Renderer renderer;
@@ -68,6 +71,7 @@ Application::Application(const ApplicationSpecification& appSpec)
     m_activeScene = std::make_shared<Engine::Scene>("Default Scene");
 
     AssetManager::loadAssets();
+    CORE_INFO("Application Initialized");
 }
 
 Application::~Application()
@@ -89,7 +93,7 @@ void Application::run()
 
         if (m_window->shouldClose())
         {
-            std::cout << "window should close !";
+            CORE_INFO("window should close !");
             stop();
             break;
         }

@@ -39,6 +39,8 @@ EditorLayer::EditorLayer()
     }
 
     m_menuBar.addMenu(entityMenu);
+
+    Gui::Menu SceneMenu("Scene");
 }
 
 EditorLayer::~EditorLayer()
