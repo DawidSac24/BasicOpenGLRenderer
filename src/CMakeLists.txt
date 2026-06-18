@@ -98,10 +98,6 @@ target_link_libraries(Engine PUBLIC
     assimp::assimp
 )
 
-if(Stb_FOUND)
-    target_include_directories(Engine PUBLIC ${Stb_INCLUDE_DIR})
-endif()
-
 set(APP_SOURCES
     Application/GameLayer.cpp
     Application/GameLayer.h
@@ -114,6 +110,9 @@ set(APP_SOURCES
 
 add_executable(OpenGLRenderer ${APP_SOURCES})
 target_link_libraries(OpenGLRenderer PRIVATE Engine)
+
+target_link_libraries(Engine PRIVATE project_warnings)
+target_link_libraries(OpenGLRenderer PRIVATE project_warnings)
 
 # --- Asset Management ---
 add_custom_command(TARGET OpenGLRenderer POST_BUILD

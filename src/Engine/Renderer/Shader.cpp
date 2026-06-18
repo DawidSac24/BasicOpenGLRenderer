@@ -1,6 +1,7 @@
 #include "Shader.h"
 
-#include "Engine/Core/FileSystem.h"
+#include "../Core/FileSystem.h"
+
 #include <GL/glew.h>
 #include <fstream>
 #include <glm/glm.hpp>
@@ -9,6 +10,8 @@
 #include <ostream>
 #include <sstream>
 #include <string>
+#include <vector>
+
 namespace Renderer
 {
 Shader::Shader(const std::string vert_filepath, std::string frag_filepath)
@@ -72,10 +75,10 @@ unsigned int Shader::createShader(const std::string& vert_shader, const std::str
     {
         int length;
         glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
-        char message[length];
-        glGetProgramInfoLog(program, length, &length, message);
+        std::vector<char> message(length);
+        glGetProgramInfoLog(program, length, &length, message.data());
         std::cout << "Failed to link program" << std::endl;
-        std::cout << message << std::endl;
+        std::cout << message.data() << std::endl;
         glDeleteProgram(program);
         return 0;
     }
@@ -101,11 +104,11 @@ unsigned int Shader::compileShader(unsigned int type, const std::string& source)
     {
         int length;
         glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-        char message[length];
-        glGetShaderInfoLog(id, length, &length, message);
+        std::vector<char> message(length);
+        glGetShaderInfoLog(id, length, &length, message.data());
         std::cout << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader"
                   << std::endl;
-        std::cout << message << std::endl;
+        std::cout << message.data() << std::endl;
 
         glDeleteShader(id);
         return 0;

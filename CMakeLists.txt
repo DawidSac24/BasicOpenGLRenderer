@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
 # --- Vcpkg Integration ---
-# This must be done BEFORE the project() call to correctly set up the environment.
 if(NOT CMAKE_TOOLCHAIN_FILE AND DEFINED ENV{VCPKG_ROOT})
     set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 endif()
@@ -15,20 +14,21 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # --- Build Options ---
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(TREAT_WARNINGS_AS_ERRORS "Treat warnings as errors" ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # --- Compiler Flags ---
+add_library(project_warnings INTERFACE)
+
 if(MSVC)
-    if(TREAT_WARNINGS_AS_ERRORS)
-        add_compile_options(/W4 /WX /permissive- /utf-8)
-    else()
-        add_compile_options(/W4 /permissive- /utf-8)
-    endif()
+    target_compile_options(project_warnings INTERFACE 
+        /W4 /permissive- /utf-8
+        $<$<BOOL:${TREAT_WARNINGS_AS_ERRORS}>:/WX>
+    )
 else()
-    if(TREAT_WARNINGS_AS_ERRORS)
-        add_compile_options(-Wall -Wextra -Wpedantic -Werror)
-    else()
-        add_compile_options(-Wall -Wextra -Wpedantic)
-    endif()
+    target_compile_options(project_warnings INTERFACE 
+        -Wall -Wextra -Wpedantic
+        $<$<BOOL:${TREAT_WARNINGS_AS_ERRORS}>:-Werror>
+    )
 endif()
 
 # --- Output Directories ---
