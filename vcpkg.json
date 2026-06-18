@@ -8,6 +8,8 @@
     "assimp",
     "nativefiledialog-extended",
     "nlohmann-json",
+    "spdlog",
+    "fmt",
     {
       "name": "glfw3",
       "default-features": true
