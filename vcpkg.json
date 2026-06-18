@@ -6,13 +6,13 @@
     "glew",
     "stb",
     "assimp",
-    "nativefiledialog-extended",
     "nlohmann-json",
     "spdlog",
     "fmt",
+    "nativefiledialog-extended",
     {
       "name": "glfw3",
-      "default-features": true
+      "default-features": false
     },
     {
       "name": "imgui",

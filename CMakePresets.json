@@ -2,15 +2,74 @@
   "version": 3,
   "configurePresets": [
     {
-      "name": "default",
-      "displayName": "Config",
-      "description": "Default build using Vcpkg",
+      "name": "base",
+      "hidden": true,
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build",
+      "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_TOOLCHAIN_FILE": "/home/dawid/Apps/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_TOOLCHAIN_FILE": "/home/dawid/Apps/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_C_FLAGS": "-Wno-error=override-init",
+        "VCPKG_CXX_FLAGS": "-Wno-error=override-init",
+        "TREAT_WARNINGS_AS_ERRORS": "OFF"
+      },
+      "environment": {
+        "CFLAGS": "-Wno-error=override-init",
+        "CXXFLAGS": "-Wno-error=override-init"
       }
+    },
+    {
+      "name": "dev-linux",
+      "displayName": "Linux Debug",
+      "description": "Debug build for Linux using vcpkg",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "release-linux",
+      "displayName": "Linux Release",
+      "description": "Release build for Linux using vcpkg",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "dev-win",
+      "displayName": "Windows Debug",
+      "description": "Debug build for Windows using vcpkg",
+      "inherits": "base",
+      "generator": "Visual Studio 17 2022",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "dev-linux",
+      "configurePreset": "dev-linux"
+    },
+    {
+      "name": "release-linux",
+      "configurePreset": "release-linux"
     }
   ]
 }
