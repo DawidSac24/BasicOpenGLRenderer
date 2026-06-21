@@ -6,9 +6,28 @@
 
 namespace Engine
 {
+std::string EntityTypeToString(Engine::EntityType type)
+{
+    switch (type)
+    {
+    case Engine::EntityType::Empty:
+        return "Empty";
+    case Engine::EntityType::Cube:
+        return "Cube";
+    case Engine::EntityType::Sphere:
+        return "Sphere";
+    case Engine::EntityType::Plane:
+        return "Plane";
+    case Engine::EntityType::Camera:
+        return "Camera";
+    default:
+        return "Unknown";
+    }
+}
+
 Entity::Entity(const std::string& name, Scene* scene, Entity* parent)
-    : id()
-    , name(name)
+    : name(name)
+    , id()
     , m_scene(scene)
     , m_parent(parent)
 {
@@ -16,8 +35,8 @@ Entity::Entity(const std::string& name, Scene* scene, Entity* parent)
 }
 
 Entity::Entity(Core::UUID id, const std::string& name, Scene* scene, Entity* parent)
-    : id(id)
-    , name(name)
+    : name(name)
+    , id(id)
     , m_scene(scene)
     , m_parent(parent)
 {

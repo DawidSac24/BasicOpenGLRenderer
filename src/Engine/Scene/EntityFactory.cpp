@@ -66,7 +66,7 @@ std::unique_ptr<Entity> EntityFactory::createCamera(const std::string& name)
 
     entity->transform->setPosition({ 0.0f, 0.0f, 5.0f });
 
-    auto* camComp = entity->addComponent<CameraComponent>(entity.get());
+    entity->addComponent<CameraComponent>(entity.get());
 
     return entity;
 }

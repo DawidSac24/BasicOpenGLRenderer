@@ -11,8 +11,8 @@ namespace Core
 {
 // THIS PART IS FROM :
 // https://blog.nobel-joergensen.com/2013/02/17/debugging-opengl-part-2-using-gldebugmessagecallback
-inline void APIENTRY openglCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length,
-                                            const GLchar *message, const void *userParam)
+inline void APIENTRY openglCallbackFunction(GLenum /*source*/, GLenum type, GLuint id, GLenum severity, GLsizei /*length*/,
+    const GLchar* message, const void* /*userParam*/)
 {
     std::cout << "message: " << message << std::endl;
     std::cout << "type: ";

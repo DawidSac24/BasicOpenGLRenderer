@@ -11,6 +11,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <fmt/chrono.h>
 #include <memory>
 
 namespace Engine
@@ -83,7 +84,9 @@ bool Scene::addEntity(std::shared_ptr<Entity> entity)
 
 Entity* Scene::createEntity(const std::string& p_name, EntityType type)
 {
-    auto newEntity = m_entityFactory.create(p_name, type);
+    std::unique_ptr<Entity> newEntity = m_entityFactory.create(p_name, type);
+    if (newEntity == nullptr)
+        return nullptr;
 
     Core::UUID id = newEntity->getID();
     Entity* rawPointer = newEntity.get();

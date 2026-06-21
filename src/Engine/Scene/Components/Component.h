@@ -13,7 +13,7 @@ public:
     }
     virtual ~Component() = default;
 
-    virtual void onUpdate(float deltaTime) { }
+    virtual void onUpdate(float /*deltaTime*/) { }
 
     virtual void onRender() { }
 

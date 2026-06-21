@@ -29,6 +29,8 @@ EditorLayer::EditorLayer()
     for (int i = 0; i < (int)Engine::EntityType::Count; i++)
     {
         Engine::EntityType type = (Engine::EntityType)i;
+        if (type == EntityType::Unknown)
+            continue;
 
         std::string label = "Add " + EntityTypeToString(type);
 

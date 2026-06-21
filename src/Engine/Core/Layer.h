@@ -13,7 +13,7 @@ public:
 
     virtual void onRender() { }
 
-    virtual void onEvent(Event& event) { }
+    virtual void onEvent(Event& /*event*/) { }
 
     virtual void onDetach() { }
 };
