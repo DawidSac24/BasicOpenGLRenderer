@@ -1,7 +1,15 @@
 #pragma once
 
 #include "Component.h"
-#include "Engine/Math/Transform.h"
+
+#include <glm/fwd.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
+
+namespace Core
+{
+class ClassDescriptor;
+}
 
 class Entity;
 
@@ -10,27 +18,12 @@ namespace Engine
 class TransformComponent : public Component
 {
 public:
+    glm::vec3 position = { 0.0f, 0.0f, 0.0f };
+    glm::quat rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 scale = { 1.0f, 1.0f, 1.0f };
+
+public:
     TransformComponent(Entity* owner);
-
-    inline glm::vec3 getPosition() const { return m_handle.position; }
-    inline glm::quat getRotation() const { return m_handle.rotation; }
-    inline glm::vec3 getScale() const { return m_handle.scale; }
-
-    inline void setPosition(const glm::vec3& position)
-    {
-        m_handle.position = position;
-        markDirty();
-    }
-    inline void setRotation(const glm::quat& rotation)
-    {
-        m_handle.rotation = rotation;
-        markDirty();
-    }
-    inline void setScale(const glm::vec3& scale)
-    {
-        m_handle.scale = scale;
-        markDirty();
-    }
 
     void markDirty();
     inline void forceSetDirty() { m_isDirty = true; }
@@ -38,9 +31,9 @@ public:
     glm::mat4 getLocalMatrix() const;
     glm::mat4 getWorldMatrix();
 
-private:
-    Math::Transform m_handle;
+    static void registerReflection(Core::ClassDescriptor& desc);
 
+private:
     bool m_isDirty = true; // Start dirty to force first calculation
     glm::mat4 m_worldMatrix; // Cached result
 

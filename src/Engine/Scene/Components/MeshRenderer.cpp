@@ -1,5 +1,6 @@
 #include "MeshRenderer.h"
 
+#include "Engine/Core/Reflection/ClassDescriptor.h"
 #include "Engine/Scene/Components/Component.h"
 
 namespace Engine
@@ -14,6 +15,12 @@ MeshRenderer::MeshRenderer(Entity* owner, std::shared_ptr<Renderer::Mesh> m, std
     , mesh(m)
     , material(mat)
 {
+}
+
+void MeshRenderer::registerReflection(Core::ClassDescriptor& desc)
+{
+    desc.addProperty("mesh", &MeshRenderer::mesh);
+    desc.addProperty("material", &MeshRenderer::material);
 }
 
 }

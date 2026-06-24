@@ -1,8 +1,8 @@
 #include "SandboxLayer.h"
 
-#include "Engine/Math/Transform.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Scene/Components/CameraComponent.h"
+#include <glm/ext/vector_float3.hpp>
 
 SandboxLayer::SandboxLayer()
 {
@@ -11,7 +11,7 @@ SandboxLayer::SandboxLayer()
 
     m_CameraEntity = m_activeScene->getPrimaryCamera();
 
-    m_CameraEntity->getTransform()->setPosition({ 0.0f, 0.0f, 5.0f });
+    m_CameraEntity->transform->position = glm::vec3({ 0.0f, 0.0f, 5.0f });
 }
 
 void SandboxLayer::onUpdate()
@@ -23,7 +23,7 @@ void SandboxLayer::onUpdate()
 
         glm::quat rotation = glm::angleAxis(glm::radians(m_rotation), glm::normalize(glm::vec3(1.0f, 1.0f, 0.0f)));
 
-        m_CubeEntity->transform->setRotation(rotation);
+        m_CubeEntity->transform->rotation = rotation;
     }
 }
 
@@ -31,6 +31,6 @@ void SandboxLayer::onRender()
 {
 }
 
-void SandboxLayer::onEvent(Core::Event& event)
+void SandboxLayer::onEvent(Core::Event& /*event*/)
 {
 }

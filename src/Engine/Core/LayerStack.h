@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/Events/ApplicationEvents.h"
+#include "Engine/Core/Events/ApplicationEvents.h"
 #include "Layer.h"
 
 #include <memory>
@@ -41,7 +41,10 @@ public:
     void popLayer()
     {
         auto layer = std::ranges::find_if(m_layers.begin(), m_layers.end(),
-            [](const std::unique_ptr<Layer>& layer) { return dynamic_cast<TLayer*>(layer.get()) != nullptr; });
+            [](const std::unique_ptr<Layer>& layer)
+        {
+            return dynamic_cast<TLayer*>(layer.get()) != nullptr;
+        });
 
         if (layer != m_layers.end())
         {

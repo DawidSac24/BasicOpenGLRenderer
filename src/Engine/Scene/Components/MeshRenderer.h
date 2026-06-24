@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/Math/Transform.h"
+#include "Engine/Core/Reflection/ClassDescriptor.h"
 #include "Engine/Renderer/Material.h"
 #include "Engine/Renderer/Mesh.h"
 #include "Engine/Scene/Components/Component.h"
@@ -21,5 +21,7 @@ public:
     MeshRenderer(Entity* owner, std::shared_ptr<Renderer::Mesh> m, std::shared_ptr<Renderer::Material> mat);
 
     virtual ~MeshRenderer() = default;
+
+    void registerReflection(Core::ClassDescriptor& desc);
 };
 }

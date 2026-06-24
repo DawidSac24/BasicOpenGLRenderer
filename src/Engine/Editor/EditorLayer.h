@@ -1,12 +1,13 @@
 #pragma once
 
 #include "EditorPanels.h"
+#include "Engine/Core/Events/InputEvents.h"
 #include "Engine/Core/Layer.h"
-#include "Engine/Events/InputEvents.h"
 #include "Engine/ImGui/MenuItems.h"
 #include "Engine/Platform/OpenGL/Application.h"
 #include "Engine/Scene/Entity.h"
 #include "Engine/Scene/Scene.h"
+
 #include <memory>
 
 namespace Engine

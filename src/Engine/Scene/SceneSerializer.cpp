@@ -167,9 +167,9 @@ void SceneSerializer::deserializeComponents(Entity* entity, json& components)
 
 void SceneSerializer::serializeTransformComponent(TransformComponent& c, json& out)
 {
-    glm::vec3 pos = c.getPosition();
-    glm::quat rot = c.getRotation();
-    glm::vec3 scale = c.getScale();
+    glm::vec3 pos = c.position;
+    glm::quat rot = c.rotation;
+    glm::vec3 scale = c.scale;
 
     out["position"] = { pos.x, pos.y, pos.z };
     out["rotation"] = { rot.x, rot.y, rot.z, rot.w };
@@ -179,11 +179,11 @@ void SceneSerializer::deserializeTransformComponent(Entity* entity, json& data)
 {
     auto transform = entity->getComponent<TransformComponent>();
     json pos = data["position"];
-    transform->setPosition({ pos[0], pos[1], pos[2] });
+    transform->position = glm::vec3({ pos[0], pos[1], pos[2] });
     json rot = data["rotation"];
-    transform->setRotation({ rot[0], rot[1], rot[2], rot[3] });
+    transform->rotation = glm::quat({ rot[0], rot[1], rot[2], rot[3] });
     json scale = data["scale"];
-    transform->setScale({ scale[0], scale[1], scale[2] });
+    transform->scale = glm::vec3({ scale[0], scale[1], scale[2] });
 }
 
 void SceneSerializer::serializeCameraComponent(CameraComponent& c, json& out)

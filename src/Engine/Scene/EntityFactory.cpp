@@ -6,6 +6,7 @@
 #include "Engine/Scene/Components/MeshRenderer.h"
 #include "Engine/Scene/Entity.h"
 
+#include <glm/ext/vector_float3.hpp>
 #include <iostream>
 #include <memory>
 #include <string>
@@ -64,7 +65,7 @@ std::unique_ptr<Entity> EntityFactory::createCamera(const std::string& name)
 {
     auto entity = std::make_unique<Entity>(name, m_scene);
 
-    entity->transform->setPosition({ 0.0f, 0.0f, 5.0f });
+    entity->transform->position = glm::vec3({ 0.0f, 0.0f, 5.0f });
 
     entity->addComponent<CameraComponent>(entity.get());
 

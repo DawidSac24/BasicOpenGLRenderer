@@ -23,5 +23,5 @@ void GameLayer::onRender()
     m_scene->onRender();
 }
 
-void GameLayer::onEvent(Core::Event& event) { }
+void GameLayer::onEvent(Core::Event& /*event*/) { }
 void GameLayer::onDetach() { }

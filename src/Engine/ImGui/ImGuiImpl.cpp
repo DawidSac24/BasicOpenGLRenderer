@@ -1,5 +1,4 @@
 #include "ImGuiImpl.h"
-#include "Engine/Platform/OpenGL/Application.h"
 #include "imgui.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <imgui_impl_glfw.h>
@@ -7,8 +6,6 @@
 
 namespace Gui
 {
-
-static ImGuiImpl* s_impl = nullptr;
 
 void ImGuiImpl::init(Core::Window& window)
 {
@@ -50,7 +47,6 @@ void ImGuiImpl::begin()
 void ImGuiImpl::end()
 {
     ImGuiIO& io = ImGui::GetIO();
-    Core::Application& app = Core::Application::get();
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

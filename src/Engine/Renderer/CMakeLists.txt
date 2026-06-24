@@ -1,0 +1,21 @@
+target_sources(Engine PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/buffers/IndexBuffer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/buffers/IndexBuffer.h
+    ${CMAKE_CURRENT_LIST_DIR}/buffers/VertexArray.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/buffers/VertexArray.h
+    ${CMAKE_CURRENT_LIST_DIR}/buffers/VertexBuffer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/buffers/VertexBuffer.h
+    ${CMAKE_CURRENT_LIST_DIR}/buffers/VertexBufferLayout.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/buffers/VertexBufferLayout.h
+    ${CMAKE_CURRENT_LIST_DIR}/Material.h
+    ${CMAKE_CURRENT_LIST_DIR}/Mesh.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/MeshFactory.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/MeshFactory.h
+    ${CMAKE_CURRENT_LIST_DIR}/Mesh.h
+    ${CMAKE_CURRENT_LIST_DIR}/Renderer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Renderer.h
+    ${CMAKE_CURRENT_LIST_DIR}/Shader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Shader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Texture.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Texture.h 
+)

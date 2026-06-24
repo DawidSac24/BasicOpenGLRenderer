@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/Events/Event.h"
+#include "Engine/Core/Events/Event.h"
 
 #include "glm/glm.hpp"
 #include <GL/glew.h>

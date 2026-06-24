@@ -2,10 +2,10 @@
 
 #include "Debug.h"
 #include "Engine/Core/AssetManager.h"
+#include "Engine/Core/Events/ApplicationEvents.h"
+#include "Engine/Core/Events/Event.h"
+#include "Engine/Core/Events/WindowEvents.h"
 #include "Engine/Core/Log.h"
-#include "Engine/Events/ApplicationEvents.h"
-#include "Engine/Events/Event.h"
-#include "Engine/Events/WindowEvents.h"
 #include "Engine/ImGui/ImGuiImpl.h"
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Scene/Scene.h"
@@ -27,7 +27,7 @@ Application::Application(const ApplicationSpecification& appSpec)
 {
     s_application = this;
 
-    Log::Init();
+    Log::init();
 
     glfwSetErrorCallback(glfwErrorCallback);
 

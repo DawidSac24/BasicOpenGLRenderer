@@ -147,29 +147,29 @@ private:
     {
         drawComponent<Engine::TransformComponent>("Transform", entity, [](auto& component)
         {
-            glm::vec3 pos = component.getPosition();
+            glm::vec3 pos = component.position;
 
             // 2. Pass local variable to helper
             if (ImGuiImpl::drawVec3Control("Position", pos))
             {
                 // 3. Write back ONLY if changed
-                component.setPosition(pos);
+                component.position = pos;
             }
 
             // --- ROTATION ---
-            glm::vec3 euler = glm::degrees(glm::eulerAngles(component.getRotation()));
+            glm::vec3 euler = glm::degrees(glm::eulerAngles(component.rotation));
 
             if (ImGuiImpl::drawVec3Control("Rotation", euler))
             {
-                component.setRotation(glm::quat(glm::radians(euler)));
+                component.rotation = glm::quat(glm::radians(euler));
             }
 
             // --- SCALE ---
-            glm::vec3 scale = component.getScale();
+            glm::vec3 scale = component.scale;
 
             if (ImGuiImpl::drawVec3Control("Scale", scale))
             {
-                component.setScale(scale);
+                component.scale = scale;
             }
         });
         drawComponent<Engine::CameraComponent>("Camera", entity, [entity](auto& component) // <--- CAPTURE entity here

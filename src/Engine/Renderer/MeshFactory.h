@@ -2,7 +2,6 @@
 
 #include "Engine/Renderer/Material.h"
 #include "Engine/Renderer/Mesh.h"
-#include "Engine/Renderer/Shader.h"
 #include "Engine/Scene/Entity.h"
 
 #include <memory>

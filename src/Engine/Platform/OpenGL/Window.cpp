@@ -4,8 +4,8 @@
 #include <cassert>
 #include <iostream>
 
-#include "Engine/Events/InputEvents.h"
-#include "Engine/Events/WindowEvents.h"
+#include "Engine/Core/Events/InputEvents.h"
+#include "Engine/Core/Events/WindowEvents.h"
 
 namespace Core
 {
@@ -45,87 +45,87 @@ void Window::create()
 
     glfwSetWindowCloseCallback(m_handle,
         [](GLFWwindow* handle)
-        {
-            Window& window = *((Window*)glfwGetWindowUserPointer(handle));
+    {
+        Window& window = *((Window*)glfwGetWindowUserPointer(handle));
 
-            WindowClosedEvent event;
-            window.raiseEvent(event);
-        });
+        WindowClosedEvent event;
+        window.raiseEvent(event);
+    });
 
     glfwSetFramebufferSizeCallback(m_handle,
         [](GLFWwindow* handle, int width, int height)
-        {
-            Window& window = *((Window*)glfwGetWindowUserPointer(handle));
+    {
+        Window& window = *((Window*)glfwGetWindowUserPointer(handle));
 
-            // 1. Create the event with physical pixel size
-            WindowResizeEvent event((uint32_t)width, (uint32_t)height);
+        // 1. Create the event with physical pixel size
+        WindowResizeEvent event((uint32_t)width, (uint32_t)height);
 
-            // 2. Dispatch
-            window.raiseEvent(event);
-        });
+        // 2. Dispatch
+        window.raiseEvent(event);
+    });
 
     glfwSetKeyCallback(m_handle,
         [](GLFWwindow* handle, int key, int scancode, int action, int mods)
-        {
-            Window& window = *((Window*)glfwGetWindowUserPointer(handle));
+    {
+        Window& window = *((Window*)glfwGetWindowUserPointer(handle));
 
-            switch (action)
-            {
-            case GLFW_PRESS:
-            case GLFW_REPEAT:
-            {
-                KeyPressedEvent event(key, action == GLFW_REPEAT);
-                window.raiseEvent(event);
-                break;
-            }
-            case GLFW_RELEASE:
-            {
-                KeyReleasedEvent event(key);
-                window.raiseEvent(event);
-                break;
-            }
-            }
-        });
+        switch (action)
+        {
+        case GLFW_PRESS:
+        case GLFW_REPEAT:
+        {
+            KeyPressedEvent event(key, action == GLFW_REPEAT);
+            window.raiseEvent(event);
+            break;
+        }
+        case GLFW_RELEASE:
+        {
+            KeyReleasedEvent event(key);
+            window.raiseEvent(event);
+            break;
+        }
+        }
+    });
 
     glfwSetMouseButtonCallback(m_handle,
         [](GLFWwindow* handle, int button, int action, int mods)
-        {
-            Window& window = *((Window*)glfwGetWindowUserPointer(handle));
+    {
+        Window& window = *((Window*)glfwGetWindowUserPointer(handle));
 
-            switch (action)
-            {
-            case GLFW_PRESS:
-            {
-                MouseButtonPressedEvent event(button);
-                window.raiseEvent(event);
-                break;
-            }
-            case GLFW_RELEASE:
-            {
-                MouseButtonReleasedEvent event(button);
-                window.raiseEvent(event);
-                break;
-            }
-            }
-        });
+        switch (action)
+        {
+        case GLFW_PRESS:
+        {
+            MouseButtonPressedEvent event(button);
+            window.raiseEvent(event);
+            break;
+        }
+        case GLFW_RELEASE:
+        {
+            MouseButtonReleasedEvent event(button);
+            window.raiseEvent(event);
+            break;
+        }
+        }
+    });
 
     glfwSetScrollCallback(m_handle,
         [](GLFWwindow* handle, double xOffset, double yOffset)
-        {
-            Window& window = *((Window*)glfwGetWindowUserPointer(handle));
+    {
+        Window& window = *((Window*)glfwGetWindowUserPointer(handle));
 
-            MouseScrolledEvent event(xOffset, yOffset);
-            window.raiseEvent(event);
-        });
+        MouseScrolledEvent event(xOffset, yOffset);
+        window.raiseEvent(event);
+    });
 
     glfwSetCursorPosCallback(m_handle,
         [](GLFWwindow* handle, double x, double y)
-        {
-            Window& window = *((Window*)glfwGetWindowUserPointer(handle));
+    {
+        Window& window = *((Window*)glfwGetWindowUserPointer(handle));
 
-            MouseMovedEvent event(x, y);
-            window.raiseEvent(event);
-        });
+        MouseMovedEvent event(x, y);
+        window.raiseEvent(event);
+    });
 }
 
 void Window::destroy()

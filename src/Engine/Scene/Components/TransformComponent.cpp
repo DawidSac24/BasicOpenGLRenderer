@@ -1,5 +1,7 @@
 #include "TransformComponent.h"
 
+#include "Engine/Core/Reflection/ClassDescriptor.h"
+#include "Engine/Core/Reflection/Registry.h"
 #include "Engine/Scene/Components/Component.h"
 #include "Engine/Scene/Entity.h"
 
@@ -24,9 +26,9 @@ void TransformComponent::markDirty()
 glm::mat4 TransformComponent::getLocalMatrix() const
 {
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, m_handle.position);
-    model *= glm::toMat4(m_handle.rotation);
-    model = glm::scale(model, m_handle.scale);
+    model = glm::translate(model, position);
+    model *= glm::toMat4(rotation);
+    model = glm::scale(model, scale);
     return model;
 }
 
@@ -51,4 +53,13 @@ glm::mat4 TransformComponent::computeWorldMatrix()
 
     return localMat;
 }
+
+void TransformComponent::registerReflection(Core::ClassDescriptor& desc)
+{
+    desc.addProperty("position", &TransformComponent::position);
+    desc.addProperty("rotation", &TransformComponent::rotation);
+    desc.addProperty("scale", &TransformComponent::scale);
+}
+
+REFLECT_CLASS(TransformComponent)
 }

@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Engine/Core/Events/Event.h"
+#include "Engine/Core/Events/WindowEvents.h"
 #include "Engine/Core/Layer.h"
 #include "Engine/Core/LayerStack.h"
-#include "Engine/Events/Event.h"
-#include "Engine/Events/WindowEvents.h"
 #include "Engine/Platform/OpenGL/Window.h"
 #include "Engine/Scene/Scene.h"
 
